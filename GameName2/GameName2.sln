@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameName2", "GameName2\GameName2.csproj", "{E3B2F84F-E561-462C-B037-09C4D17A8263}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3B2F84F-E561-462C-B037-09C4D17A8263}.Debug|x86.ActiveCfg = Debug|x86
+		{E3B2F84F-E561-462C-B037-09C4D17A8263}.Debug|x86.Build.0 = Debug|x86
+		{E3B2F84F-E561-462C-B037-09C4D17A8263}.Release|x86.ActiveCfg = Release|x86
+		{E3B2F84F-E561-462C-B037-09C4D17A8263}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
