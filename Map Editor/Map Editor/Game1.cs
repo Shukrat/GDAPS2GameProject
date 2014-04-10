@@ -32,21 +32,23 @@ namespace Map_Editor
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        #region
         // Attributes:
+        #region Attributes - Texture2D
         // Tiles
         Texture2D grayTile;
         Texture2D blueTile;
         Texture2D greenTile;
         Texture2D sideBar;
         Texture2D pathTile;
-
+        #endregion
+        #region Attributes - Texture Selection Booleans
         // Bools for keystates
         bool tfGrayTile;
         bool tfBlueTile;
         bool tfGreenTile;
         bool tfPathTile;
-
+        #endregion
+        #region Attributes - Rectangles
         // Retangles for tile selection options
         Rectangle sideBarBG;
         Rectangle selectGray;
@@ -55,26 +57,21 @@ namespace Map_Editor
         Rectangle selectPath;
         Rectangle paintBrush;
         Rectangle mousePos;
-
+        #endregion
+        #region Attributes - 2D Arrays
         // 2D arrays for map information
         Rectangle[,] tiles;
         int[,] textures;
         string fileName;
-
+        #endregion
+        #region Attribute - Mouse and Keyboard States
         // Keyboard and mouse states
         KeyboardState kState;
         MouseState mState;
-
         #endregion
 
-        public Game1()
-            : base()
-        {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-        }
-
-        #region
+        // Custom Methods
+        #region Custom Methods
         // CUSTOM METHODS - NOT PART OF DEFAULT MONOGAME METHODS
         // Keyboard Shortcuts to Select Tiles
         public void KeyboardSC()
@@ -149,6 +146,14 @@ namespace Map_Editor
 
         #endregion
 
+        // Constructor - MONOGAME DEFAULT
+        public Game1()
+            : base()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -161,6 +166,8 @@ namespace Map_Editor
             SaveLoad saveLoad = new SaveLoad(textures, tiles, fileName);
             graphics.PreferredBackBufferHeight = 900;
             graphics.PreferredBackBufferWidth = 1210;
+
+            #region Initialize Arrays
             // Initilize 2D Rectangle Array
             // Used to store map information
             tiles = new Rectangle[20, 20];
@@ -192,7 +199,9 @@ namespace Map_Editor
                     // 3 = Green;
                 }
             }
+            #endregion
 
+            #region Interface
             // ----------Setup interface----------
             // Sidebar background
             sideBarBG = new Rectangle();
@@ -214,8 +223,9 @@ namespace Map_Editor
             paintBrush.Height = 50;
             paintBrush.X = mState.X;
             paintBrush.Y = mState.Y;
+            #endregion
 
-            // --- Tile selection options ---
+            #region Image Rectangles
             // Gray
             selectGray = new Rectangle();
             selectGray.Width = 50;
@@ -240,10 +250,8 @@ namespace Map_Editor
             selectPath.Height = 50;
             selectPath.X = graphics.PreferredBackBufferWidth - 195;
             selectPath.Y = 90;
+            #endregion
 
-            // --- End Tile Selection Options ---
-
-            // ---------- End Setup Interface ----------
             base.Initialize();
         }
 
@@ -257,11 +265,13 @@ namespace Map_Editor
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            #region Texture2D File Load
             grayTile = Content.Load<Texture2D>("Gray Tile");
             blueTile = Content.Load<Texture2D>("Blue Tile");
             greenTile = Content.Load<Texture2D>("Green Tile");
             pathTile = Content.Load<Texture2D>("path");
             sideBar = Content.Load<Texture2D>("Sidebar");
+            #endregion
         }
 
         /// <summary>
@@ -284,19 +294,20 @@ namespace Map_Editor
                 Exit();
 
             // TODO: Add your update logic here
-            
+            #region Mouse/Keyboard Tile Paint Selection Update
             // Check Keyboard or Mouse for new tile selection
             KeyboardSC();
             MouseTileSelect();
+            #endregion
 
+            #region Mouse Location Update
             // Update mouse state and set paint brush to location
             mState = Mouse.GetState();
             paintBrush.X = mState.X;
             paintBrush.Y = mState.Y;
             mousePos.X = mState.X;
             mousePos.Y = mState.Y;
-
-            
+            #endregion
 
             base.Update(gameTime);
         }
@@ -312,13 +323,16 @@ namespace Map_Editor
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
+            #region Draw Interface
             // Draw interface
-            spriteBatch.Draw(sideBar, sideBarBG, Color.White);
-            spriteBatch.Draw(grayTile, selectGray, Color.White);
-            spriteBatch.Draw(blueTile, selectBlue, Color.White);
-            spriteBatch.Draw(greenTile, selectGreen, Color.White);
-            spriteBatch.Draw(pathTile, selectPath, Color.White);
+            spriteBatch.Draw(sideBar, sideBarBG, Color.White); // Sidebar background
+            spriteBatch.Draw(grayTile, selectGray, Color.White); // 1 - Gray Tile
+            spriteBatch.Draw(blueTile, selectBlue, Color.White); // 2 - Blue Tile
+            spriteBatch.Draw(greenTile, selectGreen, Color.White); // 3 - Green Tile
+            spriteBatch.Draw(pathTile, selectPath, Color.White); // 4 - Path Tile
+            #endregion
 
+            #region Rectangle Texture Assignment Detection
             // Draw rectangle matrix
             for (int x = 0; x < 20; x++)
             {
@@ -336,7 +350,7 @@ namespace Map_Editor
                         {
                             textures[x, y] = 2;
                         }
-                        
+
                         if (tfGreenTile)
                         {
                             textures[x, y] = 3;
@@ -348,7 +362,9 @@ namespace Map_Editor
                     }
                 }
             }
+            #endregion
 
+            #region Draw Textures on Rectangles
             // Draw textures on matrix if ints in textures array are specific numbers
             for (int x = 0; x < 20; x++)
             {
@@ -379,6 +395,7 @@ namespace Map_Editor
                     }
                 }
             }
+            #endregion
             // ----------------------------UPDATE THIS SECTION TO UPDATE SELECTION RECTANGLE IN SIDEBAR
             // Draw paint brush selection
             //if (tfBlueTile)
