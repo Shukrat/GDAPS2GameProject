@@ -20,25 +20,37 @@ namespace Map_Editor
 
         #region Attributes - Texture2D
         // Tiles
-        Texture2D grayTile;
-        Texture2D blueTile;
-        Texture2D greenTile;
-        Texture2D sideBar;
-        Texture2D pathTile;
+        // Path tiles
+        Texture2D pathDL_Tile;
+        Texture2D pathDR_Tile;
+        Texture2D pathUL_Tile;
+        Texture2D pathUR_Tile;
+        Texture2D pathET_Tile;
+        Texture2D pathLeftRight_Tile;
+        Texture2D pathNT_Tile;
+        Texture2D pathST_Tile;
+        Texture2D pathUpDown_Tile;
+        Texture2D pathWT_Tile;
 
-        // Images for Menus
-        // Textures for Main Menu
-        Texture2D exit;
-        Texture2D exitHover;
-        Texture2D exitClick;
-        Texture2D loadMap;
-        Texture2D newMap;
+        // Object tiles
+        Texture2D grayTile;     // OBSOLETE
+        Texture2D blueTile;     // OBSOLETE
+        Texture2D greenTile;    // OBSOLETE
+        Texture2D pathTile;     // OBSOLETE
 
-        // Textures for Map Editor
-        Texture2D saveMap;
-        Texture2D mapEditExitButton;
+        // Main Menu - Textures for buttons / interface
+        Texture2D mainMenu_Exit_Txtr;
+        Texture2D mainMenu_ExitHover_Txtr;
+        Texture2D mainMenu_ExitClick_Txtr;
+        Texture2D mainMenu_Load_Txtr;
+        Texture2D mainMenu_New_Txtr;
+
+        // Map Editor - Textures for buttons / interface
+        Texture2D mapEdit_Save_Txtr;
+        Texture2D mapEdit_Exit_Txtr;
+        Texture2D mapEdit_SideBar_Txtr;
         
-        // Font for save or load menu
+        // Save or Load Menu Font
         SpriteFont font;
         #endregion
 
@@ -54,23 +66,36 @@ namespace Map_Editor
         // Mouse position Rectangle
         Rectangle mousePos;
 
-        // Retangles for tile selection options
+        // Retangles for tile selection options -- PALLETTE CLASS
         Rectangle selectGray;   // OBSOLETE
         Rectangle selectBlue;   // OBSOLETE
         Rectangle selectGreen;  // OBSOLETE
         Rectangle selectPath;   // OBSOLETE
-        
+
+        Rectangle select_PathDL; // Corner from left to bottom
+        Rectangle select_PathDR; // Corner from right to bottom
+        Rectangle select_PathUL; // Corner from left to top
+        Rectangle select_PathUR; // Corner from right to top
+        Rectangle select_PathET; // T-intersect from right
+        Rectangle select_PathLeftRight;  // Path left to right
+        Rectangle select_PathNT; // T-intersect from top
+        Rectangle select_PathST; // T-intersect from bottom
+        Rectangle select_PathUpDown;     // Path from top to bottom
+        Rectangle select_PathWT; // T-intersect from left
+
         // Rectangle to show currently selected tile
         Rectangle paintBrush;
 
-        // Rectangles for Menus / Buttons
+        // Rectangles for Menus / Buttons - MENU CLASS - GOOGLE: STATE DESIGN PATTERN
         // Main Menu
-        Rectangle mainMenuExitRec;
-        Rectangle mainMenuLoadRec;
-        Rectangle mainMenuNewRec;
+        Rectangle mainMenu_ExitRec;
+        Rectangle mainMenu_LoadRec;
+        Rectangle mainMenu_NewRec;
         // Map Editor
-        Rectangle mapEditExitRec;
-        Rectangle mapEditSaveRec;
+        Rectangle mapEdit_ExitRec;
+        Rectangle mapEdit_SaveRec;
+        Rectangle mapEdit_BackRec;
+        Rectangle mapEdit_PathTilesRec;  // Button displays only path tiles to paint
         Rectangle sideBarBG;
         #endregion
 
@@ -209,25 +234,25 @@ namespace Map_Editor
             // Initialize main menu buttons - Only called on program start
             #region Rectangle Initialization
             // Create Exit Button
-            mainMenuExitRec = new Rectangle();
-            mainMenuExitRec.Width = 200;
-            mainMenuExitRec.Height = 88;
-            mainMenuExitRec.X = graphics.PreferredBackBufferWidth - mainMenuExitRec.Width - 10;
-            mainMenuExitRec.Y = graphics.PreferredBackBufferHeight - mainMenuExitRec.Height - 10;
+            mainMenu_ExitRec = new Rectangle();
+            mainMenu_ExitRec.Width = 200;
+            mainMenu_ExitRec.Height = 88;
+            mainMenu_ExitRec.X = graphics.PreferredBackBufferWidth - mainMenu_ExitRec.Width - 10;
+            mainMenu_ExitRec.Y = graphics.PreferredBackBufferHeight - mainMenu_ExitRec.Height - 10;
 
             // Create Load Map Button
-            mainMenuLoadRec = new Rectangle();
-            mainMenuLoadRec.Width = 200;
-            mainMenuLoadRec.Height = 88;
-            mainMenuLoadRec.X = (int)(graphics.PreferredBackBufferWidth - mainMenuLoadRec.Width * 2.5);
-            mainMenuLoadRec.Y = graphics.PreferredBackBufferHeight - mainMenuLoadRec.Height - 10;
+            mainMenu_LoadRec = new Rectangle();
+            mainMenu_LoadRec.Width = 200;
+            mainMenu_LoadRec.Height = 88;
+            mainMenu_LoadRec.X = (int)(graphics.PreferredBackBufferWidth - mainMenu_LoadRec.Width * 2.5);
+            mainMenu_LoadRec.Y = graphics.PreferredBackBufferHeight - mainMenu_LoadRec.Height - 10;
 
             // Create New Map Button
-            mainMenuNewRec = new Rectangle();
-            mainMenuNewRec.Width = 200;
-            mainMenuNewRec.Height = 88;
-            mainMenuNewRec.X = 10;
-            mainMenuNewRec.Y = graphics.PreferredBackBufferHeight - mainMenuNewRec.Height - 10;
+            mainMenu_NewRec = new Rectangle();
+            mainMenu_NewRec.Width = 200;
+            mainMenu_NewRec.Height = 88;
+            mainMenu_NewRec.X = 10;
+            mainMenu_NewRec.Y = graphics.PreferredBackBufferHeight - mainMenu_NewRec.Height - 10;
             #endregion
         }
 
@@ -236,17 +261,24 @@ namespace Map_Editor
         {
             // Load All Textures
             #region Texture2D File Load
-            grayTile = Content.Load<Texture2D>("Gray Tile");
-            blueTile = Content.Load<Texture2D>("Blue Tile");
-            greenTile = Content.Load<Texture2D>("Green Tile");
-            pathTile = Content.Load<Texture2D>("path");
-            sideBar = Content.Load<Texture2D>("Sidebar");
-            exit = Content.Load<Texture2D>("exitButton");
-            loadMap = Content.Load<Texture2D>("loadMapButton");
-            newMap = Content.Load<Texture2D>("newMapButton");
-            saveMap = Content.Load<Texture2D>("saveButton");
-            mapEditExitButton = Content.Load<Texture2D>("mapEditExitButton");
-            font = Content.Load<SpriteFont>("mainFont");
+            // TILES:
+            grayTile = Content.Load<Texture2D>("TEST TILES - OBSOLETE/Gray Tile");
+            blueTile = Content.Load<Texture2D>("TEST TILES - OBSOLETE/Blue Tile");
+            greenTile = Content.Load<Texture2D>("TEST TILES - OBSOLETE/Green Tile");
+            pathTile = Content.Load<Texture2D>("TEST TILES - OBSOLETE/path");
+
+            // MAIN MENU:
+            mainMenu_Exit_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Main Menu/Button - Exit/exitButton");
+            mainMenu_Load_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Main Menu/Button - Load Map/loadMapButton");
+            mainMenu_New_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Main Menu/Button - New Map/newMapButton");
+
+            // MAP EDITOR:
+            mapEdit_SideBar_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/Sidebar");
+            mapEdit_Save_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Map Editor Menu/Button - Save/saveButton");
+            mapEdit_Exit_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Map Editor Menu/Button - Exit/mapEditExitButton");
+
+            // LOAD / SAVE SCREEN:
+            font = Content.Load<SpriteFont>("Fonts/mainFont");
             #endregion
         }
 
@@ -268,7 +300,7 @@ namespace Map_Editor
             {
                 // New Map Button collision
                 // Goes to Update - Map Maker in this Update method
-                if (mousePos.Intersects(mainMenuNewRec) && mState.LeftButton == ButtonState.Pressed)
+                if (mousePos.Intersects(mainMenu_NewRec) && mState.LeftButton == ButtonState.Pressed)
                 {
                     mainMenu = false;
                     mapMaker = true;
@@ -277,7 +309,7 @@ namespace Map_Editor
                 }
                 // Load Map Button collision
                 // Goes to Update - Load Map in this Update method
-                if (mousePos.Intersects(mainMenuLoadRec) && mState.LeftButton == ButtonState.Pressed)
+                if (mousePos.Intersects(mainMenu_LoadRec) && mState.LeftButton == ButtonState.Pressed)
                 {
                     mainMenu = false;
                     mapMaker = false;
@@ -285,7 +317,7 @@ namespace Map_Editor
                     saveMenu = false;
                 }
                 // Exit Map Button collision
-                if (mousePos.Intersects(mainMenuExitRec) && mState.LeftButton == ButtonState.Pressed)
+                if (mousePos.Intersects(mainMenu_ExitRec) && mState.LeftButton == ButtonState.Pressed)
                 {
                     game1.Exit();
                 }
@@ -320,18 +352,18 @@ namespace Map_Editor
                     sideBarBG.Y = 0;
 
                     // Exit Button
-                    mapEditExitRec = new Rectangle();
-                    mapEditExitRec.Width = 100;
-                    mapEditExitRec.Height = 75;
-                    mapEditExitRec.X = graphics.PreferredBackBufferWidth - 110;
-                    mapEditExitRec.Y = 805;
+                    mapEdit_ExitRec = new Rectangle();
+                    mapEdit_ExitRec.Width = 100;
+                    mapEdit_ExitRec.Height = 75;
+                    mapEdit_ExitRec.X = graphics.PreferredBackBufferWidth - 110;
+                    mapEdit_ExitRec.Y = 805;
 
                     // Save Button
-                    mapEditSaveRec = new Rectangle();
-                    mapEditSaveRec.Width = 100;
-                    mapEditSaveRec.Height = 75;
-                    mapEditSaveRec.X = graphics.PreferredBackBufferWidth - 220;
-                    mapEditSaveRec.Y = 805;
+                    mapEdit_SaveRec = new Rectangle();
+                    mapEdit_SaveRec.Width = 100;
+                    mapEdit_SaveRec.Height = 75;
+                    mapEdit_SaveRec.X = graphics.PreferredBackBufferWidth - 220;
+                    mapEdit_SaveRec.Y = 805;
 
                     // Tile Selection Display Rectangle
                     paintBrush = new Rectangle();
@@ -379,7 +411,7 @@ namespace Map_Editor
 
                 #region Button Functionality - Save and Exit
                 // Detects mouse rectangle and button collisions
-                if (mousePos.Intersects(mapEditSaveRec) && mState.LeftButton == ButtonState.Pressed)
+                if (mousePos.Intersects(mapEdit_SaveRec) && mState.LeftButton == ButtonState.Pressed)
                 {
                     // Sets which "window" is currently "open," or being updated in Update method
                     // And drawn in Draw method
@@ -388,7 +420,7 @@ namespace Map_Editor
                     loadMenu = false;
                     saveMenu = true;
                 }
-                if (mousePos.Intersects(mapEditExitRec) && mState.LeftButton == ButtonState.Pressed)
+                if (mousePos.Intersects(mapEdit_ExitRec) && mState.LeftButton == ButtonState.Pressed)
                 {
                     game1.Exit();
                 }
@@ -463,9 +495,9 @@ namespace Map_Editor
             // Draws main buttons: New, Load, Exit
             if (mainMenu)
             {
-                spriteBatch.Draw(exit, mainMenuExitRec, Color.White);
-                spriteBatch.Draw(newMap, mainMenuNewRec, Color.White);
-                spriteBatch.Draw(loadMap, mainMenuLoadRec, Color.White);
+                spriteBatch.Draw(mainMenu_Exit_Txtr, mainMenu_ExitRec, Color.White);
+                spriteBatch.Draw(mainMenu_New_Txtr, mainMenu_NewRec, Color.White);
+                spriteBatch.Draw(mainMenu_Load_Txtr, mainMenu_LoadRec, Color.White);
             }
             #endregion
 
@@ -475,13 +507,13 @@ namespace Map_Editor
             {
                 #region Draw Interface
                 // Draws all textures for sidebar, tile selection options, and buttons
-                spriteBatch.Draw(sideBar, sideBarBG, Color.White); // Sidebar background
+                spriteBatch.Draw(mapEdit_SideBar_Txtr, sideBarBG, Color.White); // Sidebar background
                 spriteBatch.Draw(grayTile, selectGray, Color.White); // 1 - Gray Tile
                 spriteBatch.Draw(blueTile, selectBlue, Color.White); // 2 - Blue Tile
                 spriteBatch.Draw(greenTile, selectGreen, Color.White); // 3 - Green Tile
                 spriteBatch.Draw(pathTile, selectPath, Color.White); // 4 - Path Tile
-                spriteBatch.Draw(saveMap, mapEditSaveRec, Color.White); // Save Map Button
-                spriteBatch.Draw(mapEditExitButton, mapEditExitRec, Color.White); // Exit Map Button
+                spriteBatch.Draw(mapEdit_Save_Txtr, mapEdit_SaveRec, Color.White); // Save Map Button
+                spriteBatch.Draw(mapEdit_Exit_Txtr, mapEdit_ExitRec, Color.White); // Exit Map Button
                 #endregion
 
                 
