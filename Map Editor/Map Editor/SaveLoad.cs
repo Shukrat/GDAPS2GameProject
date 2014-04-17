@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -273,14 +272,15 @@ namespace Map_Editor
                             case Keys.SelectMedia:
                             case Keys.Separator:
                             case Keys.Sleep:
+                            case Keys.OemSemicolon:
                             case Keys.VolumeDown:
                             case Keys.VolumeMute:
                             case Keys.VolumeUp:
                             case Keys.Zoom:
-                            case Keys.Tab:
                             // ::::From here::::
                             // These keys may be placed back in other cases
                             // to write additional symbols, or add functionality
+                            case Keys.Tab:
                             case Keys.OemOpenBrackets:
                             case Keys.OemCloseBrackets:
                             case Keys.OemPipe:
@@ -293,7 +293,7 @@ namespace Map_Editor
                             case Keys.OemComma:
                             case Keys.Up:
                             case Keys.Down:
-                                // ::::To here::::
+                            // ::::To here::::
                                 break;
                             #endregion
 
