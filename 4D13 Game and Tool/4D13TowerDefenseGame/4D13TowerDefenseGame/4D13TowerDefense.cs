@@ -153,7 +153,7 @@ namespace _4D13TowerDefenseGame
 
             // TODO: Add your update logic here
             // Logic Update
-            gameState.ChangeState(1);
+            //gameState.ChangeState(1);
 
             // GUI Update
             #region Mouse Location Update
