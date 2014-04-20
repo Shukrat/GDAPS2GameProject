@@ -37,19 +37,37 @@ namespace _4D13TowerDefenseGame
         }
 
         // move the projectile toward the enemy
-        public override void Move(Enemy en)
+        public override void Move(int targetx, int targety, int towerx, int towery, Enemy en)
         {
-            /*
-            while (active == true)
+            int vectorX = (targetx - towerx);
+            int vectorY = (targety - towery);
+
+            double vectorMagnitude = (Math.Sqrt((vectorX * vectorX) + (vectorY * vectorY)));
+
+            double unitVectorX = (vectorX / vectorMagnitude);
+            double unitVectorY = (vectorY / vectorMagnitude);
+
+            double finalVectorX = (unitVectorX * moveSpeed);
+            double finalVectorY = (unitVectorY * moveSpeed);
+
+            
+            
+            this.pieceShape.X += (int)finalVectorX;
+            this.pieceShape.Y += (int)finalVectorY;
+
+            if (this.pieceShape.Intersects(en.PieceShape))
             {
-                this.pieceShape.X = this.pieceShape.X + (this.moveSpeed - en.PieceShape.X);
-                this.pieceShape.Y = this.pieceShape.Y + (this.moveSpeed - en.PieceShape.Y);
-                if (this.pieceShape.Intersects(en.PieceShape) == true)
-                {
-                    active = false;
-                }
+                active = false;
+                en.TakeDamage(this);
+                
             }
-              */
+            else if(this.pieceShape.X < 0 || this.pieceShape.Y < 0 || this.pieceShape.X > 800 || this.pieceShape.Y > 600)
+            {
+                active = false;
+            }
+
+            
+            
         }
     }
 }

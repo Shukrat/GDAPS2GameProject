@@ -45,6 +45,7 @@ namespace _4D13TowerDefenseGame
             armor = amr;
             immune = imu;
             canAttack = cnAtk;
+            alive = true;
         }
 
         // method stub for attacking towers
@@ -56,7 +57,7 @@ namespace _4D13TowerDefenseGame
         public void TakeDamage(Projectile prj)
         {
             // subtract the attack of the projectile from the enemy's health
-            this.Health = this.Health - prj.Attack;
+            this.health = this.health - prj.Attack;
 
             // test if enemy is immune to status ailements, and inflict them inf not
             if (immune == false)
@@ -69,6 +70,11 @@ namespace _4D13TowerDefenseGame
                             break;
                         }
                 }
+            }
+
+            if (this.health <= 0)
+            {
+                this.alive = false;
             }
         }
 
