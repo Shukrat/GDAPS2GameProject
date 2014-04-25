@@ -21,11 +21,17 @@ namespace _4D13TowerDefenseGame
         int shotSpeed; // speed of projectiles created by this tower
         string effect; // effects done by this tower to enemies
         string shotString; // image of the projectile used by the tower
+        Rectangle hitbox; // area from which the tower can attack; placeholder because the circle class doesn't want to run
 
         // properties
         public int Cost
         {
             get { return cost; }
+        }
+
+        public Rectangle HitBox
+        {
+            get { return hitbox; }
         }
 
         // parameterized constructor
@@ -39,6 +45,7 @@ namespace _4D13TowerDefenseGame
             // construct this tower's projectile in the center of the tower sprite
             
             saleValue = cost / 2;
+            hitbox = new Rectangle((pieceShape.X - (2 * pieceShape.Width)), (pieceShape.Y - ((3 / 2) * pieceShape.Height)), (pieceShape.Width * 4), (pieceShape.Height * 4));
         }  
 
         // method stub for attacking enemies

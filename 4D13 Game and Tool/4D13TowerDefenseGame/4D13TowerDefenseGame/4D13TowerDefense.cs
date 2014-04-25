@@ -22,7 +22,8 @@ namespace _4D13TowerDefenseGame
         SpriteBatch spriteBatch;
         Tower t = new Tower(50, 20, 40, 40, 50, 50, "Image", "Image", 100, 5, "");
         Texture2D tower;
-        Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
+       // Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
+        Enemy[] enemies = new Enemy[20];
         Random rgen = new Random();
         #endregion
 
@@ -74,6 +75,11 @@ namespace _4D13TowerDefenseGame
         {
             // TODO: Add your initialization logic here
             // Logic Intialization
+
+            for (int i = 0; i < 20; i++)
+            {
+                enemies[i] = new Enemy(50, 20, 0, (i * 40), 50, 50, "Image", 1, 100, 100, false, false);
+            }
 
             // GUI Initalization
             graphics.PreferredBackBufferHeight = 600;
@@ -233,17 +239,20 @@ namespace _4D13TowerDefenseGame
             // Start Click
             if (mousePos.Intersects(startRec) && mState.LeftButton == ButtonState.Pressed)
             {
-                spriteBatch.Draw(startClick, startRec, Color.White);
-                // Object Drawing
                 spriteBatch.Draw(tower, t.PieceShape, Color.White);
                 if (t.shot != null)
                 {
                     spriteBatch.Draw(tower, t.shot.PieceShape, Color.White);
                 }
-                if (e != null)
+                foreach (Enemy e in enemies)
                 {
-                    spriteBatch.Draw(tower, e.PieceShape, Color.White);
+                    if (e != null)
+                    {
+                        spriteBatch.Draw(tower, e.PieceShape, Color.White);
+                    }
                 }
+                spriteBatch.End();
+
                 base.Draw(gameTime);
             }
 

@@ -85,7 +85,7 @@ namespace _4D13TowerDefenseGame
 
         public override void Move()
         {
-            base.Move();
+            this.pieceShape.X += moveSpeed;
         }
     }
 }
