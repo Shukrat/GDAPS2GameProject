@@ -16,15 +16,15 @@ namespace _4D13TowerDefenseGame
     /// </summary>
     public class Game1 : Game
     {
+        // Object Creation
+        #region Objects created
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Tower t = new Tower(50, 20, 40, 40, 50, 50, "Image", "Image", 100, 5, "");
         Texture2D tower;
         Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
         Random rgen = new Random();
-
-        // Game Logic attribute
-        GameState gameState = new GameState();
+        #endregion
 
         // GUI Attribute
         // Attributes
@@ -74,13 +74,12 @@ namespace _4D13TowerDefenseGame
         {
             // TODO: Add your initialization logic here
             // Logic Intialization
-            
+
             // GUI Initalization
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
 
-           
-
+            // Rectangle Initialization
             #region Rectangle Initialization
             exitRec = new Rectangle();
             exitRec.Width = 200;
@@ -155,8 +154,6 @@ namespace _4D13TowerDefenseGame
                 Exit();
 
             // TODO: Add your update logic here
-            // Logic Update
-            //gameState.ChangeState(1);
 
             // GUI Update
             #region Mouse Location Update
@@ -180,7 +177,7 @@ namespace _4D13TowerDefenseGame
             {
                 e = new Enemy(50, 20, rgen.Next(0, 801), rgen.Next(0, 601), 50, 50, "Image", 100, 100, 100, false, false);
             }
-            
+
 
             base.Update(gameTime);
         }
@@ -192,55 +189,65 @@ namespace _4D13TowerDefenseGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            //gameState.ChangeState(1);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            // GUI drawing
 
+            // GUI drawing
             spriteBatch.Draw(exit, exitRec, Color.White);
             spriteBatch.Draw(settings, settingsRec, Color.White);
             spriteBatch.Draw(start, startRec, Color.White);
 
+            // Hover Exit
             if (mousePos.Intersects(exitRec))
             {
                 spriteBatch.Draw(exitHover, exitRec, Color.White);
             }
+
+            // Exit Click
             if (mousePos.Intersects(exitRec) && mState.LeftButton == ButtonState.Pressed)
             {
                 spriteBatch.Draw(exitClick, exitRec, Color.White);
+                this.Exit();
             }
 
+            // Setting Hover
             if (mousePos.Intersects(settingsRec))
             {
                 spriteBatch.Draw(settingsHover, settingsRec, Color.White);
             }
+
+            // Setting Clicked
             if (mousePos.Intersects(settingsRec) && mState.LeftButton == ButtonState.Pressed)
             {
                 spriteBatch.Draw(settingsClick, settingsRec, Color.White);
             }
 
+            // Start Hover
             if (mousePos.Intersects(startRec))
             {
                 spriteBatch.Draw(startHover, startRec, Color.White);
             }
+
+            // Start Click
             if (mousePos.Intersects(startRec) && mState.LeftButton == ButtonState.Pressed)
             {
                 spriteBatch.Draw(startClick, startRec, Color.White);
-            }
-
-            // Object Drawing
-            spriteBatch.Draw(tower, t.PieceShape, Color.White);
-            if (t.shot != null)
-            {
-                spriteBatch.Draw(tower, t.shot.PieceShape, Color.White);
-            }
-            if (e != null)
-            {
-                spriteBatch.Draw(tower, e.PieceShape, Color.White);
+                // Object Drawing
+                spriteBatch.Draw(tower, t.PieceShape, Color.White);
+                if (t.shot != null)
+                {
+                    spriteBatch.Draw(tower, t.shot.PieceShape, Color.White);
+                }
+                if (e != null)
+                {
+                    spriteBatch.Draw(tower, e.PieceShape, Color.White);
+                }
+                base.Draw(gameTime);
             }
 
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

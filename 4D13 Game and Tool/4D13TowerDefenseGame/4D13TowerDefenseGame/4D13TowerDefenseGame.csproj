@@ -37,7 +37,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="4D13TowerDefense.cs" />
-    <Compile Include="GameState.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GamePiece.cs" />
     <Compile Include="MovableGamePiece.cs" />
@@ -61,12 +60,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\MonoGame\v3.0\Assemblies\WindowsGL\SDL.dll">
-      <Link>SDL.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\exitButton.xnb">
@@ -96,6 +89,7 @@
     <Content Include="Content\startButtonHover.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SDL.dll" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Image.xnb">
