@@ -405,6 +405,7 @@ namespace Map_Editor
                     // Moves MapProcesses Update method from Update - Save Menu
                     // to Update - Map Maker in Update method
                     saveComplete = true;
+                    saveMenu = false;
                 }
 
                 // loadMenu value is passed from MapProcesses class
@@ -420,6 +421,7 @@ namespace Map_Editor
                     // Moves MapProcesses Update method from Update - Load Menu
                     // to Update - Map Maker in Update method
                     loadComplete = true;
+                    loadMenu = false;
                 }
             }
         }

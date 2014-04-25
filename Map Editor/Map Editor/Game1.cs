@@ -30,11 +30,12 @@ namespace Map_Editor
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
 
         // Create MapProcesses class
         // Class effectively moves code from Game1 to distinct class
         // Unclutters Game1
-        MapProcesses mapProcesses = new MapProcesses();
+        GameProcesses mapProcesses = new GameProcesses();
 
         // Constructor - MONOGAME DEFAULT
         public Game1()
@@ -95,7 +96,7 @@ namespace Map_Editor
             // TODO: Add your update logic here
             
             // Pass graphics and the Game1 class to MapProcesses to run MapProcesses.Update() properly
-            mapProcesses.Update(graphics, this);
+            mapProcesses.Update(graphics, this, mapProcesses);
 
             base.Update(gameTime);
         }
