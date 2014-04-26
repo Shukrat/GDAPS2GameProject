@@ -14,6 +14,7 @@ namespace _4D13TowerDefenseGame
         bool immune; // whether or not the enemy is immune to status effects (like slow); if true, then it is immune
         bool canAttack; // whether or not the enemy can attack the player's towers; if true, then it can
         bool alive; // whether or not the enemy is alive; if false, enemy will cease to exist immediately
+        //GameVariables gv = new GameVariables(); // accesss to stat
 
         // properties
         public int MoraleDamage
@@ -57,7 +58,7 @@ namespace _4D13TowerDefenseGame
         public void TakeDamage(Projectile prj)
         {
             // subtract the attack of the projectile from the enemy's health
-            this.health = this.health - prj.Attack;
+            this.health = this.health - (prj.Attack - armor);
 
             // test if enemy is immune to status ailements, and inflict them inf not
             if (immune == false)
@@ -81,6 +82,7 @@ namespace _4D13TowerDefenseGame
         // method stub for reducing the player's morale
         public void MoraleAttack()
         {
+            GameVariables.Morale -= moraleDamage;
         }
 
         public override void Move()

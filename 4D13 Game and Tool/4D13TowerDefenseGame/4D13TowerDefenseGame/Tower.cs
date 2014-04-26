@@ -45,15 +45,15 @@ namespace _4D13TowerDefenseGame
             // construct this tower's projectile in the center of the tower sprite
             
             saleValue = cost / 2;
-            hitbox = new Rectangle((pieceShape.X - (2 * pieceShape.Width)), (pieceShape.Y - ((3 / 2) * pieceShape.Height)), (pieceShape.Width * 4), (pieceShape.Height * 4));
+            hitbox = new Rectangle((pieceShape.X - pieceShape.Width), (pieceShape.Y - pieceShape.Height), (pieceShape.Width * 3), (pieceShape.Height * 3));
         }  
 
-        // method stub for attacking enemies
-        public void Attack(Enemy en)
+        // method for attacking enemies
+        public void AttackEnemy(Enemy en)
         {
             if (shot == null)
             {
-                shot = new Projectile(1, attack, (this.PieceShape.X + (this.PieceShape.Width / 2)), (this.PieceShape.Y + (this.PieceShape.Height / 2)), 25, 25, shotString, shotSpeed, effect);
+                shot = new Projectile(1, attack, (this.PieceShape.X + (this.PieceShape.Width / 4)), (this.PieceShape.Y + (this.PieceShape.Height / 4)), 25, 25, shotString, shotSpeed, effect);
             }
             if (shot.Active == false)
             {

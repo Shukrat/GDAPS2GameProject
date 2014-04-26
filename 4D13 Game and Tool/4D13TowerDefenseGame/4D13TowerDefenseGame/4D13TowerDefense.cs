@@ -20,10 +20,10 @@ namespace _4D13TowerDefenseGame
         #region Objects created
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Tower t = new Tower(50, 20, 40, 40, 50, 50, "Image", "Image", 100, 5, "");
+        Tower t = new Tower(50, 20, 400, 300, 50, 50, "Image", "Image", 100, 5, "");
         Texture2D tower;
        // Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
-        Enemy[] enemies = new Enemy[20];
+        List<Enemy> enemies;
         Random rgen = new Random();
         #endregion
 
@@ -76,9 +76,11 @@ namespace _4D13TowerDefenseGame
             // TODO: Add your initialization logic here
             // Logic Intialization
 
+            enemies = new List<Enemy>();
+
             for (int i = 0; i < 20; i++)
             {
-                enemies[i] = new Enemy(50, 20, 0, (i * 40), 50, 50, "Image", 1, 100, 100, false, false);
+                enemies.Add(new Enemy(50, 20, 0, (i * 40), 50, 50, "Image", 1, 100, 10, false, false));
             }
 
             // GUI Initalization
@@ -171,17 +173,34 @@ namespace _4D13TowerDefenseGame
             #endregion
 
             // Object Update
-            if (e != null)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                t.Attack(e);
-                if (e.Alive == false)
+                if (enemies[i] != null)
                 {
-                    e = null;
+                    if (t.HitBox.Intersects(enemies[i].PieceShape))
+                    {
+                        t.AttackEnemy(enemies[i]);
+                    }
+                    if (enemies[i].Alive == false)
+                    {
+                        enemies[i] = null;
+                        t.shot = null;
+                    }
                 }
-            }
-            else if (e == null)
-            {
-                e = new Enemy(50, 20, rgen.Next(0, 801), rgen.Next(0, 601), 50, 50, "Image", 100, 100, 100, false, false);
+                if (enemies[i] != null)
+                {
+                    enemies[i].Move();
+                    if (enemies[i].PieceShape.X > 800)
+                    {
+                        enemies[i].MoraleAttack();
+                        enemies[i] = null;
+                        t.shot = null;
+                    }
+                }
+                else if (enemies[i] == null)
+                {
+                    enemies[i] = new Enemy(50, 20, 0, rgen.Next(0, 601), 50, 50, "Image", 1, 100, 10, false, false);
+                }
             }
 
 
@@ -239,6 +258,8 @@ namespace _4D13TowerDefenseGame
             // Start Click
             if (mousePos.Intersects(startRec) && mState.LeftButton == ButtonState.Pressed)
             {
+                
+                spriteBatch.Draw(tower, t.HitBox, Color.Aqua);
                 spriteBatch.Draw(tower, t.PieceShape, Color.White);
                 if (t.shot != null)
                 {
