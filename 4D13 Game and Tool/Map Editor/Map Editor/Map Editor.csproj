@@ -36,6 +36,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="GS_MM_LoadMenu.cs" />
+    <Compile Include="GS_MM_MainMenu.cs" />
+    <Compile Include="GS_MM_MapEditor.cs" />
+    <Compile Include="GS_MM_SaveMenu.cs" />
+    <Compile Include="GS_TDGame.cs" />
+    <Compile Include="GameProcesses.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveLoad.cs" />
@@ -64,30 +71,97 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Gray Tile.xnb">
+    <Content Include="Content\TEST TILES - OBSOLETE\Gray Tile.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Blue Tile.xnb">
+    <Content Include="Content\TEST TILES - OBSOLETE\Blue Tile.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Sidebar.xnb">
+    <Content Include="Content\TEST TILES - OBSOLETE\Green Tile.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Green Tile.xnb">
+    <Content Include="Content\Tiles\Tiles - Tower Art\catapult.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TEST TILES - OBSOLETE\path.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Exit\exitButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Exit\exitButtonClick.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Exit\exitButtonHover.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\catapult.xnb" />
-    <Content Include="Content\path.xnb">
+    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Load Map\loadMapButton.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - New Map\newMapButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Interface\Interface - Noninteractive\Sidebar.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Interface\Interface - Interactive\Map Editor Menu\Button - Exit\mapEditExitButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Map Editor Menu\Button - Save\saveButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\mainFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathcornerDL.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathcornerDR.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathcornerUL.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathcornerUR.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathET.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathleftright.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathNT.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathST.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathupdown.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Path Art\pathWT.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Tiles\Tiles - Object Art\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
