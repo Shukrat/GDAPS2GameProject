@@ -24,7 +24,17 @@ namespace _4D13TowerDefenseGame
         #region Attributes - Strings
         private string fileName;
         private string lineBuffer;
+        private string[] files;
         #endregion
+
+        #region Attributes - Vectors
+        private Vector2 userInput;
+        private Vector2 fileDisplay;
+        private Vector2 availFiles;
+        int count = 0;
+        #endregion
+
+        private List<Vector2> vectorList;
 
         #region Attributes - Bools
         private bool lineDelay;
@@ -32,6 +42,7 @@ namespace _4D13TowerDefenseGame
         private bool saveComplete = false;
         private bool loadMenu;
         private bool loadComplete = false;
+        private bool loadedVectors = false;
         #endregion
 
         #region Attributes - 2D Arrays
@@ -39,6 +50,8 @@ namespace _4D13TowerDefenseGame
         private Rectangle[,] tiles;
         private int[,] textures;
         #endregion
+
+        public int saveLoadBackground;
 
         // Properties:
         #region Property - ConsoleFont
@@ -100,7 +113,28 @@ namespace _4D13TowerDefenseGame
         // Constructor
         public SaveLoad()
         {
+            files = Directory.GetFiles(".");
+            vectorList = new List<Vector2>();
+            for (int x = 0; x < files.Length; x++)
+            {
+                Vector2 newVector = new Vector2();
+                newVector.X = 10;
+                newVector.Y = 50 + (25 * x);
+                vectorList.Add(newVector);
+            }
+
             lineDelay = false;
+            userInput = new Vector2();
+            userInput.X = 10;
+            userInput.Y = 10;
+
+            fileDisplay = new Vector2();
+            fileDisplay.X = 10;
+            fileDisplay.Y = 35;
+
+            availFiles = new Vector2();
+            availFiles.X = 10;
+            availFiles.Y = 60;
         }
 
         // Methods - Save, Load, Update, Draw
@@ -113,16 +147,18 @@ namespace _4D13TowerDefenseGame
             BinaryWriter output = null;
             try
             {
-                str = File.OpenWrite(fileName + ".dat");
+                str = File.OpenWrite(fileName + ".map");
 
                 output = new BinaryWriter(str);
+
+                output.Write(saveLoadBackground);
 
                 for (int x = 0; x < 20; x++)
                 {
                     for (int y = 0; y < 20; y++)
                     {
                         // Take value out of array and then write value to file
-                        Int32 value = textures[x,y];
+                        Int32 value = textures[x, y];
                         output.Write(value);
                     }
                 }
@@ -144,7 +180,9 @@ namespace _4D13TowerDefenseGame
             BinaryReader input = null;
             try
             {
-                input = new BinaryReader(File.OpenRead(fileName + ".dat"));
+                input = new BinaryReader(File.OpenRead(fileName + ".map"));
+
+                saveLoadBackground = input.ReadInt32();
 
                 for (int x = 0; x < 20; x++)
                 {
@@ -169,6 +207,14 @@ namespace _4D13TowerDefenseGame
         // And save upon hitting enter
         public void Update(KeyboardState kState, KeyboardState prevKState)
         {
+            files = Directory.GetFiles(".");
+            for (int x = 0; x < files.Length; x++)
+            {
+                Vector2 newVector = new Vector2();
+                newVector.X = 10;
+                newVector.Y = 50 + (25 * x);
+                vectorList.Add(newVector);
+            }
             // Detect if the current or previous keystates were the Enter key
             // If NOT, then...
             if (!(kState.IsKeyDown(Keys.Enter) || prevKState.IsKeyDown(Keys.Enter)))
@@ -293,7 +339,7 @@ namespace _4D13TowerDefenseGame
                             case Keys.OemComma:
                             case Keys.Up:
                             case Keys.Down:
-                            // ::::To here::::
+                                // ::::To here::::
                                 break;
                             #endregion
 
@@ -389,7 +435,7 @@ namespace _4D13TowerDefenseGame
 
                 lineDelay = false;
             }
-                // Once the user hits enter, this code runs:
+            // Once the user hits enter, this code runs:
             else if (!lineDelay)
             {
                 // saveMenu value is passed from MapProcesses class
@@ -406,6 +452,8 @@ namespace _4D13TowerDefenseGame
                     // to Update - Map Maker in Update method
                     saveComplete = true;
                     saveMenu = false;
+                    loadedVectors = false;
+                    lineBuffer = "";
                 }
 
                 // loadMenu value is passed from MapProcesses class
@@ -422,6 +470,8 @@ namespace _4D13TowerDefenseGame
                     // to Update - Map Maker in Update method
                     loadComplete = true;
                     loadMenu = false;
+                    loadedVectors = false;
+                    lineBuffer = "";
                 }
             }
         }
@@ -431,7 +481,17 @@ namespace _4D13TowerDefenseGame
         // Draws the text detected in SaveLoad.Update()
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Enter desired map file name: " + lineBuffer, Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, "Enter desired map file name (Enter file name without .map): " + lineBuffer, userInput, Color.Black);
+            spriteBatch.DrawString(font, "Available map files:", fileDisplay, Color.Black);
+            foreach (string str in files)
+            {
+                if (str.Contains("map"))
+                {
+                    count++;
+                    spriteBatch.DrawString(font, str, vectorList[count], Color.Black);
+                }
+            }
+            count = 0;
         }
         #endregion
     }

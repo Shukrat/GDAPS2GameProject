@@ -17,46 +17,17 @@ namespace _4D13TowerDefenseGame
     public class Game1 : Game
     {
         // Object Creation
-        #region Objects created
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Tower t = new Tower(50, 20, 400, 300, 50, 50, "Image", "Image", 100, 5, "");
-        Texture2D tower;
-       // Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
-        List<Enemy> enemies;
-        Random rgen = new Random();
-        #endregion
+       // Tower t = new Tower(50, 20, 400, 300, 50, 50, "Image", "Image", 100, 5, "");
+       // Texture2D tower;
+       //// Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
+       // List<Enemy> enemies;
+       // Random rgen = new Random();
 
-        // GUI Attribute
-        // Attributes
-        #region Attributes - Texture2D
-        Texture2D exit;
-        Texture2D exitHover;
-        Texture2D exitClick;
-        Texture2D settings;
-        Texture2D settingsHover;
-        Texture2D settingsClick;
-        Texture2D start;
-        Texture2D startHover;
-        Texture2D startClick;
-        #endregion
 
-        #region Attributes - Rectangles
-        Rectangle exitRec;
-        Rectangle settingsRec;
-        Rectangle startRec;
-        Rectangle mousePos;
-        #endregion
-
-        #region Attributes - Mouse and Keyboard State
-        KeyboardState kState;
-        MouseState mState;
-        #endregion
-
-        #region Attributes - Draw Booleans
-        bool startBool;
-        bool settingsBool;
-        #endregion
+        GameProcesses gameProcesses = new GameProcesses();
 
         public Game1()
             : base()
@@ -75,44 +46,16 @@ namespace _4D13TowerDefenseGame
         {
             // TODO: Add your initialization logic here
             // Logic Intialization
+            gameProcesses.Initialize(graphics);
 
-            enemies = new List<Enemy>();
+            //enemies = new List<Enemy>();
 
-            for (int i = 0; i < 20; i++)
-            {
-                enemies.Add(new Enemy(50, 20, 0, (i * 40), 50, 50, "Image", 1, 100, 10, false, false));
-            }
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    enemies.Add(new Enemy(50, 20, 0, (i * 40), 50, 50, "Image", 1, 100, 10, false, false));
+            //}
 
-            // GUI Initalization
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.PreferredBackBufferWidth = 800;
-
-            // Rectangle Initialization
-            #region Rectangle Initialization
-            exitRec = new Rectangle();
-            exitRec.Width = 200;
-            exitRec.Height = 88;
-            exitRec.X = graphics.PreferredBackBufferWidth - exitRec.Width - 10;
-            exitRec.Y = graphics.PreferredBackBufferHeight - exitRec.Height - 10;
-
-            settingsRec = new Rectangle();
-            settingsRec.Width = 200;
-            settingsRec.Height = 88;
-            settingsRec.X = (int)(graphics.PreferredBackBufferWidth - settingsRec.Width * 2.5);
-            settingsRec.Y = graphics.PreferredBackBufferHeight - settingsRec.Height - 10;
-
-            startRec = new Rectangle();
-            startRec.Width = 200;
-            startRec.Height = 88;
-            startRec.X = 10;
-            startRec.Y = graphics.PreferredBackBufferHeight - startRec.Height - 10;
-
-            mousePos = new Rectangle();
-            mousePos.Width = 1;
-            mousePos.Height = 1;
-            mousePos.X = 0;
-            mousePos.Y = 0;
-            #endregion
+            
 
             base.Initialize();
         }
@@ -125,21 +68,10 @@ namespace _4D13TowerDefenseGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // GUI content
-            #region Content - Button Art
-            exit = Content.Load<Texture2D>("exitButton");
-            exitHover = Content.Load<Texture2D>("exitButtonHover");
-            exitClick = Content.Load<Texture2D>("exitButtonClick");
-            settings = Content.Load<Texture2D>("settingsButton");
-            settingsHover = Content.Load<Texture2D>("settingsButtonHover");
-            settingsClick = Content.Load<Texture2D>("settingsButtonClick");
-            start = Content.Load<Texture2D>("startButton");
-            startHover = Content.Load<Texture2D>("startButtonHover");
-            startClick = Content.Load<Texture2D>("startButtonClick");
-            #endregion
+            gameProcesses.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
-            tower = Content.Load<Texture2D>(t.ImageStr);
+            // tower = Content.Load<Texture2D>(t.ImageStr);
         }
 
         /// <summary>
@@ -162,46 +94,37 @@ namespace _4D13TowerDefenseGame
                 Exit();
 
             // TODO: Add your update logic here
-
-            // GUI Update
-            #region Mouse Location Update
-
-            // Update mouse state and set paint brush to location
-            mState = Mouse.GetState();
-            mousePos.X = mState.X;
-            mousePos.Y = mState.Y;
-            #endregion
-
+            gameProcesses.Update(graphics, this, gameProcesses);
             // Object Update
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (enemies[i] != null)
-                {
-                    if (t.HitBox.Intersects(enemies[i].PieceShape))
-                    {
-                        t.AttackEnemy(enemies[i]);
-                    }
-                    if (enemies[i].Alive == false)
-                    {
-                        enemies[i] = null;
-                        t.shot = null;
-                    }
-                }
-                if (enemies[i] != null)
-                {
-                    enemies[i].Move();
-                    if (enemies[i].PieceShape.X > 800)
-                    {
-                        enemies[i].MoraleAttack();
-                        enemies[i] = null;
-                        t.shot = null;
-                    }
-                }
-                else if (enemies[i] == null)
-                {
-                    enemies[i] = new Enemy(50, 20, 0, rgen.Next(0, 601), 50, 50, "Image", 1, 100, 10, false, false);
-                }
-            }
+            //for (int i = 0; i < enemies.Count; i++)
+            //{
+            //    if (enemies[i] != null)
+            //    {
+            //        if (t.HitBox.Intersects(enemies[i].PieceShape))
+            //        {
+            //            t.AttackEnemy(enemies[i]);
+            //        }
+            //        if (enemies[i].Alive == false)
+            //        {
+            //            enemies[i] = null;
+            //            t.shot = null;
+            //        }
+            //    }
+            //    if (enemies[i] != null)
+            //    {
+            //        enemies[i].Move();
+            //        if (enemies[i].PieceShape.X > 800)
+            //        {
+            //            enemies[i].MoraleAttack();
+            //            enemies[i] = null;
+            //            t.shot = null;
+            //        }
+            //    }
+            //    else if (enemies[i] == null)
+            //    {
+            //        enemies[i] = new Enemy(50, 20, 0, rgen.Next(0, 601), 50, 50, "Image", 1, 100, 10, false, false);
+            //    }
+            //}
 
 
             base.Update(gameTime);
@@ -213,69 +136,13 @@ namespace _4D13TowerDefenseGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.DarkGray);
             //gameState.ChangeState(1);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
-            // GUI drawing
-            spriteBatch.Draw(exit, exitRec, Color.White);
-            spriteBatch.Draw(settings, settingsRec, Color.White);
-            spriteBatch.Draw(start, startRec, Color.White);
-
-            // Hover Exit
-            if (mousePos.Intersects(exitRec))
-            {
-                spriteBatch.Draw(exitHover, exitRec, Color.White);
-            }
-
-            // Exit Click
-            if (mousePos.Intersects(exitRec) && mState.LeftButton == ButtonState.Pressed)
-            {
-                spriteBatch.Draw(exitClick, exitRec, Color.White);
-                this.Exit();
-            }
-
-            // Setting Hover
-            if (mousePos.Intersects(settingsRec))
-            {
-                spriteBatch.Draw(settingsHover, settingsRec, Color.White);
-            }
-
-            // Setting Clicked
-            if (mousePos.Intersects(settingsRec) && mState.LeftButton == ButtonState.Pressed)
-            {
-                spriteBatch.Draw(settingsClick, settingsRec, Color.White);
-            }
-
-            // Start Hover
-            if (mousePos.Intersects(startRec))
-            {
-                spriteBatch.Draw(startHover, startRec, Color.White);
-            }
-
-            // Start Click
-            if (mousePos.Intersects(startRec) && mState.LeftButton == ButtonState.Pressed)
-            {
-                
-                spriteBatch.Draw(tower, t.HitBox, Color.Aqua);
-                spriteBatch.Draw(tower, t.PieceShape, Color.White);
-                if (t.shot != null)
-                {
-                    spriteBatch.Draw(tower, t.shot.PieceShape, Color.White);
-                }
-                foreach (Enemy e in enemies)
-                {
-                    if (e != null)
-                    {
-                        spriteBatch.Draw(tower, e.PieceShape, Color.White);
-                    }
-                }
-                spriteBatch.End();
-
-                base.Draw(gameTime);
-            }
+            gameProcesses.Draw(spriteBatch, graphics);
+            
 
             spriteBatch.End();
             base.Draw(gameTime);

@@ -21,36 +21,87 @@ namespace _4D13TowerDefenseGame
         #endregion
 
         #region Attributes - Texture2D
-        // Tiles
+        // Currently Selected Tile
+        public Texture2D paintBrush_Txtr;
+
         // Path tiles
+        public Texture2D eraser_Tile; // ERASER
         public Texture2D pathDL_Tile;
         public Texture2D pathDR_Tile;
         public Texture2D pathUL_Tile;
         public Texture2D pathUR_Tile;
-        public Texture2D pathET_Tile;
         public Texture2D pathLeftRight_Tile;
-        public Texture2D pathNT_Tile;
-        public Texture2D pathST_Tile;
         public Texture2D pathUpDown_Tile;
-        public Texture2D pathWT_Tile;
 
-        // Object tiles
-        public Texture2D grayTile;     // OBSOLETE
-        public Texture2D blueTile;     // OBSOLETE
-        public Texture2D greenTile;    // OBSOLETE
-        public Texture2D pathTile;     // OBSOLETE
+        // Towers
+        public Texture2D twr_Catapult_Txtr;
+        public Texture2D twr_Trebuchet_Txtr;
+
+        // Spells
+        public Texture2D spell_Heal_Txtr;
+        public Texture2D spell_Rage_Txtr;
+        public Texture2D spell_Slow_Txtr;
+        public Texture2D spell_Fireball_Txtr;
+        
+        // Collidable tiles
+        public Texture2D obj_Boulder;
+        public Texture2D obj_Tree;
+
+        // Spawn / Goal Tiles
+        public Texture2D spawn;
+        public Texture2D goal;
+
+        // Background Images
+        public Texture2D bg_MapEditMainMenu; // Used for main menu and map editor main menu
+        public Texture2D bg_Desert;
+        public Texture2D bg_Grasslands;
+        public Texture2D bg_Tundra;
+
+        // Game Interface
+        public Texture2D game_GameBorder_Txtr;
+        public Texture2D game_HealthBar_Txtr;
+        public Texture2D game_Pause_Txtr;
+        public Texture2D game_Play_Txtr;
+        public Texture2D game_FF_Txtr;
+        public Texture2D game_FFF_Txtr;
 
         // Main Menu - Textures for buttons / interface
-        public Texture2D mainMenu_Exit_Txtr;
-        public Texture2D mainMenu_ExitHover_Txtr;
-        public Texture2D mainMenu_ExitClick_Txtr;
+        public Texture2D mainMenu_Exit_Txtr;        // This texture also used for map editor Exit button
+        public Texture2D mainMenu_ExitHover_Txtr;   // This texture also used for map editor Exit button
+        public Texture2D mainMenu_ExitClick_Txtr;   // This texture also used for map editor Exit button
         public Texture2D mainMenu_Load_Txtr;
+        public Texture2D mainMenu_LoadHover_Txtr;
+        public Texture2D mainMenu_LoadClick_Txtr;
         public Texture2D mainMenu_New_Txtr;
+        public Texture2D mainMenu_NewHover_Txtr;
+        public Texture2D mainMenu_NewClick_Txtr;
+        public Texture2D mainMenu_MapEditor_Txtr;
+        public Texture2D mainMenu_MapEditorHover_Txtr;
+        public Texture2D mainMenu_MapEditorClick_Txtr;
+        public Texture2D mainMenu_Settings_Txtr;
+        public Texture2D mainMenu_SettingsHover_Txtr;
+        public Texture2D mainMenu_SettingsClick_Txtr;
 
         // Map Editor - Textures for buttons / interface
+        public Texture2D mapEdit_Tiles_Txtr;
+        public Texture2D mapEdit_TilesHover_Txtr;
+        public Texture2D mapEdit_TilesClick_Txtr;
+        public Texture2D mapEdit_Back_Txtr;
+        public Texture2D mapEdit_BackHover_Txtr;
+        public Texture2D mapEdit_BackClick_Txtr;
+        public Texture2D mapEdit_Menu_Txtr;
+        public Texture2D mapEdit_MenuHover_Txtr;
+        public Texture2D mapEdit_MenuClick_Txtr;
         public Texture2D mapEdit_Save_Txtr;
-        public Texture2D mapEdit_Exit_Txtr;
+        public Texture2D mapEdit_SaveHover_Txtr;
+        public Texture2D mapEdit_SaveClick_Txtr;
         public Texture2D mapEdit_SideBar_Txtr;
+        public Texture2D mapEdit_BackSelect_Txtr;
+        public Texture2D mapEdit_BackSelectHover_Txtr;
+        public Texture2D mapEdit_BackSelectClick_Txtr;
+        public Texture2D mapEdit_PathSelect_Txtr;
+        public Texture2D mapEdit_PathSelectHover_Txtr;
+        public Texture2D mapEdit_PathSelectClick_Txtr;
 
         // Save or Load Menu Font
         public SpriteFont font;
@@ -60,48 +111,69 @@ namespace _4D13TowerDefenseGame
         // Keyboard and mouse states
         public KeyboardState kState;
         public KeyboardState prevKState;
-        public MouseState mState;
+        public static MouseState mState;
+        public static MouseState prevMState;
         #endregion
 
-        #region Attributes - Bools for Save/Load 
+        #region Attributes - Bools for Save/Load
         // Not assigned here but used in GG_MM_LoadMenu and GS_MM_SaveMenu
+        // DO NOT DELETE
         public bool loadMenu;
         public bool saveMenu;
         #endregion
 
-        #region Attributes - Other stuff
-        // Used to draw interface on mapeditor once
-        public bool interfaceMade = false;
-        #endregion
-
         #region Attributes - Texture Selection Booleans
         // Bools for keystates
-        public bool tfGrayTile;
-        public bool tfBlueTile;
-        public bool tfGreenTile;
-        public bool tfPathTile;
+        // Path selection
+        public bool tf_Eraser;
+        public bool tf_PathDL;
+        public bool tf_PathDR;
+        public bool tf_PathUL;
+        public bool tf_PathUR;
+        public bool tf_PathLeftRight;
+        public bool tf_PathUpDown;
+
+        // Object select
+        public bool tf_Bolder;
+        public bool tf_Tree;
+
+        // Background select
+        public bool tf_Grasslands;
+        public bool tf_Desert;
+        public bool tf_Tundra;
+        
+        // Spawn / Goal
+        public bool tf_Spawn;
+        public bool tf_Goal;
+
+        // Change between background select and path select
+        public bool tf_BackgroundSelect = false;
+        public bool tf_PathSelect = false;
         #endregion
 
         #region Attributes - Rectangles
         // Mouse position Rectangle
         public Rectangle mousePos;
 
-        // Retangles for tile selection options -- PALLETTE CLASS
-        public Rectangle selectGray;   // OBSOLETE
-        public Rectangle selectBlue;   // OBSOLETE
-        public Rectangle selectGreen;  // OBSOLETE
-        public Rectangle selectPath;   // OBSOLETE
-
-        public Rectangle select_PathDL; // Corner from left to bottom
-        public Rectangle select_PathDR; // Corner from right to bottom
-        public Rectangle select_PathUL; // Corner from left to top
-        public Rectangle select_PathUR; // Corner from right to top
-        public Rectangle select_PathET; // T-intersect from right
+        // Retangles for tile selection options
+        public Rectangle select_Eraser; 
+        public Rectangle select_PathDL; // Corner from left to bottom   // USED FOR BOLDER
+        public Rectangle select_PathDR; // Corner from right to bottom  // USED FOR TREE
+        public Rectangle select_PathUL; // Corner from left to top      // USED FOR SPAWN
+        public Rectangle select_PathUR; // Corner from right to top     // USED FOR GOAL
         public Rectangle select_PathLeftRight;  // Path left to right
-        public Rectangle select_PathNT; // T-intersect from top
-        public Rectangle select_PathST; // T-intersect from bottom
         public Rectangle select_PathUpDown;     // Path from top to bottom
-        public Rectangle select_PathWT; // T-intersect from left
+
+
+        // Towers
+        public Rectangle twr_TrebuchetRec;
+        public Rectangle twr_CatapultRec;
+
+        // Spells
+        public Rectangle spell_FireballRec;
+        public Rectangle spell_HealRec;
+        public Rectangle spell_RageRec;
+        public Rectangle spell_SlowRec;
 
         // Rectangle to show currently selected tile
         public Rectangle paintBrush;
@@ -111,13 +183,31 @@ namespace _4D13TowerDefenseGame
         public Rectangle mainMenu_ExitRec;
         public Rectangle mainMenu_LoadRec;
         public Rectangle mainMenu_NewRec;
+        public Rectangle mainMenu_MapEditorRec;
+        public Rectangle mainMenu_SettingsRec;
+
+        // Game Interface
+        public Rectangle game_GameBorderRec;
+        public Rectangle game_BackgroundRec;
+        public Rectangle game_HealthBarRec;
+        public Rectangle game_ManaBarRec;
+        public Rectangle game_PlayRec;
+        public Rectangle game_PauseRec;
+        public Rectangle game_FFRec;
+        public Rectangle game_FFFRec;
+
         // Map Editor
+        public Rectangle mapEdit_TilesRec;
+        public Rectangle mapEdit_MainBackground;
+        public Rectangle mapEdit_MenuRec;
         public Rectangle mapEdit_ExitRec;
         public Rectangle mapEdit_SaveRec;
-        public Rectangle mapEdit_BackRec;
+        public Rectangle mapEdit_BackSelectRec;
         public Rectangle mapEdit_PathTilesRec;  // Button displays only path tiles to paint
         public Rectangle sideBarBG;
         #endregion
+
+        public static int saveLoadBackground;
 
         // Properties:
         #region Property - Get Rectangle 2D Array
@@ -151,8 +241,8 @@ namespace _4D13TowerDefenseGame
                     Rectangle newTile = new Rectangle();
                     newTile.Width = 45;
                     newTile.Height = 45;
-                    newTile.X = 45 * x;
-                    newTile.Y = 45 * i;
+                    newTile.X = (45 * x) + 10;
+                    newTile.Y = (45 * i) + 10;
                     tiles[i, x] = newTile;
                 }
             }
@@ -189,33 +279,261 @@ namespace _4D13TowerDefenseGame
             // Update mouse position at each call of this method in update in Game1
             mState = Mouse.GetState();
             // Detect collisions
-            if (mousePos.Intersects(selectGray) && mState.LeftButton == ButtonState.Pressed)
+            #region Eraser Select
+            if (mousePos.Intersects(select_Eraser) && mState.LeftButton == ButtonState.Pressed)
             {
-                tfGrayTile = true;
-                tfBlueTile = false;
-                tfGreenTile = false;
-                tfPathTile = false;
+                tf_PathDL = false;
+                tf_PathDR = false;
+                tf_PathUL = false;
+                tf_PathUR = false;
+                tf_PathLeftRight = false;
+                tf_PathUpDown = false;
+                tf_Bolder = false;
+                tf_Tree = false;
+                tf_Eraser = true;
+                tf_Spawn = false;
+                tf_Goal = false;
             }
-            if (mousePos.Intersects(selectBlue) && mState.LeftButton == ButtonState.Pressed)
+            #endregion
+
+            #region Tile Select - Paths
+            if (mousePos.Intersects(select_PathDL) && mState.LeftButton == ButtonState.Pressed)
             {
-                tfGrayTile = false;
-                tfBlueTile = true;
-                tfGreenTile = false;
-                tfPathTile = false;
+                if (!tf_BackgroundSelect && tf_PathSelect)
+                {
+                    tf_PathDL = true;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
             }
-            if (mousePos.Intersects(selectGreen) && mState.LeftButton == ButtonState.Pressed)
+            if (mousePos.Intersects(select_PathDR) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && tf_PathSelect)
             {
-                tfGrayTile = false;
-                tfBlueTile = false;
-                tfGreenTile = true;
-                tfPathTile = false;
+                if (!tf_BackgroundSelect && tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = true;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
             }
-            if (mousePos.Intersects(selectPath) && mState.LeftButton == ButtonState.Pressed)
+            if (mousePos.Intersects(select_PathUL) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && tf_PathSelect)
             {
-                tfGrayTile = false;
-                tfBlueTile = false;
-                tfGreenTile = false;
-                tfPathTile = true;
+                if (!tf_BackgroundSelect && tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = true;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
+            }
+            if (mousePos.Intersects(select_PathUR) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = true;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
+            }
+            if (mousePos.Intersects(select_PathLeftRight) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = true;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
+            }
+            if (mousePos.Intersects(select_PathUpDown) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = true;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
+            }
+            #endregion
+
+            #region Tile Select - Objects
+            if (mousePos.Intersects(select_PathDL) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = true;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
+            }
+            if (mousePos.Intersects(select_PathDR) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = true;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                }
+            }
+            #endregion
+
+            #region Tile Select - Spawn / Goal
+            if (mousePos.Intersects(select_PathUL) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = true;
+                    tf_Goal = false;
+                }
+            }
+            if (mousePos.Intersects(select_PathUR) && mState.LeftButton == ButtonState.Pressed && !tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = true;
+                }
+            }
+            #endregion
+
+            #region Background Select
+            if (mousePos.Intersects(select_PathDL) && mState.LeftButton == ButtonState.Pressed && tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_Grasslands = true;
+                    tf_Desert = false;
+                    tf_Tundra = false;
+                    saveLoadBackground = 1;
+                }
+            }
+            if (mousePos.Intersects(select_PathDR) && mState.LeftButton == ButtonState.Pressed && tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_Grasslands = false;
+                    tf_Desert = true;
+                    tf_Tundra = false;
+                    saveLoadBackground = 2;
+                }
+            }
+            if (mousePos.Intersects(select_PathUL) && mState.LeftButton == ButtonState.Pressed && tf_BackgroundSelect && !tf_PathSelect)
+            {
+                if (tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_Grasslands = false;
+                    tf_Desert = false;
+                    tf_Tundra = true; 
+                    saveLoadBackground = 3;
+                }
+            }
+            #endregion
+
+            #region Change between Object, Background and Path selections
+            if (mousePos.Intersects(mapEdit_BackSelectRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                tf_BackgroundSelect = true;
+                tf_PathSelect = false;
+            }
+            if (mousePos.Intersects(mapEdit_PathTilesRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                tf_BackgroundSelect = false;
+                tf_PathSelect = true;
+            }
+            if (mousePos.Intersects(mapEdit_TilesRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                tf_BackgroundSelect = false;
+                tf_PathSelect = false;
+            }
+            #endregion
+
+        }
+
+        public void MouseStateGet()
+        {
+            mState = Mouse.GetState();
+            if (mState.LeftButton == ButtonState.Released)
+            {
+                prevMState = Mouse.GetState();
             }
         }
     }

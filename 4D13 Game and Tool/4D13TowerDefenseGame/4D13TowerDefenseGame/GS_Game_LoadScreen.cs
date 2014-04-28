@@ -8,11 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
-using System.Threading;
 
 namespace _4D13TowerDefenseGame
 {
-    class GS_MM_LoadMenu : GameState
+    class GS_Game_LoadScreen : GameState
     {
         // Load content needed for this GameState
         public override void LoadContent(ContentManager Content)
@@ -58,18 +57,18 @@ namespace _4D13TowerDefenseGame
             // moves to Map Maker Update Bool in this Update method
             if (GameProcesses.saveLoad.LoadComplete)
             {
-                return GameProcesses.GameStateEnum.mapEdit_MapEditor;
+                return GameProcesses.GameStateEnum.main_LoadMap;
             }
             if (prevMState.LeftButton != ButtonState.Pressed)
             {
                 if (mousePos.Intersects(mainMenu_ExitRec) && mState.LeftButton == ButtonState.Pressed)
                 {
                     prevMState = Mouse.GetState();
-                    return GameProcesses.GameStateEnum.mapEdit_MainMenu;
+                    return GameProcesses.GameStateEnum.main_MainMenu;
                 }
             }
 
-            return GameProcesses.GameStateEnum.mapEdit_LoadMenu;
+            return GameProcesses.GameStateEnum.main_LoadScreen;
 
         }
 
