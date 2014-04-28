@@ -11,18 +11,6 @@ using Microsoft.Xna.Framework.GamerServices;
 
 namespace Map_Editor
 {
-    // ------------------------------TO DO NOTES------------------------------
-    // - ADD MORE TILE SELECTIONS ON SIDEBAR
-    // - ADD ERASE FUNCTION - Blank tile set as 0;
-    // - PERFECT WINDOW SIZE
-    // - ADD WALKING PATH 2D ARRAY?
-    // - ADD BUILDABLE LOCATION 2D ARRAY? - THIS WILL BE INT VALUE OF 0
-    // - ADD BACKSPLAT SELECTION TO UPDATE TILE SELECTION OPTIONS
-    // - UPDATE COMMENTS
-    // - MORE?
-    // ------------------------------END TO DO NOTES------------------------------
-
-
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -56,6 +44,7 @@ namespace Map_Editor
             // TODO: Add your initialization logic here
             
             // Pass graphics to MapProcesses to run MapProcesses.Initialize() properly
+            
             mapProcesses.Initialize(graphics);
 
             base.Initialize();
@@ -107,7 +96,7 @@ namespace Map_Editor
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Gray);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

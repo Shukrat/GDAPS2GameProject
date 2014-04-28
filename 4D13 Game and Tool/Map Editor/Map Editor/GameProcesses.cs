@@ -51,8 +51,8 @@ namespace Map_Editor
         public void Initialize(GraphicsDeviceManager graphics)
         {
             // Set width and height of window
-            graphics.PreferredBackBufferHeight = 900;
-            graphics.PreferredBackBufferWidth = 1130;
+            graphics.PreferredBackBufferHeight = 920;
+            graphics.PreferredBackBufferWidth = 1150;
 
             // MAP EDITOR GAME STATES
             gameStateStatus = GameStateEnum.mapEdit_MainMenu;

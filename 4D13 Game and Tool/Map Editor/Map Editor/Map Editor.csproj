@@ -71,55 +71,12 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\TEST TILES - OBSOLETE\Gray Tile.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\TEST TILES - OBSOLETE\Blue Tile.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\TEST TILES - OBSOLETE\Green Tile.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\Tiles\Tiles - Tower Art\catapult.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\TEST TILES - OBSOLETE\path.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Exit\exitButton.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Exit\exitButtonClick.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Exit\exitButtonHover.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - Load Map\loadMapButton.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Interface\Interface - Interactive\Main Menu\Button - New Map\newMapButton.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Interface\Interface - Noninteractive\Sidebar.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Interface\Interface - Interactive\Map Editor Menu\Button - Exit\mapEditExitButton.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Interface\Interface - Interactive\Map Editor Menu\Button - Save\saveButton.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -141,27 +98,179 @@
     <Content Include="Content\Tiles\Tiles - Path Art\pathcornerUR.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Tiles\Tiles - Path Art\pathET.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Tiles\Tiles - Path Art\pathleftright.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Tiles\Tiles - Path Art\pathNT.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Tiles\Tiles - Path Art\pathST.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiles\Tiles - Path Art\pathupdown.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Tiles\Tiles - Path Art\pathWT.xnb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Tiles\Eraser.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Tiles\Tiles - Object Art\" />
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Exit\exitButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Exit\exitButtonClick.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Exit\exitButtonHover.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Load\LoadButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Load\LoadClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Load\LoadHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Menu\MenuButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Menu\MenuClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Menu\MenuHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - New Map\NewButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - New Map\NewClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - New Map\NewHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Save\SaveButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Save\SaveClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Save\SaveHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Speed Control\FF.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Speed Control\FFF.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Speed Control\Pause.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Speed Control\Play.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Spells\Fireball.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Spells\Heal.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Spells\Rage.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\Game - In Game\Buttons\Spells\Slow.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Interface\Interface - Noninteractive\GameFrame.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Noninteractive\HealthBarFrame.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Projectiles\Projectile.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Backsplashes\Desert.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Backsplashes\Grasslands.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Backsplashes\Tundra.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Object Art\Collidables\Boulder.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Object Art\Collidables\Tree.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Object Art\Monsters\Monster.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Object Art\SpawnGoal\Gate.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Object Art\SpawnGoal\Portal.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Tower Art\Tower1.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tiles\Tiles - Tower Art\Tower2.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Splash.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\SplashEditor.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Back\BackButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Back\BackClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Back\BackHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Tiles\TilesButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Tiles\TilesClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Tiles\TilesHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Backdrop Select\BGButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Backdrop Select\BGClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Backdrop Select\BGHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Path Select\PathsButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Path Select\PathsClickButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Interactive\All Buttons\Button - Path Select\PathsHoverButton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

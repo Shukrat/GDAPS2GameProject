@@ -35,6 +35,7 @@ namespace Map_Editor
             GameProcesses.saveLoad.LoadMenu = true;
             GameProcesses.saveLoad.Update(kState, prevKState);
             textures = GameProcesses.saveLoad.Textures;
+            saveLoadBackground = GameProcesses.saveLoad.saveLoadBackground;
 
             // Waits for user hits enter in SaveLoad.Update method
             // moves to Map Maker Update Bool in this Update method

@@ -40,6 +40,8 @@ namespace Map_Editor
         private int[,] textures;
         #endregion
 
+        public int saveLoadBackground;
+
         // Properties:
         #region Property - ConsoleFont
         public SpriteFont ConsoleFont
@@ -117,6 +119,8 @@ namespace Map_Editor
 
                 output = new BinaryWriter(str);
 
+                output.Write(saveLoadBackground);
+
                 for (int x = 0; x < 20; x++)
                 {
                     for (int y = 0; y < 20; y++)
@@ -145,6 +149,8 @@ namespace Map_Editor
             try
             {
                 input = new BinaryReader(File.OpenRead(fileName + ".dat"));
+
+                saveLoadBackground = input.ReadInt32();
 
                 for (int x = 0; x < 20; x++)
                 {

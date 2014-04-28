@@ -31,6 +31,7 @@ namespace Map_Editor
             // Saves to binary file
             GameProcesses.saveLoad.SaveComplete = false;
             GameProcesses.saveLoad.SaveMenu = true;
+            GameProcesses.saveLoad.saveLoadBackground = saveLoadBackground;
             //saveLoad.Textures = textures;
             GameProcesses.saveLoad.Update(kState, prevKState);
 
