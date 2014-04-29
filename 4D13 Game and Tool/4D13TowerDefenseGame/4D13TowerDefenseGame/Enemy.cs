@@ -85,9 +85,112 @@ namespace _4D13TowerDefenseGame
             GameVariables.Morale -= moraleDamage;
         }
 
-        public override void Move()
+        public override void Move(int xDimension, int yDimension)
         {
-            this.pieceShape.X += moveSpeed;
+            switch (GameState.textures[xDimension, yDimension])
+            {
+                case 1:
+                    {
+                        if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
+                        {
+                            this.xPos -= moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
+                        {
+                            this.yPos += moveSpeed;
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
+                        {
+                            this.xPos += moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
+                        {
+                            this.yPos += moveSpeed;
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
+                        {
+                            this.yPos -= moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
+                        {
+                            this.xPos -= moveSpeed;
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
+                        {
+                            this.xPos += moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
+                        {
+                            this.yPos -= moveSpeed;
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
+                        {
+                            this.xPos += moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
+                        {
+                            this.xPos -= moveSpeed;
+                        }
+                        break;
+                    }
+                case 6:
+                    {
+                        if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
+                        {
+                            this.yPos -= moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
+                        {
+                            this.yPos += moveSpeed;
+                        }
+                        break;
+                    }
+                case 9:
+                    {
+                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension+1, yDimension] == 5)
+                        {
+                            this.xPos += moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
+                        {
+                            this.yPos -= moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
+                        {
+                            this.xPos -= moveSpeed;
+                        }
+                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
+                        {
+                            this.yPos += moveSpeed;
+                        }
+                        break;
+                    }
+                case 10:
+                    {
+                        
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
         }
     }
 }

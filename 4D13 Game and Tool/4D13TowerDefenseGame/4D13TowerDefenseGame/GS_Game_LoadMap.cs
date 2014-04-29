@@ -51,6 +51,7 @@ namespace _4D13TowerDefenseGame
             // Objects
             obj_Boulder = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Collidables/Boulder");
             obj_Tree = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Collidables/Tree");
+            obj_Monster = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Monsters/Monster");
             // Spawn/Goal
             spawn = Content.Load<Texture2D>("Tiles/Tiles - Object Art/SpawnGoal/Portal");
             goal = Content.Load<Texture2D>("Tiles/Tiles - Object Art/SpawnGoal/Gate");
@@ -62,10 +63,61 @@ namespace _4D13TowerDefenseGame
 
             // GAME / GAME BORDER
             game_GameBorder_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/GameFrame");
+
         }
 
         public override GameProcesses.GameStateEnum Update(GraphicsDeviceManager graphics, Game1 game1)
         {
+
+            for (int i = 0; i < GameVariables.Enemies.Count; i++)
+            {
+                foreach (Tower t in GameVariables.Towers)
+                {
+                    if (GameVariables.Enemies[i] != null)
+                    {
+
+                        if (t.HitBox.Intersects(GameVariables.Enemies[i].PieceShape))
+                        {
+                            t.AttackEnemy(GameVariables.Enemies[i]);
+                        }
+                        if (GameVariables.Enemies[i].Alive == false)
+                        {
+                            GameVariables.Enemies[i] = null;
+                            t.shot = null;
+                        }
+
+                    }
+                    if (GameVariables.Enemies[i] != null)
+                    {
+                        for (int r = 0; r < 20; r++)
+                        {
+                            for (int q = 0; q < 20; q++)
+                            {
+                                if (GameVariables.Enemies[i].PieceShape.Intersects(GameState.tiles[r, q]))
+                                {
+                                    if (GameState.textures[r, q] == 10)
+                                    {
+                                        GameVariables.Enemies[i].MoraleAttack();
+                                        GameVariables.Enemies[i] = null;
+                                    }
+                                    else
+                                    {
+                                        GameVariables.Enemies[i].Move(r, q);
+                                    }
+
+                                }
+                            }
+                        }
+                        if (GameVariables.Enemies[i].PieceShape.X > 800)
+                        {
+                            GameVariables.Enemies[i].MoraleAttack();
+                            GameVariables.Enemies[i] = null;
+                            t.shot = null;
+                        }
+                    }
+                }
+            }
+
             // POSSIBLY UNNEEDED - BUTTONS AND INTERFACE STILL NEED EDITING 4/28
             #region Mouse/Keyboard Tile Paint Selection Update
             // Check Mouse for new tile selection
@@ -236,7 +288,8 @@ namespace _4D13TowerDefenseGame
                 }
             }
 
-            return GameProcesses.GameStateEnum.main_LoadMap;
+
+            
             #endregion
 
 
@@ -244,7 +297,7 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME CODE HERE
             /// ...
             /// </summary>
-            
+            return GameProcesses.GameStateEnum.main_LoadMap;
         }
 
         public override void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
@@ -376,6 +429,17 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME ANIMATION CODE HERE
             /// ...
             /// </summary>
+            foreach (Tower t in GameVariables.Towers)
+            {
+                spriteBatch.Draw(twr_Catapult_Txtr, t.PieceShape, Color.White);
+            }
+            foreach (Enemy e in GameVariables.Enemies)
+            {
+                if (e != null)
+                {
+                    spriteBatch.Draw(obj_Monster, e.PieceShape, Color.White);
+                }
+            }
         }
     }
 }

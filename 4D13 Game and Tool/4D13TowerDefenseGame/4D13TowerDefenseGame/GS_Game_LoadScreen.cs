@@ -57,6 +57,32 @@ namespace _4D13TowerDefenseGame
             // moves to Map Maker Update Bool in this Update method
             if (GameProcesses.saveLoad.LoadComplete)
             {
+
+
+                int xDim = 0;
+                int yDim = 0;
+
+                for (int i = 0; i < 20; i++)
+                {
+                    for (int j = 0; j < 20; j++)
+                    {
+                        if (GameState.textures[i, j] == 9)
+                        {
+                            xDim = GameState.tiles[i, j].X;
+                            yDim = GameState.tiles[i, j].Y;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 1; i++)
+                {
+                    GameVariables.Enemies.Add(new Enemy(50, 20, xDim, yDim, 50, 50, "Monster", 600, 100, 100, false, false));
+                }
+
+                Tower t = new Tower(50, 20, 400, 300, 50, 50, "Tower1", "Projectile", 100, 5, "");
+                Tower u = new Tower(50, 20, 400, 320, 50, 50, "Tower1", "Projectile", 100, 5, "");
+                GameVariables.Towers.Add(t);
+                GameVariables.Towers.Add(u);
                 return GameProcesses.GameStateEnum.main_LoadMap;
             }
             if (prevMState.LeftButton != ButtonState.Pressed)

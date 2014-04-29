@@ -52,6 +52,7 @@ namespace _4D13TowerDefenseGame
             // Objects
             obj_Boulder = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Collidables/Boulder");
             obj_Tree = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Collidables/Tree");
+            obj_Monster = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Monsters/Monster");
             // Spawn/Goal
             spawn = Content.Load<Texture2D>("Tiles/Tiles - Object Art/SpawnGoal/Portal");
             goal = Content.Load<Texture2D>("Tiles/Tiles - Object Art/SpawnGoal/Gate");
@@ -63,6 +64,7 @@ namespace _4D13TowerDefenseGame
 
             // GAME / GAME BORDER
             game_GameBorder_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/GameFrame");
+            
         }
 
         // This method should handle game code
@@ -247,6 +249,7 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>
             
+            
         }
 
         // This method handles drawing the interface AND enemies.
@@ -373,6 +376,8 @@ namespace _4D13TowerDefenseGame
                 }
             }
             #endregion
+
+            
 
 
             /// <summary>

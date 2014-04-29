@@ -46,6 +46,7 @@ namespace _4D13TowerDefenseGame
         // Collidable tiles
         public Texture2D obj_Boulder;
         public Texture2D obj_Tree;
+        public Texture2D obj_Monster;
 
         // Spawn / Goal Tiles
         public Texture2D spawn;

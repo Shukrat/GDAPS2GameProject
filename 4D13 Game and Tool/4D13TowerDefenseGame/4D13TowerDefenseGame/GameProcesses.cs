@@ -86,12 +86,19 @@ namespace _4D13TowerDefenseGame
             gs_Game_MapFirst = new GS_Game_MapFirst();
             gs_Game_MapSecond = new GS_Game_MapSecond();
             gs_Game_MapThird = new GS_Game_MapThird();
-            
+
 
             // Set default game state - SET THIS TO THE FIRST SCREEN YOU WANT
             gameStateStatus = GameStateEnum.main_MainMenu;
 
+            // set the list of enemies to exist
+            GameVariables.Enemies = new List<Enemy>();
+            GameVariables.Towers = new List<Tower>();
+
         }
+
+
+            
 
         // Load Content - to be used in LoadContent in Game1
         public void LoadContent(ContentManager Content)

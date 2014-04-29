@@ -45,5 +45,9 @@ namespace _4D13TowerDefenseGame
         public virtual void Move(int targetx, int targety, int towerx, int towery, Enemy en)
         {
         }
+
+        public virtual void Move(int xDim, int yDim)
+        {
+        }
     }
 }
