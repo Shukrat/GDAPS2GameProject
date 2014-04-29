@@ -15,6 +15,7 @@ namespace _4D13TowerDefenseGame
     {
         public override void LoadContent(ContentManager Content)
         {
+            #region Load Interface Content
             // LOAD INTERFACE CONTENT
             // Buttons
             mapEdit_SideBar_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/Sidebar");
@@ -39,7 +40,9 @@ namespace _4D13TowerDefenseGame
             game_Pause_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Game - In Game/Buttons/Speed Control/Pause");
             game_FF_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Game - In Game/Buttons/Speed Control/FF");
             game_FFF_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Game - In Game/Buttons/Speed Control/FFF");
+            #endregion
 
+            #region Load Tile Content
             // LOAD TILE CONTENT
             // Paths
             pathDL_Tile = Content.Load<Texture2D>("Tiles/Tiles - Path Art/pathcornerDL");
@@ -63,61 +66,12 @@ namespace _4D13TowerDefenseGame
 
             // GAME / GAME BORDER
             game_GameBorder_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/GameFrame");
+            #endregion
 
         }
 
         public override GameProcesses.GameStateEnum Update(GraphicsDeviceManager graphics, Game1 game1)
         {
-
-            for (int i = 0; i < GameVariables.Enemies.Count; i++)
-            {
-                foreach (Tower t in GameVariables.Towers)
-                {
-                    if (GameVariables.Enemies[i] != null)
-                    {
-
-                        if (t.HitBox.Intersects(GameVariables.Enemies[i].PieceShape))
-                        {
-                            t.AttackEnemy(GameVariables.Enemies[i]);
-                        }
-                        if (GameVariables.Enemies[i].Alive == false)
-                        {
-                            GameVariables.Enemies[i] = null;
-                            t.shot = null;
-                        }
-
-                    }
-                    if (GameVariables.Enemies[i] != null)
-                    {
-                        for (int r = 0; r < 20; r++)
-                        {
-                            for (int q = 0; q < 20; q++)
-                            {
-                                if (GameVariables.Enemies[i].PieceShape.Intersects(GameState.tiles[r, q]))
-                                {
-                                    if (GameState.textures[r, q] == 10)
-                                    {
-                                        GameVariables.Enemies[i].MoraleAttack();
-                                        GameVariables.Enemies[i] = null;
-                                    }
-                                    else
-                                    {
-                                        GameVariables.Enemies[i].Move(r, q);
-                                    }
-
-                                }
-                            }
-                        }
-                        if (GameVariables.Enemies[i].PieceShape.X > 800)
-                        {
-                            GameVariables.Enemies[i].MoraleAttack();
-                            GameVariables.Enemies[i] = null;
-                            t.shot = null;
-                        }
-                    }
-                }
-            }
-
             // POSSIBLY UNNEEDED - BUTTONS AND INTERFACE STILL NEED EDITING 4/28
             #region Mouse/Keyboard Tile Paint Selection Update
             // Check Mouse for new tile selection
@@ -292,11 +246,65 @@ namespace _4D13TowerDefenseGame
             
             #endregion
 
-
             /// <summary>
             /// INSERT GAME CODE HERE
             /// ...
             /// </summary>
+
+            for (int i = 0; i < GameVariables.Enemies.Count; i++)
+            {
+                foreach (Tower t in GameVariables.Towers)
+                {
+                    if (GameVariables.Enemies[i] != null)
+                    {
+
+                        if (t.HitBox.Intersects(GameVariables.Enemies[i].PieceShape))
+                        {
+                            t.AttackEnemy(GameVariables.Enemies[i]);
+                        }
+                        if (GameVariables.Enemies[i].Alive == false)
+                        {
+                            GameVariables.Enemies[i] = null;
+                            t.shot = null;
+                        }
+
+                    }
+                    if (GameVariables.Enemies[i] != null)
+                    {
+                        for (int x = 0; x < 20; x++)
+                        {
+                            for (int y = 0; y < 20; y++)
+                            {
+                                if (GameVariables.Enemies[i].PieceShape.Intersects(GameState.tiles[x, y]))
+                                {
+                                    if (GameState.textures[x, y] == 10)
+                                    {
+                                        GameVariables.Enemies[i].MoraleAttack();
+                                        GameVariables.Enemies[i] = null;
+                                    }
+                                    else
+                                    {
+                                        GameVariables.Enemies[i].Move(x, y);
+                                    }
+
+                                }
+                            }
+                        }
+                        if (GameVariables.Enemies[i].PieceShape.X > 800)
+                        {
+                            GameVariables.Enemies[i].MoraleAttack();
+                            GameVariables.Enemies[i] = null;
+                            t.shot = null;
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
 

@@ -14,6 +14,22 @@ namespace _4D13TowerDefenseGame
     /// <summary>
     /// This is the main type for your game
     /// </summary>
+    /// 
+
+
+    // TO ADD
+        // SCREENS WITH BUTTONS TO JUST LOAD MAP FROM SELECTION
+        // USING BUTTONS
+        // MAKE SAVE SCREEN ONLY HAVE TEXT INPUT
+        // MAKE SAVE SCREEN FUNCTION WITH THIS?
+    // Pause/Play selected glow and merge pause/play
+    // Same thing for spell select, glowing.
+    // Delete map function for settings
+
+
+
+
+
     public class Game1 : Game
     {
         // Object Creation
