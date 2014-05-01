@@ -11,6 +11,7 @@ namespace _4D13TowerDefenseGame
         static int morale = 100;
         static List<Enemy> enemies;
         static List<Tower> towers;
+        static List<PathMarker> markers;
 
         static public int Morale
         {
@@ -28,6 +29,12 @@ namespace _4D13TowerDefenseGame
         {
             get { return towers; }
             set { towers = value; }
+        }
+
+        static public List<PathMarker> Markers
+        {
+            get { return markers; }
+            set { markers = value; }
         }
     }
 }

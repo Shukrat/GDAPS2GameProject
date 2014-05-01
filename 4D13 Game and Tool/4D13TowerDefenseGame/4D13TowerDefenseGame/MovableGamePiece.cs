@@ -42,7 +42,7 @@ namespace _4D13TowerDefenseGame
         // will add more once I get a feel for what it needs to do in its entirety
         // is virtual so that child classes can override it as needed
         // overloaded so certain classes can use it
-        public virtual void Move(int targetx, int targety, int towerx, int towery, Enemy en)
+        public virtual void Move(int targetx, int targety, int towerx, int towery, Enemy en, Tower t)
         {
         }
 

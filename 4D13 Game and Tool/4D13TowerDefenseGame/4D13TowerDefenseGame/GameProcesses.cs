@@ -94,7 +94,7 @@ namespace _4D13TowerDefenseGame
             // set the list of enemies to exist
             GameVariables.Enemies = new List<Enemy>();
             GameVariables.Towers = new List<Tower>();
-
+            GameVariables.Markers = new List<PathMarker>();
         }
 
 
