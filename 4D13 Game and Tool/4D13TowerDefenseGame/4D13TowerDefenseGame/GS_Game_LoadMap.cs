@@ -28,6 +28,10 @@ namespace _4D13TowerDefenseGame
             // Towers
             twr_Catapult_Txtr = Content.Load<Texture2D>("Tiles/Tiles - Tower Art/catapult");
             twr_Trebuchet_Txtr = Content.Load<Texture2D>("Tiles/Tiles - Tower Art/Tower2");
+
+            // projectiles
+            projectiles_Ball_Txtr = Content.Load<Texture2D>("Projectiles/Projectile");
+
             // Spells
             spell_Fireball_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Fireball");
             spell_Heal_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Heal");
@@ -271,34 +275,20 @@ namespace _4D13TowerDefenseGame
                     }
                     if (GameVariables.Enemies[i] != null)
                     {
-                        for (int x = 0; x < 20; x++)
-                        {
-                            for (int y = 0; y < 20; y++)
-                            {
-                                if (GameVariables.Enemies[i].PieceShape.Intersects(GameState.tiles[x, y]))
-                                {
-                                    if (GameState.textures[x, y] == 10)
-                                    {
-                                        GameVariables.Enemies[i].MoraleAttack();
-                                        GameVariables.Enemies[i] = null;
-                                    }
-                                    else
-                                    {
-                                        GameVariables.Enemies[i].Move(x, y);
-                                    }
+                       
+                                
+                        GameVariables.Enemies[i].Move();
 
-                                }
-                            }
-                        }
-                        if (GameVariables.Enemies[i].PieceShape.X > 800)
-                        {
-                            GameVariables.Enemies[i].MoraleAttack();
-                            GameVariables.Enemies[i] = null;
-                            t.shot = null;
-                        }
-                    }
+
+                    if (GameVariables.Enemies[i].PieceShape.X > 800)
+                    {
+                        GameVariables.Enemies[i].MoraleAttack();
+                        GameVariables.Enemies[i] = null;
+                        t.shot = null;
+                     }
                 }
             }
+        }
 
 
 
@@ -512,6 +502,10 @@ namespace _4D13TowerDefenseGame
             foreach (Tower t in GameVariables.Towers)
             {
                 spriteBatch.Draw(twr_Catapult_Txtr, t.PieceShape, Color.White);
+                if (t.shot != null)
+                {
+                    spriteBatch.Draw(projectiles_Ball_Txtr, t.shot.PieceShape, Color.White);
+                }
             }
             foreach (Enemy e in GameVariables.Enemies)
             {

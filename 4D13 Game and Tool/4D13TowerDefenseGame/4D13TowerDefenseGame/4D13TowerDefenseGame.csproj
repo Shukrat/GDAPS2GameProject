@@ -55,6 +55,7 @@
     <Compile Include="GS_MM_SaveMenu.cs" />
     <Compile Include="GS_Game_MapFirst.cs" />
     <Compile Include="MovableGamePiece.cs" />
+    <Compile Include="PathMarker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

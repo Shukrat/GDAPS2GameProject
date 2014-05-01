@@ -37,37 +37,41 @@ namespace _4D13TowerDefenseGame
         }
 
         // move the projectile toward the enemy
-        public override void Move(int targetx, int targety, int towerx, int towery, Enemy en)
+        public override void Move(int targetx, int targety, int towerx, int towery, Enemy en, Tower t)
         {
-            int vectorX = (targetx - towerx);
-            int vectorY = (targety - towery);
+            if (this.pieceShape.Intersects(t.HitBox))
+            {
+                int vectorX = (targetx - towerx);
+                int vectorY = (targety - towery);
 
-            double vectorMagnitude = (Math.Sqrt((vectorX * vectorX) + (vectorY * vectorY)));
+                double vectorMagnitude = (Math.Sqrt((vectorX * vectorX) + (vectorY * vectorY)));
 
-            double unitVectorX = (vectorX / vectorMagnitude);
-            double unitVectorY = (vectorY / vectorMagnitude);
+                double unitVectorX = (vectorX / vectorMagnitude);
+                double unitVectorY = (vectorY / vectorMagnitude);
 
-            double finalVectorX = (unitVectorX * moveSpeed);
-            double finalVectorY = (unitVectorY * moveSpeed);
+                double finalVectorX = (unitVectorX * moveSpeed);
+                double finalVectorY = (unitVectorY * moveSpeed);
 
-            
-            
-            this.pieceShape.X += (int)finalVectorX;
-            this.pieceShape.Y += (int)finalVectorY;
 
-            if (this.pieceShape.Intersects(en.PieceShape))
+
+                this.pieceShape.X += (int)finalVectorX;
+                this.pieceShape.Y += (int)finalVectorY;
+
+                if (this.pieceShape.Intersects(en.PieceShape))
+                {
+                    active = false;
+                    en.TakeDamage(this);
+
+                }
+                else if (this.pieceShape.X < 0 || this.pieceShape.Y < 0 || this.pieceShape.X > 800 || this.pieceShape.Y > 600)
+                {
+                    active = false;
+                }
+            }
+            else
             {
                 active = false;
-                en.TakeDamage(this);
-                
             }
-            else if(this.pieceShape.X < 0 || this.pieceShape.Y < 0 || this.pieceShape.X > 800 || this.pieceShape.Y > 600)
-            {
-                active = false;
-            }
-
-            
-            
         }
     }
 }

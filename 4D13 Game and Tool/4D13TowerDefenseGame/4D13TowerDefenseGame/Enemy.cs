@@ -15,7 +15,7 @@ namespace _4D13TowerDefenseGame
         bool immune; // whether or not the enemy is immune to status effects (like slow); if true, then it is immune
         bool canAttack; // whether or not the enemy can attack the player's towers; if true, then it can
         bool alive; // whether or not the enemy is alive; if false, enemy will cease to exist immediately
-        //GameVariables gv = new GameVariables(); // accesss to stat
+        int direction; // direction the enemy should move in, 1 for up, 2 for right, 3 for down, 4 for up
 
         // RNG
         Random rng = new Random();
@@ -51,7 +51,11 @@ namespace _4D13TowerDefenseGame
             immune = imu;
             canAttack = cnAtk;
             alive = true;
+<<<<<<< HEAD
             droppedCurrency = rng.Next(49);
+=======
+            direction = 3;
+>>>>>>> e1b709fdbd6bd07632161d9337456624ebdc23fe
         }
 
         // method stub for attacking towers
@@ -91,12 +95,13 @@ namespace _4D13TowerDefenseGame
             GameVariables.Morale -= moraleDamage;
         }
 
-        public override void Move(int xDimension, int yDimension)
+        public override void Move(/*int xDimension, int yDimension*/)
         {
-            switch (GameState.textures[xDimension, yDimension])
+            switch (direction)
             {
                 case 1:
                     {
+                        /*
                         if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
                         {
                             this.xPos -= moveSpeed;
@@ -105,10 +110,13 @@ namespace _4D13TowerDefenseGame
                         {
                             this.yPos += moveSpeed;
                         }
+                        */
+                        this.pieceShape.Y -= moveSpeed;
                         break;
                     }
                 case 2:
                     {
+                        /*
                         if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
                         {
                             this.xPos += moveSpeed;
@@ -117,10 +125,13 @@ namespace _4D13TowerDefenseGame
                         {
                             this.yPos += moveSpeed;
                         }
+                        */
+                        this.pieceShape.X += moveSpeed;
                         break;
                     }
                 case 3:
                     {
+                        /*
                         if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
                         {
                             this.yPos -= moveSpeed;
@@ -129,10 +140,13 @@ namespace _4D13TowerDefenseGame
                         {
                             this.xPos -= moveSpeed;
                         }
+                        */
+                        this.pieceShape.Y += moveSpeed;
                         break;
                     }
                 case 4:
                     {
+                        /*
                         if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
                         {
                             this.xPos += moveSpeed;
@@ -141,61 +155,27 @@ namespace _4D13TowerDefenseGame
                         {
                             this.yPos -= moveSpeed;
                         }
+                        */
+                        this.pieceShape.X -= moveSpeed;
                         break;
                     }
                 case 5:
                     {
-                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
-                        {
-                            this.xPos += moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
-                        {
-                            this.xPos -= moveSpeed;
-                        }
-                        break;
-                    }
-                case 6:
-                    {
-                        if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
-                        {
-                            this.yPos -= moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
-                        {
-                            this.yPos += moveSpeed;
-                        }
-                        break;
-                    }
-                case 9:
-                    {
-                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension+1, yDimension] == 5)
-                        {
-                            this.xPos += moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
-                        {
-                            this.yPos -= moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
-                        {
-                            this.xPos -= moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
-                        {
-                            this.yPos += moveSpeed;
-                        }
-                        break;
-                    }
-                case 10:
-                    {
-                        
+                        this.MoraleAttack();
+                        alive = false;
                         break;
                     }
                 default:
                     {
                         break;
                     }
+            }
+            foreach (PathMarker pm in GameVariables.Markers)
+            {
+                if(this.pieceShape.Intersects(pm.Marker))
+                {
+                    direction = pm.Control;
+                }
             }
         }
     }

@@ -37,6 +37,9 @@ namespace _4D13TowerDefenseGame
         public Texture2D twr_Catapult_Txtr;
         public Texture2D twr_Trebuchet_Txtr;
 
+        // Projectiles
+        public Texture2D projectiles_Ball_Txtr;
+
         // Spells
         public Texture2D spell_Heal_Txtr;
         public Texture2D spell_Rage_Txtr;

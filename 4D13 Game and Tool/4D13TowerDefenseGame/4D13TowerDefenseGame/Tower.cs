@@ -54,16 +54,16 @@ namespace _4D13TowerDefenseGame
         {
             if (shot == null)
             {
-                shot = new Projectile(1, attack, (this.PieceShape.X + (this.PieceShape.Width / 4)), (this.PieceShape.Y + (this.PieceShape.Height / 4)), 25, 25, shotString, shotSpeed, effect);
+                shot = new Projectile(1, attack, (this.PieceShape.X + (this.PieceShape.Width / 4)), (this.PieceShape.Y + (this.PieceShape.Height / 4)), 22, 22, shotString, shotSpeed, effect);
             }
             if (shot.Active == false)
             {
                 shot.Active = true;
-                shot.Move(en.PieceShape.X, en.PieceShape.Y, this.pieceShape.X, this.pieceShape.Y, en);
+                shot.Move(en.PieceShape.X, en.PieceShape.Y, this.pieceShape.X, this.pieceShape.Y, en, this);
             }
             else if (shot.Active == true)
             {
-                shot.Move(en.PieceShape.X, en.PieceShape.Y, this.pieceShape.X, this.pieceShape.Y, en);
+                shot.Move(en.PieceShape.X, en.PieceShape.Y, this.pieceShape.X, this.pieceShape.Y, en, this);
                 if (shot.Active == false)
                 {
                     shot = null;
