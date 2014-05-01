@@ -39,6 +39,7 @@ namespace _4D13TowerDefenseGame
             :base(hlt, atk, x, y, w, h, imgStr)
         {
             cost = cst;
+            cost = 100;
             shotSpeed = stSpd;
             effect = eft;
             shotString = stStr;

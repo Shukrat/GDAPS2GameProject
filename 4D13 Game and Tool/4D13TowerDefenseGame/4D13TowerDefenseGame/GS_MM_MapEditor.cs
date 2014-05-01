@@ -256,7 +256,7 @@ namespace _4D13TowerDefenseGame
 
             #region Draw Map Editor Buttons
             // Draws all textures for sidebar, tile selection options, and buttons
-            
+
             spriteBatch.Draw(mapEdit_SideBar_Txtr, sideBarBG, Color.White);                 // Sidebar background
             spriteBatch.Draw(mapEdit_Save_Txtr, mapEdit_SaveRec, Color.White);              // Save Map Button
             spriteBatch.Draw(mainMenu_Exit_Txtr, mapEdit_ExitRec, Color.White);             // Exit Map Button
@@ -266,7 +266,7 @@ namespace _4D13TowerDefenseGame
             spriteBatch.Draw(mapEdit_Tiles_Txtr, mapEdit_TilesRec, Color.White);
             spriteBatch.Draw(game_GameBorder_Txtr, game_GameBorderRec, Color.White);
             spriteBatch.Draw(eraser_Tile, select_Eraser, Color.White);
-            
+
             // Menu Button Hover and Click
             if (mousePos.Intersects(mapEdit_MenuRec))
             {

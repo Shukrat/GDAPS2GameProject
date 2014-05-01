@@ -33,9 +33,11 @@ namespace _4D13TowerDefenseGame
             pathUR_Tile = Content.Load<Texture2D>("Tiles/Tiles - Path Art/pathcornerUR");
             pathLeftRight_Tile = Content.Load<Texture2D>("Tiles/Tiles - Path Art/pathleftright");
             pathUpDown_Tile = Content.Load<Texture2D>("Tiles/Tiles - Path Art/pathupdown");
+
             // Objects
             obj_Boulder = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Collidables/Boulder");
             obj_Tree = Content.Load<Texture2D>("Tiles/Tiles - Object Art/Collidables/Tree");
+
             // Spawn/Goal
             spawn = Content.Load<Texture2D>("Tiles/Tiles - Object Art/SpawnGoal/Portal");
             goal = Content.Load<Texture2D>("Tiles/Tiles - Object Art/SpawnGoal/Gate");
@@ -222,7 +224,7 @@ namespace _4D13TowerDefenseGame
                 }
             }
 
-            return GameProcesses.GameStateEnum.main_LoadMap;
+            
             #endregion
 
 
@@ -230,7 +232,11 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME CODE HERE
             /// ...
             /// </summary>
-            
+            /// 
+
+
+
+            return GameProcesses.GameStateEnum.main_LoadMap;
         }
 
         // This method handles drawing the interface AND enemies.

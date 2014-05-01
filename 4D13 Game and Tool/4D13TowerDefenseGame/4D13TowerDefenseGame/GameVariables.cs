@@ -9,6 +9,7 @@ namespace _4D13TowerDefenseGame
     static class GameVariables
     {
         static int morale = 100;
+        static int currency = 1000;
         static List<Enemy> enemies;
         static List<Tower> towers;
 
@@ -28,6 +29,12 @@ namespace _4D13TowerDefenseGame
         {
             get { return towers; }
             set { towers = value; }
+        }
+
+        static public int Currency
+        {
+            get { return currency; }
+            set { currency = value; }
         }
     }
 }

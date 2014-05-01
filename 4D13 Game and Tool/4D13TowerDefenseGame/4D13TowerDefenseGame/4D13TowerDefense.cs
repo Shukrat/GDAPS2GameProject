@@ -25,7 +25,20 @@ namespace _4D13TowerDefenseGame
     // Pause/Play selected glow and merge pause/play
     // Same thing for spell select, glowing.
     // Delete map function for settings
+    // Lose screen
+    // victory screen
+    // In game / Map editor when hitting menu button asks "are you sure?"
 
+
+    // Game functions:
+    // Monster movement - somewhat works? Needs polish.
+    // Monster attack - unsure
+    // Tower attack
+    // Tower placement - Polish it later.
+    // health damage taken for monster, tower and player - unsure
+    // currency system - created but not implemented
+    // tower selling - created but not implemented
+    
 
 
 
@@ -36,12 +49,6 @@ namespace _4D13TowerDefenseGame
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-       // Tower t = new Tower(50, 20, 400, 300, 50, 50, "Image", "Image", 100, 5, "");
-       // Texture2D tower;
-       //// Enemy e = new Enemy(50, 20, 200, 200, 50, 50, "Image", 100, 100, 100, false, false);
-       // List<Enemy> enemies;
-       // Random rgen = new Random();
-
 
         GameProcesses gameProcesses = new GameProcesses();
 
@@ -63,15 +70,6 @@ namespace _4D13TowerDefenseGame
             // TODO: Add your initialization logic here
             // Logic Intialization
             gameProcesses.Initialize(graphics);
-
-            //enemies = new List<Enemy>();
-
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    enemies.Add(new Enemy(50, 20, 0, (i * 40), 50, 50, "Image", 1, 100, 10, false, false));
-            //}
-
-            
 
             base.Initialize();
         }
@@ -111,36 +109,6 @@ namespace _4D13TowerDefenseGame
 
             // TODO: Add your update logic here
             gameProcesses.Update(graphics, this, gameProcesses);
-            // Object Update
-            //for (int i = 0; i < enemies.Count; i++)
-            //{
-            //    if (enemies[i] != null)
-            //    {
-            //        if (t.HitBox.Intersects(enemies[i].PieceShape))
-            //        {
-            //            t.AttackEnemy(enemies[i]);
-            //        }
-            //        if (enemies[i].Alive == false)
-            //        {
-            //            enemies[i] = null;
-            //            t.shot = null;
-            //        }
-            //    }
-            //    if (enemies[i] != null)
-            //    {
-            //        enemies[i].Move();
-            //        if (enemies[i].PieceShape.X > 800)
-            //        {
-            //            enemies[i].MoraleAttack();
-            //            enemies[i] = null;
-            //            t.shot = null;
-            //        }
-            //    }
-            //    else if (enemies[i] == null)
-            //    {
-            //        enemies[i] = new Enemy(50, 20, 0, rgen.Next(0, 601), 50, 50, "Image", 1, 100, 10, false, false);
-            //    }
-            //}
 
 
             base.Update(gameTime);
@@ -153,7 +121,6 @@ namespace _4D13TowerDefenseGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkGray);
-            //gameState.ChangeState(1);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

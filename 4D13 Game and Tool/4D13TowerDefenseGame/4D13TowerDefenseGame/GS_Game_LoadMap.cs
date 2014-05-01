@@ -432,6 +432,78 @@ namespace _4D13TowerDefenseGame
             }
             #endregion
 
+            #region Rectangle Texture Assignment Detection
+            // Draw rectangle matrix
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    // If mouse button is pressed, and the mouse position is in the rectangle 2x2 array:
+                    // Draw the current tile selected
+                    // Assigns textures 2D array the int associated with currently selected tile
+                    // THIS DOES NOT DRAW THE TEXTURES PERMANENTLY - DRAW TEXTURES ON RECTANGLES BELOW DOES
+                    if (mousePos.Intersects(tiles[x, y]) && mState.LeftButton == ButtonState.Pressed)
+                    {
+                        
+                        if (tf_Catapult)
+                        {
+                            if (textures[x, y] == 0)
+                            {              
+                                if(GameVariables.Currency >= 100)
+                                {
+                                    //create tower
+                                    textures[x,y] = 11;
+                                    GameVariables.Currency = GameVariables.Currency - 100;
+                                }
+                            }
+                        }
+                        if (tf_Trebuchet)
+                        {
+                            if (textures[x, y] == 0)
+                            {
+                                if(GameVariables.Currency >= 100)
+                                {
+                                    //create tower
+                                    textures[x, y] = 12;
+                                    GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/catapult","Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Fireball", 5,5, "";
+                                    GameVariables.Currency = GameVariables.Currency - 100;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Draw Textures on Rectangles
+            // Draw textures on matrix if ints in textures array are specific numbers
+            // THIS PERMANENTLY SHOWS TEXTURE'S ASSIGNED ON SCREEN
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    // At location x, y in int 2D array, draw texture according to int
+                    // IFORMATION FOR TEXTURES 2D ARRAY:
+                    // 0 = No texture;
+                    // 1 = Gray;
+                    // 2 = Blue;
+                    // 3 = Green;
+                    switch (textures[x, y])
+                    {
+                        case 0:
+                            break;
+                        case 11:
+                            spriteBatch.Draw(twr_Catapult_Txtr, tiles[x ,y], Color.White);
+                            break;
+                        case 12:
+                            spriteBatch.Draw(twr_Trebuchet_Txtr, tiles[x, y], Color.White);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            #endregion
 
             /// <summary>
             /// INSERT GAME ANIMATION CODE HERE

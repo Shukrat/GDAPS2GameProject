@@ -138,6 +138,10 @@ namespace _4D13TowerDefenseGame
         public bool tf_Bolder;
         public bool tf_Tree;
 
+        // Tower select
+        public bool tf_Trebuchet;
+        public bool tf_Catapult;
+
         // Background select
         public bool tf_Grasslands;
         public bool tf_Desert;
@@ -435,6 +439,47 @@ namespace _4D13TowerDefenseGame
                     tf_Eraser = false;
                     tf_Spawn = false;
                     tf_Goal = false;
+                }
+            }
+            #endregion
+
+            #region Tower Select - Objects
+            if (mousePos.Intersects(twr_TrebuchetRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                    tf_Trebuchet = true;
+                    tf_Catapult = false;
+                }
+            }
+            if (mousePos.Intersects(twr_CatapultRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = true;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                    tf_Trebuchet = false;
+                    tf_Catapult = true;
                 }
             }
             #endregion

@@ -11,10 +11,14 @@ namespace _4D13TowerDefenseGame
         // attributes
         int moraleDamage; // ammount of morale the player loses if this enemy reaches the other side of the screen
         int armor; // amount of damage removed from incoming attacks
+        int droppedCurrency;
         bool immune; // whether or not the enemy is immune to status effects (like slow); if true, then it is immune
         bool canAttack; // whether or not the enemy can attack the player's towers; if true, then it can
         bool alive; // whether or not the enemy is alive; if false, enemy will cease to exist immediately
         //GameVariables gv = new GameVariables(); // accesss to stat
+
+        // RNG
+        Random rng = new Random();
 
         // properties
         public int MoraleDamage
@@ -47,6 +51,7 @@ namespace _4D13TowerDefenseGame
             immune = imu;
             canAttack = cnAtk;
             alive = true;
+            droppedCurrency = rng.Next(49);
         }
 
         // method stub for attacking towers
@@ -76,6 +81,7 @@ namespace _4D13TowerDefenseGame
             if (this.health <= 0)
             {
                 this.alive = false;
+                GameVariables.Currency = GameVariables.Currency + droppedCurrency;
             }
         }
 
