@@ -13,6 +13,9 @@ namespace _4D13TowerDefenseGame
 {
     class GS_Game_LoadMap : GameState
     {
+        int enemySpawner;
+        int frameCount;
+
         public override void LoadContent(ContentManager Content)
         {
             #region Load Interface Content
@@ -72,6 +75,8 @@ namespace _4D13TowerDefenseGame
             game_GameBorder_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/GameFrame");
             #endregion
 
+            enemySpawner = 0;
+            frameCount = -10;
         }
 
         public override GameProcesses.GameStateEnum Update(GraphicsDeviceManager graphics, Game1 game1)
@@ -255,6 +260,8 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>
 
+            
+
             for (int i = 0; i < GameVariables.Enemies.Count; i++)
             {
                 foreach (Tower t in GameVariables.Towers)
@@ -262,7 +269,7 @@ namespace _4D13TowerDefenseGame
                     if (GameVariables.Enemies[i] != null)
                     {
 
-                        if (t.HitBox.Intersects(GameVariables.Enemies[i].PieceShape))
+                        if (t.HitBox.Intersects(GameVariables.Enemies[i].PieceShape) && GameVariables.Enemies[i].IsVisible == true)
                         {
                             t.AttackEnemy(GameVariables.Enemies[i]);
                         }
@@ -275,7 +282,27 @@ namespace _4D13TowerDefenseGame
                     }
                     if (GameVariables.Enemies[i] != null)
                     {
-                       
+                        if (GameVariables.Enemies[i].Immune == false)
+                        {
+                            foreach (Spell s in GameVariables.Magic)
+                            {
+                                if (GameVariables.Enemies[i].PieceShape.Intersects(s.AreaOfEffect))
+                                {
+                                    switch (s.Effect)
+                                    {
+                                        case "slow":
+                                            {
+                                                GameVariables.Enemies[i].Slowed = true;
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                break;
+                                            }
+                                    }
+                                }
+                            }
+                        }
                                 
                         GameVariables.Enemies[i].Move();
 
@@ -290,11 +317,21 @@ namespace _4D13TowerDefenseGame
             }
         }
 
+            if (frameCount == 59)
+            {
+                
+                for (int i = 0; i <= enemySpawner; i++)
+                {
+                    if (i < GameVariables.Enemies.Count && GameVariables.Enemies[i] != null)
+                    {
+                        GameVariables.Enemies[i].IsVisible = true;
+                    }
+                }
+                enemySpawner++;
+                frameCount = 0;
+            }
 
-
-
-
-
+            frameCount++;
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
 
@@ -455,7 +492,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x, y] = 12;
-                                    GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/catapult","Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Fireball", 5,5, "";
+                                    GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,45,45,"Tiles/Tiles - Tower Art/catapult","Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Fireball", 5,5, ""));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -509,7 +546,7 @@ namespace _4D13TowerDefenseGame
             }
             foreach (Enemy e in GameVariables.Enemies)
             {
-                if (e != null)
+                if (e != null && e.IsVisible == true)
                 {
                     spriteBatch.Draw(obj_Monster, e.PieceShape, Color.White);
                 }
