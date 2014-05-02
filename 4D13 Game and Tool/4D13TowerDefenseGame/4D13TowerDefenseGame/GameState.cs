@@ -13,6 +13,10 @@ namespace _4D13TowerDefenseGame
 {
     abstract class GameState
     {
+        #region Attributes - Fonts
+        public SpriteFont font;
+        #endregion
+
         #region Attributes - 2D Arrays
         // 2D arrays for map information
         // Static to ensure only one copy is called
@@ -107,8 +111,6 @@ namespace _4D13TowerDefenseGame
         public Texture2D mapEdit_PathSelectHover_Txtr;
         public Texture2D mapEdit_PathSelectClick_Txtr;
 
-        // Save or Load Menu Font
-        public SpriteFont font;
         #endregion
 
         #region Attributes - Mouse and Keyboard States

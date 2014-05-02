@@ -32,17 +32,18 @@ namespace _4D13TowerDefenseGame
             set { towers = value; }
         }
 
-<<<<<<< HEAD
+
         static public int Currency
         {
             get { return currency; }
             set { currency = value; }
-=======
+        }
+
         static public List<PathMarker> Markers
         {
             get { return markers; }
             set { markers = value; }
->>>>>>> e1b709fdbd6bd07632161d9337456624ebdc23fe
+
         }
     }
 }

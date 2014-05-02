@@ -51,11 +51,11 @@ namespace _4D13TowerDefenseGame
             immune = imu;
             canAttack = cnAtk;
             alive = true;
-<<<<<<< HEAD
+
             droppedCurrency = rng.Next(49);
-=======
+
             direction = 3;
->>>>>>> e1b709fdbd6bd07632161d9337456624ebdc23fe
+
         }
 
         // method stub for attacking towers

@@ -17,6 +17,8 @@ namespace _4D13TowerDefenseGame
         {
             #region Load Interface Content
             // LOAD INTERFACE CONTENT
+            // Font
+            font = Content.Load<SpriteFont>("Fonts/mainFont");
             // Buttons
             mapEdit_SideBar_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/Sidebar");
             mainMenu_Exit_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/All Buttons/Button - Exit/exitButton");
@@ -26,7 +28,7 @@ namespace _4D13TowerDefenseGame
             mapEdit_MenuHover_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/All Buttons/Button - Menu/MenuHoverButton");
             mapEdit_MenuClick_Txtr = Content.Load<Texture2D>("Interface/Interface - Interactive/All Buttons/Button - Menu/MenuClickButton");
             // Towers
-            twr_Catapult_Txtr = Content.Load<Texture2D>("Tiles/Tiles - Tower Art/catapult");
+            twr_Catapult_Txtr = Content.Load<Texture2D>("Tiles/Tiles - Tower Art/Tower1");
             twr_Trebuchet_Txtr = Content.Load<Texture2D>("Tiles/Tiles - Tower Art/Tower2");
 
             // projectiles
@@ -70,6 +72,8 @@ namespace _4D13TowerDefenseGame
 
             // GAME / GAME BORDER
             game_GameBorder_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/GameFrame");
+
+           
             #endregion
 
         }
@@ -422,6 +426,29 @@ namespace _4D13TowerDefenseGame
             }
             #endregion
 
+             // Vector for health test
+            Vector2 health = new Vector2();
+            health.X = game_HealthBarRec.X;
+            health.Y = game_HealthBarRec.Y;
+
+            // rectangle for health?
+            Rectangle health_bar = new Rectangle();
+            health_bar.Height = game_HealthBarRec.Height;
+            health_bar.Width = game_HealthBarRec.Width;
+            // add sprite batch and draw.
+            
+
+            // Vector for currency test
+            Vector2 currency = new Vector2();
+            currency.X = game_ManaBarRec.X;
+            currency.Y = game_ManaBarRec.Y;
+
+            // "Draw" Health
+            spriteBatch.DrawString(font, ("Health: " + GameVariables.Morale) , health , Color.CornflowerBlue);
+
+            // "Draw" Currency
+            spriteBatch.DrawString(font, ("Currency: " + GameVariables.Currency), currency, Color.CornflowerBlue);
+
             #region Rectangle Texture Assignment Detection
             // Draw rectangle matrix
             for (int x = 0; x < 20; x++)
@@ -443,6 +470,8 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x,y] = 11;
+                                    GameVariables.Towers.Add(new Tower(1, 1, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 5, 5, "Tiles/Tiles - Tower Art/Tower1", 
+                                        "Projectiles/Projectile", 5, 5, ""));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -455,7 +484,8 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x, y] = 12;
-                                    GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/catapult","Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Fireball", 5,5, "";
+                                    GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/Tower2",
+                                        "Projectiles/Projectile", 5, 5, ""));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
