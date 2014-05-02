@@ -57,8 +57,12 @@ namespace _4D13TowerDefenseGame
             // moves to Map Maker Update Bool in this Update method
             if (GameProcesses.saveLoad.LoadComplete)
             {
+<<<<<<< HEAD
                 // Reset/set gold
                 GameVariables.Currency = 1000;
+=======
+                GameVariables.Magic = new List<Spell>();
+>>>>>>> ba44c7ed3825e035c6694bdbe186d70f4e60d9dc
 
                 int xDim = 0;
                 int yDim = 0;
@@ -111,7 +115,7 @@ namespace _4D13TowerDefenseGame
                     }
                 }
 
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     GameVariables.Enemies.Add(new Enemy(10, 20, xDim, yDim, 50, 50, "Monster", 1, 5, 5, false, false));
                 }

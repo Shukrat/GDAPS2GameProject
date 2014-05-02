@@ -16,6 +16,10 @@ namespace _4D13TowerDefenseGame
         bool canAttack; // whether or not the enemy can attack the player's towers; if true, then it can
         bool alive; // whether or not the enemy is alive; if false, enemy will cease to exist immediately
         int direction; // direction the enemy should move in, 1 for up, 2 for right, 3 for down, 4 for up
+        bool isVisible; // determines whether or not the enemy is drawn/can move and be attacked
+        bool slowed; // determines if the enemy is being slowed down by a spell
+        bool slowControl; // controls the use of the slow spell
+        int slowCount; // controls the use of the slow spell
 
         // RNG
         Random rng = new Random();
@@ -37,11 +41,22 @@ namespace _4D13TowerDefenseGame
         {
             get { return canAttack; }
         }
-
         public bool Alive
         {
             get { return alive; }
         }
+        public bool IsVisible
+        {
+            get { return isVisible; }
+            set { isVisible = value; }
+        }
+        public bool Slowed
+        {
+            get { return slowed; }
+            set { slowed = value; }
+        }
+
+
         // parameterized constructor
         public Enemy(int hlt, int atk, int x, int y, int w, int h, string imgStr, int mvSp, int mrlDmg, int amr, bool imu, bool cnAtk)
             :base(hlt, atk, x, y, w, h, imgStr, mvSp)
@@ -56,6 +71,13 @@ namespace _4D13TowerDefenseGame
 
             direction = 3;
 
+<<<<<<< HEAD
+=======
+            isVisible = false;
+            slowed = false;
+            slowControl = false;
+            slowCount = 0;
+>>>>>>> ba44c7ed3825e035c6694bdbe186d70f4e60d9dc
         }
 
         // method stub for attacking towers
@@ -97,85 +119,111 @@ namespace _4D13TowerDefenseGame
 
         public override void Move(/*int xDimension, int yDimension*/)
         {
-            switch (direction)
+            if (isVisible == true)
             {
-                case 1:
-                    {
-                        /*
-                        if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
-                        {
-                            this.xPos -= moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
-                        {
-                            this.yPos += moveSpeed;
-                        }
-                        */
-                        this.pieceShape.Y -= moveSpeed;
-                        break;
-                    }
-                case 2:
-                    {
-                        /*
-                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
-                        {
-                            this.xPos += moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension, yDimension - 1] == 3 || GameState.textures[xDimension, yDimension - 1] == 4 || GameState.textures[xDimension, yDimension - 1] == 6)
-                        {
-                            this.yPos += moveSpeed;
-                        }
-                        */
-                        this.pieceShape.X += moveSpeed;
-                        break;
-                    }
-                case 3:
-                    {
-                        /*
-                        if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
-                        {
-                            this.yPos -= moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension - 1, yDimension] == 2 || GameState.textures[xDimension - 1, yDimension] == 4 || GameState.textures[xDimension - 1, yDimension] == 5)
-                        {
-                            this.xPos -= moveSpeed;
-                        }
-                        */
-                        this.pieceShape.Y += moveSpeed;
-                        break;
-                    }
-                case 4:
-                    {
-                        /*
-                        if (GameState.textures[xDimension + 1, yDimension] == 1 || GameState.textures[xDimension + 1, yDimension] == 3 || GameState.textures[xDimension + 1, yDimension] == 5)
-                        {
-                            this.xPos += moveSpeed;
-                        }
-                        else if (GameState.textures[xDimension, yDimension + 1] == 1 || GameState.textures[xDimension, yDimension + 1] == 2 || GameState.textures[xDimension, yDimension + 1] == 6)
-                        {
-                            this.yPos -= moveSpeed;
-                        }
-                        */
-                        this.pieceShape.X -= moveSpeed;
-                        break;
-                    }
-                case 5:
-                    {
-                        this.MoraleAttack();
-                        alive = false;
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
-            }
-            foreach (PathMarker pm in GameVariables.Markers)
-            {
-                if(this.pieceShape.Intersects(pm.Marker))
+                if (slowed == false)
                 {
-                    direction = pm.Control;
+                    switch (direction)
+                    {
+                        case 1:
+                            {
+                                this.pieceShape.Y -= moveSpeed;
+                                break;
+                            }
+                        case 2:
+                            {
+                                this.pieceShape.X += moveSpeed;
+                                break;
+                            }
+                        case 3:
+                            {
+                                this.pieceShape.Y += moveSpeed;
+                                break;
+                            }
+                        case 4:
+                            {
+                                this.pieceShape.X -= moveSpeed;
+                                break;
+                            }
+                        case 5:
+                            {
+                                this.MoraleAttack();
+                                alive = false;
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                    foreach (PathMarker pm in GameVariables.Markers)
+                    {
+                        if (this.pieceShape.Intersects(pm.Marker))
+                        {
+                            direction = pm.Control;
+                        }
+                    }
+                    
                 }
+                else if (slowed == true)
+                {
+                    if (slowControl == false)
+                    {
+                        switch (direction)
+                        {
+                            case 1:
+                                {
+                                    this.pieceShape.Y -= moveSpeed;
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    this.pieceShape.X += moveSpeed;
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    this.pieceShape.Y += moveSpeed;
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    this.pieceShape.X -= moveSpeed;
+                                    break;
+                                }
+                            case 5:
+                                {
+                                    this.MoraleAttack();
+                                    alive = false;
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+                        slowControl = true;
+                    }
+                    else
+                    {
+                        if (slowCount == 6)
+                        {
+                            slowControl = false;
+                            slowCount = 0;
+                        }
+                        slowCount++;
+                    }
+                    
+                    foreach (PathMarker pm in GameVariables.Markers)
+                    {
+                        if (this.pieceShape.Intersects(pm.Marker))
+                        {
+                            direction = pm.Control;
+                        }
+                    }
+                    
+                }
+                
             }
         }
     }

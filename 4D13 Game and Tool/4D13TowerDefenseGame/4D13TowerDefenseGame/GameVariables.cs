@@ -13,6 +13,7 @@ namespace _4D13TowerDefenseGame
         static List<Enemy> enemies;
         static List<Tower> towers;
         static List<PathMarker> markers;
+        static List<Spell> magic;
 
         static public int Morale
         {
@@ -44,6 +45,15 @@ namespace _4D13TowerDefenseGame
             get { return markers; }
             set { markers = value; }
 
+<<<<<<< HEAD
+=======
+        }
+
+        static public List<Spell> Magic
+        {
+            get { return magic; }
+            set { magic = value; }
+>>>>>>> ba44c7ed3825e035c6694bdbe186d70f4e60d9dc
         }
     }
 }
