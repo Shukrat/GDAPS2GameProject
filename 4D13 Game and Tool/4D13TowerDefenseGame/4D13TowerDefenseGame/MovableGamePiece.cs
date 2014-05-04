@@ -22,6 +22,7 @@ namespace _4D13TowerDefenseGame
         public int MoveSpeed
         {
             get { return moveSpeed; }
+            set { moveSpeed = value; }
         }
 
         // parameterized contstructor

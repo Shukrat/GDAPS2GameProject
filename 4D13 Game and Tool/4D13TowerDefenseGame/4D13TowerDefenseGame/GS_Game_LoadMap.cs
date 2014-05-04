@@ -270,6 +270,36 @@ namespace _4D13TowerDefenseGame
             {
                 foreach (Tower t in GameVariables.Towers)
                 {
+                    foreach (Spell st in GameVariables.Magic)
+                    {
+                        if (t.PieceShape.Intersects(st.AreaOfEffect))
+                        {
+                            switch (st.Effect)
+                            {
+                                case "heal":
+                                    {
+                                        t.Health += 5;
+                                        break;
+                                    }
+                                case "berserk":
+                                    {
+                                        if (t.shot != null)
+                                        {
+                                            t.shot.MoveSpeed = 10;
+                                        }
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        if (t.shot != null)
+                                        {
+                                            t.shot.MoveSpeed = 10;
+                                        }
+                                        break;
+                                    }
+                            }
+                        }
+                    }
                     if (GameVariables.Enemies[i] != null)
                     {
 
@@ -299,6 +329,11 @@ namespace _4D13TowerDefenseGame
                                                 GameVariables.Enemies[i].Slowed = true;
                                                 break;
                                             }
+                                        case "fire":
+                                            {
+                                                GameVariables.Enemies[i].Health -= 5;
+                                                break;
+                                            }
                                         default:
                                             {
                                                 break;
@@ -309,6 +344,8 @@ namespace _4D13TowerDefenseGame
                         }
                                 
                         GameVariables.Enemies[i].Move();
+
+                        
 
 
                     if (GameVariables.Enemies[i].PieceShape.X > 800)
@@ -521,12 +558,12 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x, y] = 12;
-<<<<<<< HEAD
+
                                     GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/Tower2",
                                         "Projectiles/Projectile", 5, 5, ""));
-=======
+
                                     GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,45,45,"Tiles/Tiles - Tower Art/catapult","Interface/Interface - Interactive/Game - In Game/Buttons/Spells/Fireball", 5,5, ""));
->>>>>>> ba44c7ed3825e035c6694bdbe186d70f4e60d9dc
+
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }

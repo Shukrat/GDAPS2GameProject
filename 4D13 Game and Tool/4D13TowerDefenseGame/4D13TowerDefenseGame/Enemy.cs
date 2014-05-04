@@ -71,13 +71,12 @@ namespace _4D13TowerDefenseGame
 
             direction = 3;
 
-<<<<<<< HEAD
-=======
+
             isVisible = false;
             slowed = false;
             slowControl = false;
             slowCount = 0;
->>>>>>> ba44c7ed3825e035c6694bdbe186d70f4e60d9dc
+
         }
 
         // method stub for attacking towers
