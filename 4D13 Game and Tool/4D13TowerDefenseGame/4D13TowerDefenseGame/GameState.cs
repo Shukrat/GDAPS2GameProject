@@ -68,6 +68,8 @@ namespace _4D13TowerDefenseGame
         // Game Interface
         public Texture2D game_GameBorder_Txtr;
         public Texture2D game_HealthBar_Txtr;
+        public Texture2D game_Currency_Txtr;
+        public Texture2D game_Health_Txtr;
         public Texture2D game_Pause_Txtr;
         public Texture2D game_Play_Txtr;
         public Texture2D game_FF_Txtr;
@@ -146,6 +148,12 @@ namespace _4D13TowerDefenseGame
         // Tower select
         public bool tf_Trebuchet;
         public bool tf_Catapult;
+
+        // Spell Select
+        public bool tf_Heal;
+        public bool tf_Fire;
+        public bool tf_Slow;
+        public bool tf_Rage;
 
         // Background select
         public bool tf_Grasslands;

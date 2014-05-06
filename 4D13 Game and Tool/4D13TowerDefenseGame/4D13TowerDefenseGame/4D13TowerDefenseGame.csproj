@@ -292,8 +292,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Interface\Interface - Noninteractive\Currency Bar.xnb" />
-    <None Include="Content\Interface\Interface - Noninteractive\Health Bar.xnb" />
+    <Content Include="Content\Interface\Interface - Noninteractive\Currency Bar.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Interface\Interface - Noninteractive\Health Bar.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

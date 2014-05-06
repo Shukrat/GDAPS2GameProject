@@ -60,6 +60,7 @@ namespace _4D13TowerDefenseGame
 
                 // Reset/set gold
                 GameVariables.Currency = 1000;
+                GameVariables.Morale = 100;
 
                 GameVariables.Magic = new List<Spell>();
 
@@ -120,9 +121,10 @@ namespace _4D13TowerDefenseGame
                     GameVariables.Enemies.Add(new Enemy(10, 20, xDim, yDim, 50, 50, "Monster", 1, 5, 5, false, false));
                 }
 
-                Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
+                //Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
                 Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
-                GameVariables.Towers.Add(t);
+                GameVariables.Magic.Add(new Spell("slow", xDim, yDim));
+                //GameVariables.Towers.Add(t);
                 GameVariables.Towers.Add(u);
                 return GameProcesses.GameStateEnum.main_LoadMap;
             }
