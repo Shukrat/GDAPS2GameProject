@@ -1,7 +1,13 @@
-﻿using System;
+﻿#region Using Statements
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.GamerServices;
+#endregion
 
 namespace _4D13TowerDefenseGame
 {
@@ -20,6 +26,8 @@ namespace _4D13TowerDefenseGame
         bool slowed; // determines if the enemy is being slowed down by a spell
         bool slowControl; // controls the use of the slow spell
         int slowCount; // controls the use of the slow spell
+        Projectile shot; // projectiles fired at towers
+        Rectangle hitBox;
 
         // RNG
         Random rng = new Random();
@@ -55,6 +63,15 @@ namespace _4D13TowerDefenseGame
             get { return slowed; }
             set { slowed = value; }
         }
+        public Rectangle HitBox
+        {
+            get { return hitBox; }
+        }
+        public Projectile Shot
+        {
+            get { return shot; }
+            set { shot = value; }
+        }
 
 
         // parameterized constructor
@@ -76,12 +93,29 @@ namespace _4D13TowerDefenseGame
             slowed = false;
             slowControl = false;
             slowCount = 0;
-
+            hitBox = new Rectangle((pieceShape.X - pieceShape.Width), (pieceShape.Y - pieceShape.Height), (pieceShape.Width * 3), (pieceShape.Height * 3));
         }
 
         // method stub for attacking towers
         public void AttackTower(Tower twr)
         {
+            if (shot == null)
+            {
+                shot = new Projectile(1, attack, (this.PieceShape.X + (this.PieceShape.Width / 4)), (this.PieceShape.Y + (this.PieceShape.Height / 4)), 22, 22, "", 1, "");
+            }
+            if (shot.Active == false)
+            {
+                shot.Active = true;
+                shot.Move(this.pieceShape.X, this.pieceShape.Y, twr.PieceShape.X, twr.PieceShape.Y, twr, this);
+            }
+            else if (shot.Active == true)
+            {
+                shot.Move(this.pieceShape.X, this.pieceShape.Y, twr.PieceShape.X, twr.PieceShape.Y, twr, this);
+                if (shot.Active == false)
+                {
+                    shot = null;
+                }
+            }
         }
 
         // method stub for being injured by towers

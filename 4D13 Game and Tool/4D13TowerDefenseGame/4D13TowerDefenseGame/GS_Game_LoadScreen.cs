@@ -118,12 +118,12 @@ namespace _4D13TowerDefenseGame
 
                 for (int i = 0; i < 5; i++)
                 {
-                    GameVariables.Enemies.Add(new Enemy(10, 20, xDim, yDim, 50, 50, "Monster", 1, 5, 5, false, false));
+                    GameVariables.Enemies.Add(new Enemy(10, 1000, xDim, yDim, 50, 50, "Monster", 1, 5, 5, false, true));
                 }
 
                 //Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
                 Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
-                GameVariables.Magic.Add(new Spell("slow", xDim, yDim));
+                //GameVariables.Magic.Add(new Spell("slow", xDim, yDim));
                 //GameVariables.Towers.Add(t);
                 GameVariables.Towers.Add(u);
                 return GameProcesses.GameStateEnum.main_LoadMap;

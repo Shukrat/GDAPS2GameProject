@@ -73,5 +73,43 @@ namespace _4D13TowerDefenseGame
                 active = false;
             }
         }
+
+        // overload for enemies that can attack towers
+        public override void Move(int targetx, int targety, int towerx, int towery, Tower t, Enemy en)
+        {
+            if (this.pieceShape.Intersects(t.HitBox))
+            {
+                int vectorX = (targetx - towerx);
+                int vectorY = (targety - towery);
+
+                double vectorMagnitude = (Math.Sqrt((vectorX * vectorX) + (vectorY * vectorY)));
+
+                double unitVectorX = (vectorX / vectorMagnitude);
+                double unitVectorY = (vectorY / vectorMagnitude);
+
+                double finalVectorX = (unitVectorX * moveSpeed);
+                double finalVectorY = (unitVectorY * moveSpeed);
+
+
+
+                this.pieceShape.X += (int)finalVectorX;
+                this.pieceShape.Y += (int)finalVectorY;
+
+                if (this.pieceShape.Intersects(t.PieceShape))
+                {
+                    active = false;
+                    t.TakeDamage(this);
+
+                }
+                else if (this.pieceShape.X < 0 || this.pieceShape.Y < 0 || this.pieceShape.X > 800 || this.pieceShape.Y > 600)
+                {
+                    active = false;
+                }
+            }
+            else
+            {
+                active = false;
+            }
+        }
     }
 }
