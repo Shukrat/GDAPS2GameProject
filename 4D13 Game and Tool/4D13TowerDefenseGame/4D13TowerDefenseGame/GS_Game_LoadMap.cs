@@ -85,6 +85,10 @@ namespace _4D13TowerDefenseGame
 
             enemySpawner = 0;
             frameCount = -10;
+            // Reset/set gold
+            GameVariables.Currency = 1000;
+            GameVariables.Morale = 100;
+            GameVariables.Magic = new List<Spell>();    
         }
 
         public override GameProcesses.GameStateEnum Update(GraphicsDeviceManager graphics, Game1 game1)
@@ -268,6 +272,63 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>
 
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 20; j++)
+                {
+                    if (GameState.textures[i, j] == 9)
+                    {
+                        GameVariables.SpawnLocationX = GameState.tiles[i, j].X;
+                        GameVariables.SpawnLocationY = GameState.tiles[i, j].Y;
+                    }
+                }
+            }
+
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < 20; j++)
+                {
+                    switch (GameState.textures[i, j])
+                    {
+                        case 1:
+                            {
+                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 1));//3
+                                break;
+                            }
+                        case 2:
+                            {
+                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 2));//3
+                                break;
+                            }
+                        case 3:
+                            {
+                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 3));//4
+                                break;
+                            }
+                        case 4:
+                            {
+                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 4));//2
+                                break;
+                            }
+                        case 10:
+                            {
+                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 5));
+                                break;
+                            }
+                    }
+                }
+            }
+            GameVariables.Currency = 1000;
+            GameVariables.Morale = 100;
+            for (int i = 0; i < 10; i++)
+            {
+                GameVariables.Enemies.Add(new Enemy(100, 20, GameVariables.SpawnLocationX, GameVariables.SpawnLocationY, 50, 50, "Monster", 1, 5, 5, false, false));
+            }
+
+            if (GameVariables.Currency <= 0)
+            {
+                GameVariables.Currency = 0;
+            }
             
 
             for (int i = 0; i < GameVariables.Enemies.Count; i++)
@@ -283,7 +344,6 @@ namespace _4D13TowerDefenseGame
                                 case "heal":
                                     {
                                         t.Health += 5;
-                                        GameVariables.Currency = GameVariables.Currency - 200;
                                         
                                         break;
                                     }
@@ -299,7 +359,7 @@ namespace _4D13TowerDefenseGame
                                     {
                                         if (t.shot != null)
                                         {
-                                            t.shot.MoveSpeed = 10;
+                                            t.shot.MoveSpeed = 5;
                                         }
                                         break;
                                     }
@@ -334,14 +394,12 @@ namespace _4D13TowerDefenseGame
                                             {
 
                                                 GameVariables.Enemies[i].Slowed = true;
-                                                GameVariables.Currency = GameVariables.Currency - 50;
                                                 break;
                                             }
                                         case "fire":
                                             {
                                                   
                                                 GameVariables.Enemies[i].Health -= 5;
-                                                GameVariables.Currency = GameVariables.Currency - 50;
                                                 break;
                                             }
                                         default:
@@ -380,6 +438,7 @@ namespace _4D13TowerDefenseGame
                 }
                 enemySpawner++;
                 // add spell despawn around
+                GameVariables.Magic.Clear();
                 frameCount = 0;
             }
 
@@ -562,7 +621,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x,y] = 11;
-                                    GameVariables.Towers.Add(new Tower(1, 1, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 5, 5, "Tiles/Tiles - Tower                                      Art/Tower1", "Projectiles/Projectile", 5, 5, ""));
+                                    GameVariables.Towers.Add(new Tower(1, 50, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 1, 5, "Tiles/Tiles - Tower Art/Tower1", "Projectiles/Projectile", 1, 5, ""));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -576,60 +635,78 @@ namespace _4D13TowerDefenseGame
                                     //create tower
                                     textures[x, y] = 12;
 
-                                    GameVariables.Towers.Add(new Tower(1,1,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/                                         Tower2","Projectiles/Projectile", 5, 5, ""));                                  
+                                    GameVariables.Towers.Add(new Tower(1,50,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/Tower2","Projectiles/Projectile", 5, 5, ""));                                  
                                     GameVariables.Currency = GameVariables.Currency - 100;
-                                }
-                            }
-                        }
-                        if (tf_Heal)
-                        {
-                            if (textures[x, y] == 0)
-                            {
-                                if (GameVariables.Currency >= 100)
-                                {
-                                    //create magic
-                                    textures[x, y] = 13;
-                                    GameVariables.Magic.Add(new Spell("heal", mousePos.X - 45, mousePos.Y -45));
-                                    GameVariables.Currency = GameVariables.Currency - 200;
                                 }
                             }
                         }
                         if (tf_Fire)
                         {
-                            if (textures[x, y] == 0)
+                            if (textures[x, y] != 0 || textures[x, y] == 0)
+                            {
+                                if (GameVariables.Currency >= 100)
+                                {
+                                    //create magic
+                                    textures[x, y] = 13;
+
+                                    GameVariables.Magic.Add(new Spell("fire", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Currency = GameVariables.Currency - 50;
+                                    if (GameVariables.Currency <= 0)
+                                    {
+                                        GameVariables.Currency = 0;
+                                    }
+                                }
+                            }
+                        }
+                        if (tf_Heal)
+                        {
+                            if (textures[x, y] != 0 || textures[x, y] == 0)
                             {
                                 if (GameVariables.Currency >= 100)
                                 {
                                     //create magic
                                     textures[x, y] = 14;
-                                    GameVariables.Magic.Add(new Spell("fire", mousePos.X - 45, mousePos.Y - 45));
-                                    GameVariables.Currency = GameVariables.Currency - 200;
+                                    GameVariables.Magic.Add(new Spell("heal", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Currency = GameVariables.Currency - 50;
+                                    if (GameVariables.Currency <= 0)
+                                    {
+                                        GameVariables.Currency = 0;
+                                    }
+                                    
                                 }
                             }
                         }
                         if (tf_Rage)
                         {
-                            if (textures[x, y] == 0)
+                            if (textures[x, y] != 0 || textures[x, y] == 0)
                             {
                                 if (GameVariables.Currency >= 100)
                                 {
                                     //create magic
                                     textures[x, y] = 15;
-                                    GameVariables.Magic.Add(new Spell("speed", mousePos.X - 45, mousePos.Y - 45));
-                                    GameVariables.Currency = GameVariables.Currency - 200;
+                                    GameVariables.Magic.Add(new Spell("speed", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Currency = GameVariables.Currency - 50;
+                                    if (GameVariables.Currency <= 0)
+                                    {
+                                        GameVariables.Currency = 0;
+                                    }
                                 }
                             }
                         }
                         if (tf_Slow)
                         {
-                            if (textures[x, y] == 0)
+                            if (textures[x, y] != 0 || textures[x, y] == 0)
                             {
                                 if (GameVariables.Currency >= 100)
                                 {
                                     //create magic
                                     textures[x, y] = 16;
-                                    GameVariables.Magic.Add(new Spell("slow", mousePos.X - 45, mousePos.Y - 45));
-                                    GameVariables.Currency = GameVariables.Currency - 200;
+                                    GameVariables.Magic.Add(new Spell("slow", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Currency = GameVariables.Currency - 50;
+                                    if (GameVariables.Currency <= 0)
+                                    {
+                                        GameVariables.Currency = 0;
+                                    }
                                 }
                             }
                         }
@@ -662,10 +739,10 @@ namespace _4D13TowerDefenseGame
                             spriteBatch.Draw(twr_Trebuchet_Txtr, tiles[x, y], Color.White);
                             break;
                         case 13:
-                            spriteBatch.Draw(spell_Heal_Txtr, tiles[x, y], Color.White);
+                            spriteBatch.Draw(spell_Fireball_Txtr, tiles[x, y], Color.White);
                             break;
                         case 14:
-                            spriteBatch.Draw(spell_Fireball_Txtr, tiles[x, y], Color.White);
+                            spriteBatch.Draw(spell_Heal_Txtr, tiles[x, y], Color.White);                            
                             break;
                         case 15:
                             spriteBatch.Draw(spell_Rage_Txtr, tiles[x, y], Color.White);

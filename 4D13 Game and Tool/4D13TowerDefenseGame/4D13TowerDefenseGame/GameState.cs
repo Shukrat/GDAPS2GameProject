@@ -474,6 +474,10 @@ namespace _4D13TowerDefenseGame
                     tf_Goal = false;
                     tf_Trebuchet = true;
                     tf_Catapult = false;
+                    tf_Heal = false;
+                    tf_Fire = false;
+                    tf_Slow = false;
+                    tf_Rage = false;
                 }
             }
             if (mousePos.Intersects(twr_CatapultRec) && mState.LeftButton == ButtonState.Pressed)
@@ -493,6 +497,102 @@ namespace _4D13TowerDefenseGame
                     tf_Goal = false;
                     tf_Trebuchet = false;
                     tf_Catapult = true;
+                    tf_Heal = false;
+                    tf_Fire = false;
+                    tf_Slow = false;
+                    tf_Rage = false;
+                }
+            }
+            if (mousePos.Intersects(spell_FireballRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = true;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                    tf_Trebuchet = false;
+                    tf_Catapult = false;
+                    tf_Heal = false;
+                    tf_Fire = true;
+                    tf_Slow = false;
+                    tf_Rage = false;
+                }
+            }
+            if (mousePos.Intersects(spell_HealRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                    tf_Trebuchet = false;
+                    tf_Catapult = false;
+                    tf_Heal = true;
+                    tf_Fire = false;
+                    tf_Slow = false;
+                    tf_Rage = false;
+                }
+            }
+            if (mousePos.Intersects(spell_RageRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                    tf_Trebuchet = false;
+                    tf_Catapult = false;
+                    tf_Heal = false;
+                    tf_Fire = false;
+                    tf_Slow = false;
+                    tf_Rage = true;
+                }
+            }
+            if (mousePos.Intersects(spell_SlowRec) && mState.LeftButton == ButtonState.Pressed)
+            {
+                if (!tf_BackgroundSelect && !tf_PathSelect)
+                {
+                    tf_PathDL = false;
+                    tf_PathDR = false;
+                    tf_PathUL = false;
+                    tf_PathUR = false;
+                    tf_PathLeftRight = false;
+                    tf_PathUpDown = false;
+                    tf_Bolder = false;
+                    tf_Tree = false;
+                    tf_Eraser = false;
+                    tf_Spawn = false;
+                    tf_Goal = false;
+                    tf_Trebuchet = false;
+                    tf_Catapult = false;
+                    tf_Heal = false;
+                    tf_Fire = false;
+                    tf_Slow = true;
+                    tf_Rage = false;
                 }
             }
             #endregion

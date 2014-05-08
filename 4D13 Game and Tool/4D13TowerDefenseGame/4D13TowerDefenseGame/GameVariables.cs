@@ -14,6 +14,8 @@ namespace _4D13TowerDefenseGame
         static List<Tower> towers;
         static List<PathMarker> markers;
         static List<Spell> magic;
+        static int spawnLocationX;
+        static int spawnLocationY;
 
         static public int Morale
         {
@@ -50,6 +52,17 @@ namespace _4D13TowerDefenseGame
         {
             get { return magic; }
             set { magic = value; }
+        }
+
+        static public int SpawnLocationX
+        {
+            get { return spawnLocationX; }
+            set { spawnLocationX = value; }
+        }
+        static public int SpawnLocationY
+        {
+            get { return spawnLocationY; }
+            set { spawnLocationY = value; }
         }
     }
 }

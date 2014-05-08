@@ -32,12 +32,12 @@ namespace _4D13TowerDefenseGame
 
     // Game functions:
     // Monster movement - somewhat works? Needs polish.
-    // Monster attack - unsure
-    // Tower attack - Attacks but not kills
+    // Monster attack - not implemented
+    // Tower attack - needs to test heal and spell and second game stuff
     // Tower placement - Done?
     // health damage taken for monster, tower and player - unsure
-    // currency system - created but not implemented
-    // tower selling - created but not implemented
+    // currency system - implemented not perfected
+    // tower selling -  not implemented
     
 
 

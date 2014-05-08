@@ -67,7 +67,7 @@ namespace _4D13TowerDefenseGame
             canAttack = cnAtk;
             alive = true;
 
-            droppedCurrency = rng.Next(49);
+            droppedCurrency = rng.Next(0,49);
 
             direction = 3;
 
@@ -223,6 +223,11 @@ namespace _4D13TowerDefenseGame
                     
                 }
                 
+            }
+            if (this.health <= 0)
+            {
+                this.alive = false;
+                GameVariables.Currency = GameVariables.Currency + droppedCurrency;
             }
         }
     }
