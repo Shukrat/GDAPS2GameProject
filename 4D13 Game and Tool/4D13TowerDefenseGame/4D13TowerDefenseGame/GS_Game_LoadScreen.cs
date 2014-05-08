@@ -62,10 +62,74 @@ namespace _4D13TowerDefenseGame
 
                 
 
+<<<<<<< HEAD
                 
 
                 //Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
                 //Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
+=======
+                GameVariables.Magic = new List<Spell>();
+
+
+                int xDim = 0;
+                int yDim = 0;
+
+                for (int i = 0; i < 20; i++)
+                {
+                    for (int j = 0; j < 20; j++)
+                    {
+                        if (GameState.textures[i, j] == 9)
+                        {
+                            xDim = GameState.tiles[i, j].X;
+                            yDim = GameState.tiles[i, j].Y;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 20; i++)
+                {
+                    for (int j = 0; j < 20; j++)
+                    {
+                        switch (GameState.textures[i, j])
+                        {
+                            case 1:
+                                {
+                                    GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 1));//3
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 2));//3
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 3));//4
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 4));//2
+                                    break;
+                                }
+                            case 10:
+                                {
+                                    GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 5));
+                                    break;
+                                }
+
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    GameVariables.Enemies.Add(new Enemy(10, 1000, xDim, yDim, 50, 50, "Monster", 1, 5, 5, false, true));
+                }
+
+                //Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
+                Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
+>>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
                 //GameVariables.Magic.Add(new Spell("slow", xDim, yDim));
                 //GameVariables.Towers.Add(t);
                 //GameVariables.Towers.Add(u);

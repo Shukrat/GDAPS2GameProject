@@ -333,33 +333,43 @@ namespace _4D13TowerDefenseGame
 
             for (int i = 0; i < GameVariables.Enemies.Count; i++)
             {
-                foreach (Tower t in GameVariables.Towers)
+                for (int t = 0; t < GameVariables.Towers.Count; t++)
                 {
                     foreach (Spell st in GameVariables.Magic)
                     {
-                        if (t.PieceShape.Intersects(st.AreaOfEffect))
+                        if (GameVariables.Towers[t].PieceShape.Intersects(st.AreaOfEffect))
                         {
                             switch (st.Effect)
                             {
                                 case "heal":
                                     {
+<<<<<<< HEAD
                                         t.Health += 5;
                                         
+=======
+                                        GameVariables.Towers[t].Health += 5;
+                                        GameVariables.Currency = GameVariables.Currency - 200;
+
+>>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
                                         break;
                                     }
                                 case "berserk":
                                     {
-                                        if (t.shot != null)
+                                        if (GameVariables.Towers[t].shot != null)
                                         {
-                                            t.shot.MoveSpeed = 10;
+                                            GameVariables.Towers[t].shot.MoveSpeed = 10;
                                         }
                                         break;
                                     }
                                 default:
                                     {
-                                        if (t.shot != null)
+                                        if (GameVariables.Towers[t].shot != null)
                                         {
+<<<<<<< HEAD
                                             t.shot.MoveSpeed = 5;
+=======
+                                            GameVariables.Towers[t].shot.MoveSpeed = 10;
+>>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
                                         }
                                         break;
                                     }
@@ -369,16 +379,20 @@ namespace _4D13TowerDefenseGame
                     if (GameVariables.Enemies[i] != null)
                     {
 
-                        if (t.HitBox.Intersects(GameVariables.Enemies[i].PieceShape) && GameVariables.Enemies[i].IsVisible == true)
+                        if (GameVariables.Towers[t].HitBox.Intersects(GameVariables.Enemies[i].PieceShape) && GameVariables.Enemies[i].IsVisible == true)
                         {
-                            t.AttackEnemy(GameVariables.Enemies[i]);
+                            GameVariables.Towers[t].AttackEnemy(GameVariables.Enemies[i]);
+                        }
+                        if (GameVariables.Enemies[i].HitBox.Intersects(GameVariables.Towers[t].PieceShape) && GameVariables.Enemies[i].IsVisible == true && GameVariables.Enemies[i].CanAttack == true)
+                        {
+                            GameVariables.Enemies[i].AttackTower(GameVariables.Towers[t]);
                         }
                         if (GameVariables.Enemies[i].Alive == false)
                         {
+                            GameVariables.Enemies[i].Shot = null;
                             GameVariables.Enemies[i] = null;
-                            t.shot = null;
+                            GameVariables.Towers[t].shot = null;
                         }
-
                     }
                     if (GameVariables.Enemies[i] != null)
                     {
@@ -398,32 +412,34 @@ namespace _4D13TowerDefenseGame
                                             }
                                         case "fire":
                                             {
-                                                  
+
                                                 GameVariables.Enemies[i].Health -= 5;
                                                 break;
                                             }
                                         default:
                                             {
+                                                GameVariables.Enemies[i].Slowed = false;
                                                 break;
                                             }
                                     }
                                 }
                             }
                         }
-                                
+
                         GameVariables.Enemies[i].Move();
 
-                        
 
 
-                    if (GameVariables.Enemies[i].PieceShape.X > 800)
-                    {
-                        GameVariables.Enemies[i].MoraleAttack();
-                        GameVariables.Enemies[i] = null;
-                        t.shot = null;
-                     }
+
+                        if (GameVariables.Enemies[i].PieceShape.X > 800)
+                        {
+                            GameVariables.Enemies[i].MoraleAttack();
+                            GameVariables.Enemies[i].Shot = null;
+                            GameVariables.Enemies[i] = null;
+                            GameVariables.Towers[t].shot = null;
+                        }
+                    }
                 }
-            }
         }
 
             if (frameCount == 59)
@@ -763,10 +779,13 @@ namespace _4D13TowerDefenseGame
             /// </summary>
             foreach (Tower t in GameVariables.Towers)
             {
-                spriteBatch.Draw(twr_Catapult_Txtr, t.PieceShape, Color.White);
-                if (t.shot != null)
+                if (t != null)
                 {
-                    spriteBatch.Draw(projectiles_Ball_Txtr, t.shot.PieceShape, Color.White);
+                    spriteBatch.Draw(twr_Catapult_Txtr, t.PieceShape, Color.White);
+                    if (t.shot != null)
+                    {
+                        spriteBatch.Draw(projectiles_Ball_Txtr, t.shot.PieceShape, Color.White);
+                    }
                 }
             }
             foreach (Enemy e in GameVariables.Enemies)
@@ -774,6 +793,10 @@ namespace _4D13TowerDefenseGame
                 if (e != null && e.IsVisible == true)
                 {
                     spriteBatch.Draw(obj_Monster, e.PieceShape, Color.White);
+                    if (e.Shot != null)
+                    {
+                        spriteBatch.Draw(projectiles_Ball_Txtr, e.Shot.PieceShape, Color.White);
+                    }
                 }
             }
         }

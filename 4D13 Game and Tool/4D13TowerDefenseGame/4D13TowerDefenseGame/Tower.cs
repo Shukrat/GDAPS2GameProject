@@ -77,10 +77,10 @@ namespace _4D13TowerDefenseGame
         }
 
         // method stub for damaging the tower
-        public void TakeDamage(Enemy en)
+        public void TakeDamage(Projectile p)
         {
             // the this. is to ensure that the Health called is the tower's health
-            this.Health = this.Health - en.Attack;
+            this.Health = this.Health - p.Attack;
         }
     }
 }
