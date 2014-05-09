@@ -272,58 +272,7 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>
 
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 20; j++)
-                {
-                    if (GameState.textures[i, j] == 9)
-                    {
-                        GameVariables.SpawnLocationX = GameState.tiles[i, j].X;
-                        GameVariables.SpawnLocationY = GameState.tiles[i, j].Y;
-                    }
-                }
-            }
-
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 20; j++)
-                {
-                    switch (GameState.textures[i, j])
-                    {
-                        case 1:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 1));//3
-                                break;
-                            }
-                        case 2:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 2));//3
-                                break;
-                            }
-                        case 3:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 3));//4
-                                break;
-                            }
-                        case 4:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 4));//2
-                                break;
-                            }
-                        case 10:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 5));
-                                break;
-                            }
-                    }
-                }
-            }
-            GameVariables.Currency = 1000;
-            GameVariables.Morale = 100;
-            for (int i = 0; i < 10; i++)
-            {
-                GameVariables.Enemies.Add(new Enemy(100, 20, GameVariables.SpawnLocationX, GameVariables.SpawnLocationY, 50, 50, "Monster", 1, 5, 5, false, false));
-            }
+            
 
             if (GameVariables.Currency <= 0)
             {
@@ -343,34 +292,19 @@ namespace _4D13TowerDefenseGame
                             {
                                 case "heal":
                                     {
-<<<<<<< HEAD
-                                        t.Health += 5;
-                                        
-=======
-                                        GameVariables.Towers[t].Health += 5;
-                                        GameVariables.Currency = GameVariables.Currency - 200;
 
->>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
+                                        GameVariables.Towers[t].Health += 5;
                                         break;
                                     }
                                 case "berserk":
                                     {
-                                        if (GameVariables.Towers[t].shot != null)
-                                        {
-                                            GameVariables.Towers[t].shot.MoveSpeed = 10;
-                                        }
+                                        
+                                        GameVariables.Towers[t].Berserked = true;
                                         break;
                                     }
                                 default:
                                     {
-                                        if (GameVariables.Towers[t].shot != null)
-                                        {
-<<<<<<< HEAD
-                                            t.shot.MoveSpeed = 5;
-=======
-                                            GameVariables.Towers[t].shot.MoveSpeed = 10;
->>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
-                                        }
+                                        GameVariables.Towers[t].Berserked = false;
                                         break;
                                     }
                             }
@@ -396,7 +330,7 @@ namespace _4D13TowerDefenseGame
                     }
                     if (GameVariables.Enemies[i] != null)
                     {
-                        if (GameVariables.Enemies[i].Immune == false)
+                        if (GameVariables.Enemies[i].Immune == false && GameVariables.Enemies[i].IsVisible == true)
                         {
                             foreach (Spell s in GameVariables.Magic)
                             {
@@ -441,24 +375,27 @@ namespace _4D13TowerDefenseGame
                     }
                 }
         }
-
-            if (frameCount == 59)
+            if (GameVariables.Towers.Count > 0)
             {
-                
-                for (int i = 0; i <= enemySpawner; i++)
+                if (frameCount == 59)
                 {
-                    if (i < GameVariables.Enemies.Count && GameVariables.Enemies[i] != null)
+
+                    for (int k = 0; k <= enemySpawner; k++)
                     {
-                        GameVariables.Enemies[i].IsVisible = true;
+                        if (k < GameVariables.Enemies.Count && GameVariables.Enemies[k] != null)
+                        {
+                            GameVariables.Enemies[k].IsVisible = true;
+                        }
                     }
+                    enemySpawner++;
+                    // add spell despawn around
+                    GameVariables.Magic.Clear();
+                    frameCount = 0;
                 }
-                enemySpawner++;
-                // add spell despawn around
-                GameVariables.Magic.Clear();
-                frameCount = 0;
+                frameCount++;
             }
 
-            frameCount++;
+            
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
 
@@ -637,7 +574,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x,y] = 11;
-                                    GameVariables.Towers.Add(new Tower(1, 50, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 1, 5, "Tiles/Tiles - Tower Art/Tower1", "Projectiles/Projectile", 1, 5, ""));
+                                    GameVariables.Towers.Add(new Tower(1, 100, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower1", "Projectiles/Projectile", 1, 5, "", 40));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -651,7 +588,7 @@ namespace _4D13TowerDefenseGame
                                     //create tower
                                     textures[x, y] = 12;
 
-                                    GameVariables.Towers.Add(new Tower(1,50,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,5,5,"Tiles/Tiles - Tower Art/Tower2","Projectiles/Projectile", 5, 5, ""));                                  
+                                    GameVariables.Towers.Add(new Tower(1, 50,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,45,45,"Tiles/Tiles - Tower Art/Tower2","Projectiles/Projectile", 5, 10, "", 10));                                  
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -665,7 +602,7 @@ namespace _4D13TowerDefenseGame
                                     //create magic
                                     textures[x, y] = 13;
 
-                                    GameVariables.Magic.Add(new Spell("fire", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Magic.Add(new Spell("fire", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
                                     if (GameVariables.Currency <= 0)
                                     {
@@ -682,7 +619,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create magic
                                     textures[x, y] = 14;
-                                    GameVariables.Magic.Add(new Spell("heal", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Magic.Add(new Spell("heal", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
                                     if (GameVariables.Currency <= 0)
                                     {
@@ -700,7 +637,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create magic
                                     textures[x, y] = 15;
-                                    GameVariables.Magic.Add(new Spell("speed", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Magic.Add(new Spell("speed", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
                                     if (GameVariables.Currency <= 0)
                                     {
@@ -717,7 +654,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create magic
                                     textures[x, y] = 16;
-                                    GameVariables.Magic.Add(new Spell("slow", GameState.tiles[x, y].X, GameState.tiles[x, y].Y));
+                                    GameVariables.Magic.Add(new Spell("slow", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
                                     if (GameVariables.Currency <= 0)
                                     {
@@ -782,6 +719,10 @@ namespace _4D13TowerDefenseGame
                 if (t != null)
                 {
                     spriteBatch.Draw(twr_Catapult_Txtr, t.PieceShape, Color.White);
+                    if (t.Fired != t.CoolDown)
+                    {
+                        t.Fired++;
+                    }
                     if (t.shot != null)
                     {
                         spriteBatch.Draw(projectiles_Ball_Txtr, t.shot.PieceShape, Color.White);

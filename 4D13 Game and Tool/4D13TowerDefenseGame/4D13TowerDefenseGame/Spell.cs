@@ -18,6 +18,7 @@ namespace _4D13TowerDefenseGame
         Rectangle areaOfEffect; // size where the spell hits
         string effect; // effect the spell has on the enemy
 
+
         // properties
         public Rectangle AreaOfEffect
         {
@@ -28,10 +29,12 @@ namespace _4D13TowerDefenseGame
             get { return effect; }
         }
 
+
         public Spell(string eft, int xPos, int yPos)
         {
             effect = eft;
             areaOfEffect = new Rectangle(xPos, yPos, 135, 135);
+
         }
     }
 }

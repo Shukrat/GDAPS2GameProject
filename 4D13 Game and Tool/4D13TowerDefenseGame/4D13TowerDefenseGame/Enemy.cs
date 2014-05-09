@@ -122,7 +122,14 @@ namespace _4D13TowerDefenseGame
         public void TakeDamage(Projectile prj)
         {
             // subtract the attack of the projectile from the enemy's health
-            this.health = this.health - (prj.Attack - armor);
+            if (prj.Attack - armor > 0)
+            {
+                this.health = this.health - (prj.Attack - armor);
+            }
+            else
+            {
+                this.health -= 1;
+            }
 
             // test if enemy is immune to status ailements, and inflict them inf not
             if (immune == false)
