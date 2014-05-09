@@ -91,10 +91,7 @@ namespace _4D13TowerDefenseGame
             // Set default game state - SET THIS TO THE FIRST SCREEN YOU WANT
             gameStateStatus = GameStateEnum.main_MainMenu;
 
-            // set the list of enemies to exist
-            GameVariables.Enemies = new List<Enemy>();
-            GameVariables.Towers = new List<Tower>();
-            GameVariables.Markers = new List<PathMarker>();
+            
         }
 
 
