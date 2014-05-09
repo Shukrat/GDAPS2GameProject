@@ -272,6 +272,7 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>
 
+
             for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < 20; j++)
@@ -318,8 +319,7 @@ namespace _4D13TowerDefenseGame
                     }
                 }
             }
-            GameVariables.Currency = 1000;
-            GameVariables.Morale = 100;
+      
             for (int i = 0; i < 10; i++)
             {
                 GameVariables.Enemies.Add(new Enemy(100, 20, GameVariables.SpawnLocationX, GameVariables.SpawnLocationY, 50, 50, "Monster", 1, 5, 5, false, false));
@@ -342,15 +342,10 @@ namespace _4D13TowerDefenseGame
                             switch (st.Effect)
                             {
                                 case "heal":
-                                    {
-<<<<<<< HEAD
-                                        t.Health += 5;
-                                        
-=======
-                                        GameVariables.Towers[t].Health += 5;
-                                        GameVariables.Currency = GameVariables.Currency - 200;
+                                    {                                       
 
->>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
+                                        GameVariables.Towers[t].Health += 5;
+
                                         break;
                                     }
                                 case "berserk":
@@ -365,11 +360,8 @@ namespace _4D13TowerDefenseGame
                                     {
                                         if (GameVariables.Towers[t].shot != null)
                                         {
-<<<<<<< HEAD
-                                            t.shot.MoveSpeed = 5;
-=======
                                             GameVariables.Towers[t].shot.MoveSpeed = 10;
->>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
+
                                         }
                                         break;
                                     }
@@ -615,7 +607,7 @@ namespace _4D13TowerDefenseGame
 
             // "Draw" Currency
             spriteBatch.DrawString(font, ("Currency: " + GameVariables.Currency), currency, Color.CornflowerBlue);
-
+              
             #region Rectangle Texture Assignment Detection
             // Draw rectangle matrix
             for (int x = 0; x < 20; x++)

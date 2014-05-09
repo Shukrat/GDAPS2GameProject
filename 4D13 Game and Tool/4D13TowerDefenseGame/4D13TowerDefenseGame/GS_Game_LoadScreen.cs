@@ -57,17 +57,10 @@ namespace _4D13TowerDefenseGame
             // moves to Map Maker Update Bool in this Update method
             if (GameProcesses.saveLoad.LoadComplete)
             {
+                GameVariables.Currency = 1000;
+                GameVariables.Morale = 100;
                 GameVariables.SpawnLocationX = 0;
-                GameVariables.SpawnLocationY = 0;
-
-                
-
-<<<<<<< HEAD
-                
-
-                //Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
-                //Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
-=======
+                GameVariables.SpawnLocationY = 0;          
                 GameVariables.Magic = new List<Spell>();
 
 
@@ -128,8 +121,8 @@ namespace _4D13TowerDefenseGame
                 }
 
                 //Tower t = new Tower(50, 20, 400, 300, 45, 45, "Tower1", "Tower1", 100, 5, "");
-                Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
->>>>>>> 3e308da94603b46f2716fac80cec7d5cdca2dd10
+                //Tower u = new Tower(50, 20, 400, 320, 45, 45, "Tower1", "Tower1", 100, 5, "");
+
                 //GameVariables.Magic.Add(new Spell("slow", xDim, yDim));
                 //GameVariables.Towers.Add(t);
                 //GameVariables.Towers.Add(u);
