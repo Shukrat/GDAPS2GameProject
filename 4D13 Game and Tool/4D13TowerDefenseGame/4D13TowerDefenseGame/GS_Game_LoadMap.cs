@@ -45,7 +45,7 @@ namespace _4D13TowerDefenseGame
             // Healthbar
             game_HealthBar_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/HealthBarFrame");
             game_Health_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/Health Bar");
-            
+
             // Currecny/Mana bar
             game_Currency_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/Currency Bar");
             // Speed controls
@@ -80,7 +80,7 @@ namespace _4D13TowerDefenseGame
             // GAME / GAME BORDER
             game_GameBorder_Txtr = Content.Load<Texture2D>("Interface/Interface - Noninteractive/GameFrame");
 
-           
+
             #endregion
 
             enemySpawner = 0;
@@ -88,7 +88,7 @@ namespace _4D13TowerDefenseGame
             // Reset/set gold
             GameVariables.Currency = 1000;
             GameVariables.Morale = 100;
-            GameVariables.Magic = new List<Spell>();    
+            GameVariables.Magic = new List<Spell>();
         }
 
         public override GameProcesses.GameStateEnum Update(GraphicsDeviceManager graphics, Game1 game1)
@@ -102,7 +102,7 @@ namespace _4D13TowerDefenseGame
             #region Update - Mouse Location
             // Update mouse state location - assign details to mouse rectangle
             MouseStateGet();
-            
+
             // Mouse position rectangle
             mousePos = new Rectangle();
             mousePos.Width = 1;
@@ -264,76 +264,25 @@ namespace _4D13TowerDefenseGame
             }
 
 
-            
+
             #endregion
 
             /// <summary>
             /// INSERT GAME CODE HERE
             /// ...
-            /// </summary>
-
-
-            /*
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 20; j++)
-                {
-                    if (GameState.textures[i, j] == 9)
-                    {
-                        GameVariables.SpawnLocationX = GameState.tiles[i, j].X;
-                        GameVariables.SpawnLocationY = GameState.tiles[i, j].Y;
-                    }
-                }
-            }
-
-            for (int i = 0; i < 20; i++)
-            {
-                for (int j = 0; j < 20; j++)
-                {
-                    switch (GameState.textures[i, j])
-                    {
-                        case 1:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 1));//3
-                                break;
-                            }
-                        case 2:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 2));//3
-                                break;
-                            }
-                        case 3:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 3));//4
-                                break;
-                            }
-                        case 4:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 4));//2
-                                break;
-                            }
-                        case 10:
-                            {
-                                GameVariables.Markers.Add(new PathMarker(GameState.tiles[i, j].X, GameState.tiles[i, j].Y, 5));
-                                break;
-                            }
-                    }
-                }
-            }
-      
-            for (int i = 0; i < 10; i++)
-            {
-                GameVariables.Enemies.Add(new Enemy(100, 20, GameVariables.SpawnLocationX, GameVariables.SpawnLocationY, 50, 50, "Monster", 1, 5, 5, false, false));
-            }
-
-            */
+            /// </summary>           
 
 
             if (GameVariables.Currency <= 0)
             {
                 GameVariables.Currency = 0;
             }
-            
+
+            if (GameVariables.Morale <= 0)
+            {
+                return GameProcesses.GameStateEnum.main_MainMenu;
+            }
+
 
             for (int i = 0; i < GameVariables.Enemies.Count; i++)
             {
@@ -345,16 +294,9 @@ namespace _4D13TowerDefenseGame
                         {
                             switch (st.Effect)
                             {
-                                case "heal":
-
-                                    {                                       
-
-                                        GameVariables.Towers[t].Health += 5;
-                                        break;
-                                    }
                                 case "berserk":
                                     {
-                                        
+
                                         GameVariables.Towers[t].Berserked = true;
                                         break;
                                     }
@@ -438,7 +380,7 @@ namespace _4D13TowerDefenseGame
                         }
                     }
                 }
-        }
+            }
             if (GameVariables.Towers.Count > 0)
             {
                 if (frameCount == 179)
@@ -459,7 +401,7 @@ namespace _4D13TowerDefenseGame
                 frameCount++;
             }
 
-            
+
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
 
@@ -498,7 +440,7 @@ namespace _4D13TowerDefenseGame
             spriteBatch.Draw(spell_Heal_Txtr, spell_HealRec, Color.White);
             spriteBatch.Draw(spell_Rage_Txtr, spell_RageRec, Color.White);
             spriteBatch.Draw(spell_Slow_Txtr, spell_SlowRec, Color.White);
-            
+
             // Towers
             spriteBatch.Draw(twr_Catapult_Txtr, twr_CatapultRec, Color.White);
             spriteBatch.Draw(twr_Trebuchet_Txtr, twr_TrebuchetRec, Color.White);
@@ -525,6 +467,18 @@ namespace _4D13TowerDefenseGame
                 if (mState.LeftButton == ButtonState.Pressed)
                 {
                     spriteBatch.Draw(mainMenu_ExitClick_Txtr, mapEdit_ExitRec, Color.White);
+                }
+            }
+
+            if (mousePos.Intersects(spell_HealRec))
+            {
+                if (mState.LeftButton == ButtonState.Pressed)
+                {
+                    if (GameVariables.Currency >= 50)
+                    {
+                    GameVariables.Currency = GameVariables.Currency - 10;
+                    GameVariables.Morale = GameVariables.Morale + 1;                    
+                    }
                 }
             }
 
@@ -587,7 +541,7 @@ namespace _4D13TowerDefenseGame
             }
             #endregion
 
-             // Vector for health test
+            // Vector for health test
             Vector2 health = new Vector2();
             health.X = game_HealthBarRec.X;
             health.Y = game_HealthBarRec.Y;
@@ -604,7 +558,7 @@ namespace _4D13TowerDefenseGame
             currency_bar.X = game_ManaBarRec.Height;
             currency_bar.Y = game_ManaBarRec.Width;
             // add sprite batch and draw.
-            spriteBatch.Draw(game_Currency_Txtr, currency_bar, Color.White);      
+            spriteBatch.Draw(game_Currency_Txtr, currency_bar, Color.White);
 
             // Vector for currency test
             Vector2 currency = new Vector2();
@@ -612,11 +566,11 @@ namespace _4D13TowerDefenseGame
             currency.Y = game_ManaBarRec.Y;
 
             // "Draw" Health
-            spriteBatch.DrawString(font, ("Health: " + GameVariables.Morale) , health , Color.CornflowerBlue);
+            spriteBatch.DrawString(font, ("Health: " + GameVariables.Morale), health, Color.CornflowerBlue);
 
             // "Draw" Currency
             spriteBatch.DrawString(font, ("Currency: " + GameVariables.Currency), currency, Color.CornflowerBlue);
-              
+
             #region Rectangle Texture Assignment Detection
             // Draw rectangle matrix
             for (int x = 0; x < 20; x++)
@@ -629,15 +583,15 @@ namespace _4D13TowerDefenseGame
                     // THIS DOES NOT DRAW THE TEXTURES PERMANENTLY - DRAW TEXTURES ON RECTANGLES BELOW DOES
                     if (mousePos.Intersects(tiles[x, y]) && mState.LeftButton == ButtonState.Pressed)
                     {
-                        
+
                         if (tf_Catapult)
                         {
                             if (textures[x, y] == 0)
-                            {              
-                                if(GameVariables.Currency >= 100)
+                            {
+                                if (GameVariables.Currency >= 100)
                                 {
                                     //create tower
-                                    textures[x,y] = 11;
+                                    textures[x, y] = 11;
                                     GameVariables.Towers.Add(new Tower(1, 100, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower1", "Projectiles/Projectile", 1, 5, "", 40));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
@@ -647,12 +601,12 @@ namespace _4D13TowerDefenseGame
                         {
                             if (textures[x, y] == 0)
                             {
-                                if(GameVariables.Currency >= 100)
+                                if (GameVariables.Currency >= 100)
                                 {
                                     //create tower
                                     textures[x, y] = 12;
 
-                                    GameVariables.Towers.Add(new Tower(1, 50,GameState.tiles[x,y].X,GameState.tiles[x,y].Y,45,45,"Tiles/Tiles - Tower Art/Tower2","Projectiles/Projectile", 5, 10, "", 10));                                  
+                                    GameVariables.Towers.Add(new Tower(1, 50, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower2", "Projectiles/Projectile", 5, 10, "", 10));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -675,24 +629,7 @@ namespace _4D13TowerDefenseGame
                                 }
                             }
                         }
-                        if (tf_Heal)
-                        {
-                            if (textures[x, y] != 0 || textures[x, y] == 0)
-                            {
-                                if (GameVariables.Currency >= 100)
-                                {
-                                    //create magic
-                                    textures[x, y] = 14;
-                                    GameVariables.Magic.Add(new Spell("heal", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
-                                    GameVariables.Currency = GameVariables.Currency - 50;
-                                    if (GameVariables.Currency <= 0)
-                                    {
-                                        GameVariables.Currency = 0;
-                                    }
-                                    
-                                }
-                            }
-                        }
+
                         if (tf_Rage)
                         {
                             if (textures[x, y] != 0 || textures[x, y] == 0)
@@ -750,16 +687,13 @@ namespace _4D13TowerDefenseGame
                         case 0:
                             break;
                         case 11:
-                            spriteBatch.Draw(twr_Catapult_Txtr, tiles[x ,y], Color.White);
+                            spriteBatch.Draw(twr_Catapult_Txtr, tiles[x, y], Color.White);
                             break;
                         case 12:
                             spriteBatch.Draw(twr_Trebuchet_Txtr, tiles[x, y], Color.White);
                             break;
                         case 13:
                             spriteBatch.Draw(spell_Fireball_Txtr, tiles[x, y], Color.White);
-                            break;
-                        case 14:
-                            spriteBatch.Draw(spell_Heal_Txtr, tiles[x, y], Color.White);                            
                             break;
                         case 15:
                             spriteBatch.Draw(spell_Rage_Txtr, tiles[x, y], Color.White);

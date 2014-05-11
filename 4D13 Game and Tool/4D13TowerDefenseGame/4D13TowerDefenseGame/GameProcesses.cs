@@ -30,7 +30,7 @@ namespace _4D13TowerDefenseGame
             main_Settings,
             main_MapFirst,
             main_MapSecond,
-            main_MapThird,            
+            main_MapThird,  
         }
 
         // Static SaveLoad class call - Needed to reliably save/load texture 2D array info
@@ -58,10 +58,7 @@ namespace _4D13TowerDefenseGame
         public GS_Game_Settings gs_Game_Settings;
         public GS_Game_LoadMap gs_Game_LoadMap;
         public GS_Game_LoadScreen gs_Game_LoadScreen;
-        // Gameplay gamestates
-        public GS_Game_MapFirst gs_Game_MapFirst;
-        public GS_Game_MapSecond gs_Game_MapSecond;
-        public GS_Game_MapThird gs_Game_MapThird;
+
 
         #endregion
 
@@ -82,10 +79,7 @@ namespace _4D13TowerDefenseGame
             gs_Game_MainMenu = new GS_Game_MainMenu();
             gs_Game_Settings = new GS_Game_Settings();
             gs_Game_LoadScreen = new GS_Game_LoadScreen();  // Load menu (asks what map to load)
-            gs_Game_LoadMap = new GS_Game_LoadMap();        // Actual loaded map
-            gs_Game_MapFirst = new GS_Game_MapFirst();
-            gs_Game_MapSecond = new GS_Game_MapSecond();
-            gs_Game_MapThird = new GS_Game_MapThird();
+            gs_Game_LoadMap = new GS_Game_LoadMap();        // Actual loaded map            
 
 
             // Set default game state - SET THIS TO THE FIRST SCREEN YOU WANT
@@ -108,9 +102,6 @@ namespace _4D13TowerDefenseGame
 
             gs_Game_MainMenu.LoadContent(Content);
             gs_Game_Settings.LoadContent(Content);
-            gs_Game_MapFirst.LoadContent(Content);
-            gs_Game_MapSecond.LoadContent(Content);
-            gs_Game_MapThird.LoadContent(Content);
             gs_Game_LoadScreen.LoadContent(Content);
             gs_Game_LoadMap.LoadContent(Content);
         }
@@ -160,20 +151,7 @@ namespace _4D13TowerDefenseGame
                     {
                         gameStateStatus = gs_Game_LoadMap.Update(graphics, game1);
                         break;
-                    }
-                case GameStateEnum.main_MapFirst:
-                    {
-                        gameStateStatus = gs_Game_MapFirst.Update(graphics, game1);
-                        break;
-                    }
-                case GameStateEnum.main_MapSecond:
-                    {
-                        break;
-                    }
-                case GameStateEnum.main_MapThird:
-                    {
-                        break;
-                    }
+                    }               
                 case GameStateEnum.main_Settings:
                     {
                         gameStateStatus = gs_Game_Settings.Update(graphics, game1);
@@ -229,20 +207,7 @@ namespace _4D13TowerDefenseGame
                     {
                         gs_Game_LoadMap.Draw(spriteBatch, graphics);
                         break;
-                    }
-                case GameStateEnum.main_MapFirst:
-                    {
-                        gs_Game_MapFirst.Draw(spriteBatch, graphics);
-                        break;
-                    }
-                case GameStateEnum.main_MapSecond:
-                    {
-                        break;
-                    }
-                case GameStateEnum.main_MapThird:
-                    {
-                        break;
-                    }
+                    }               
                 case GameStateEnum.main_Settings:
                     {
                         gs_Game_Settings.Draw(spriteBatch, graphics);

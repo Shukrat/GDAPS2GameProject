@@ -18,27 +18,18 @@ namespace _4D13TowerDefenseGame
 
 
     // TO ADD
-        // SCREENS WITH BUTTONS TO JUST LOAD MAP FROM SELECTION
-        // USING BUTTONS
-        // MAKE SAVE SCREEN ONLY HAVE TEXT INPUT
-        // MAKE SAVE SCREEN FUNCTION WITH THIS?
-    // Pause/Play selected glow and merge pause/play
-    // Same thing for spell select, glowing.
-    // Delete map function for settings
     // Lose screen
-    // victory screen
-    // In game / Map editor when hitting menu button asks "are you sure?"
-
 
     // Game functions:
     // Monster movement - somewhat works? Needs polish.
     // Monster attack - not implemented
-    // Tower attack - needs to test heal and spell and second game stuff
-    // Tower placement - Done?
-    // health damage taken for monster, tower and player - unsure
-    // currency system - implemented not perfected
-    // tower selling -  not implemented
-    
+    // Tower attack - needs to test heal and rage spell    
+
+    // Things the NEED to be done
+    // fix pathing ((can't go up along paths and starts are forced down))
+    // fix spell timer ((very quick but works))
+    // lose ((boots to main menu))
+    // enemy speed
 
 
 

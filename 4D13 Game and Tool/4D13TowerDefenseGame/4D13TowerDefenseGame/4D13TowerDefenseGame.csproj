@@ -46,14 +46,11 @@
     <Compile Include="GS_Game_LoadMap.cs" />
     <Compile Include="GS_Game_LoadScreen.cs" />
     <Compile Include="GS_Game_MainMenu.cs" />
-    <Compile Include="GS_Game_MapSecond.cs" />
-    <Compile Include="GS_Game_MapThird.cs" />
     <Compile Include="GS_Game_Settings.cs" />
     <Compile Include="GS_MM_LoadMenu.cs" />
     <Compile Include="GS_MM_MainMenu.cs" />
     <Compile Include="GS_MM_MapEditor.cs" />
     <Compile Include="GS_MM_SaveMenu.cs" />
-    <Compile Include="GS_Game_MapFirst.cs" />
     <Compile Include="MovableGamePiece.cs" />
     <Compile Include="PathMarker.cs" />
     <Compile Include="Program.cs" />
