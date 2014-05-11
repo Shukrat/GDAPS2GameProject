@@ -272,8 +272,8 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>
 
-<<<<<<< HEAD
 
+            /*
             for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < 20; j++)
@@ -325,9 +325,9 @@ namespace _4D13TowerDefenseGame
             {
                 GameVariables.Enemies.Add(new Enemy(100, 20, GameVariables.SpawnLocationX, GameVariables.SpawnLocationY, 50, 50, "Monster", 1, 5, 5, false, false));
             }
-=======
-            
->>>>>>> 0ead7add467fb2a511c2ccefd350c0cb39abe450
+
+            */
+
 
             if (GameVariables.Currency <= 0)
             {
@@ -346,16 +346,10 @@ namespace _4D13TowerDefenseGame
                             switch (st.Effect)
                             {
                                 case "heal":
-<<<<<<< HEAD
+
                                     {                                       
 
                                         GameVariables.Towers[t].Health += 5;
-
-=======
-                                    {
-
-                                        GameVariables.Towers[t].Health += 5;
->>>>>>> 0ead7add467fb2a511c2ccefd350c0cb39abe450
                                         break;
                                     }
                                 case "berserk":
@@ -366,15 +360,15 @@ namespace _4D13TowerDefenseGame
                                     }
                                 default:
                                     {
-<<<<<<< HEAD
+
                                         if (GameVariables.Towers[t].shot != null)
                                         {
                                             GameVariables.Towers[t].shot.MoveSpeed = 10;
 
                                         }
-=======
+
                                         GameVariables.Towers[t].Berserked = false;
->>>>>>> 0ead7add467fb2a511c2ccefd350c0cb39abe450
+
                                         break;
                                     }
                             }
@@ -447,7 +441,7 @@ namespace _4D13TowerDefenseGame
         }
             if (GameVariables.Towers.Count > 0)
             {
-                if (frameCount == 59)
+                if (frameCount == 179)
                 {
 
                     for (int k = 0; k <= enemySpawner; k++)
