@@ -18,12 +18,9 @@ namespace _4D13TowerDefenseGame
 
 
     // TO ADD
-    // Lose screen
 
     // Game functions:
-    // Monster movement - somewhat works? Needs polish.
-    // Monster attack - not implemented
-    // Tower attack - needs to test heal and rage spell    
+    // Tower attack - rage spell and fix range   
 
     // Things the NEED to be done
     // fix pathing ((can't go up along paths and starts are forced down))

@@ -216,37 +216,6 @@ namespace _4D13TowerDefenseGame
             twr_TrebuchetRec.Y = 222;
             #endregion
 
-            // PLAY / PAUSE / FF / FFF
-            #region Game Control Rectangles
-            // Play
-            game_PlayRec = new Rectangle();
-            game_PlayRec.Width = 45;
-            game_PlayRec.Height = 45;
-            game_PlayRec.X = graphics.PreferredBackBufferWidth - 175;
-            game_PlayRec.Y = 775;
-
-            // Pause
-            game_PauseRec = new Rectangle();
-            game_PauseRec.Width = 45;
-            game_PauseRec.Height = 45;
-            game_PauseRec.X = graphics.PreferredBackBufferWidth - 230;
-            game_PauseRec.Y = 775;
-
-            // Fast Forward
-            game_FFRec = new Rectangle();
-            game_FFRec.Width = 45;
-            game_FFRec.Height = 45;
-            game_FFRec.X = graphics.PreferredBackBufferWidth - 120;
-            game_FFRec.Y = 775;
-
-            // 3x Fast Forward
-            game_FFFRec = new Rectangle();
-            game_FFFRec.Width = 45;
-            game_FFFRec.Height = 45;
-            game_FFFRec.X = graphics.PreferredBackBufferWidth - 65;
-            game_FFFRec.Y = 775;
-            #endregion
-
             #region Button Functionality - Save and Exit
             if (prevMState.LeftButton != ButtonState.Pressed)
             {
@@ -271,7 +240,7 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME CODE HERE
             /// ...
             /// </summary>           
-
+            #region Value Checks
 
             if (GameVariables.Currency <= 0)
             {
@@ -282,14 +251,17 @@ namespace _4D13TowerDefenseGame
             {
                 return GameProcesses.GameStateEnum.main_MainMenu;
             }
+            #endregion
 
-
+            #region enemy/tower checks
+            // checks against all enemies
             for (int i = 0; i < GameVariables.Enemies.Count; i++)
             {
                 for (int t = 0; t < GameVariables.Towers.Count; t++)
                 {
                     foreach (Spell st in GameVariables.Magic)
                     {
+                        // See if towers are under spell effect
                         if (GameVariables.Towers[t].PieceShape.Intersects(st.AreaOfEffect))
                         {
                             switch (st.Effect)
@@ -300,22 +272,22 @@ namespace _4D13TowerDefenseGame
                                         GameVariables.Towers[t].Berserked = true;
                                         break;
                                     }
+
                                 default:
                                     {
-
                                         if (GameVariables.Towers[t].shot != null)
                                         {
                                             GameVariables.Towers[t].shot.MoveSpeed = 10;
 
                                         }
-
                                         GameVariables.Towers[t].Berserked = false;
-
                                         break;
                                     }
                             }
                         }
                     }
+
+                    // sets towers to attack enemies.
                     if (GameVariables.Enemies[i] != null)
                     {
 
@@ -323,17 +295,14 @@ namespace _4D13TowerDefenseGame
                         {
                             GameVariables.Towers[t].AttackEnemy(GameVariables.Enemies[i]);
                         }
-                        if (GameVariables.Enemies[i].HitBox.Intersects(GameVariables.Towers[t].PieceShape) && GameVariables.Enemies[i].IsVisible == true && GameVariables.Enemies[i].CanAttack == true)
-                        {
-                            GameVariables.Enemies[i].AttackTower(GameVariables.Towers[t]);
-                        }
                         if (GameVariables.Enemies[i].Alive == false)
                         {
-                            GameVariables.Enemies[i].Shot = null;
                             GameVariables.Enemies[i] = null;
                             GameVariables.Towers[t].shot = null;
                         }
                     }
+
+                    // sets spells to work
                     if (GameVariables.Enemies[i] != null)
                     {
                         if (GameVariables.Enemies[i].Immune == false && GameVariables.Enemies[i].IsVisible == true)
@@ -370,17 +339,19 @@ namespace _4D13TowerDefenseGame
 
 
 
-
+                        // if enemies go out of bounds attack
                         if (GameVariables.Enemies[i].PieceShape.X > 800)
                         {
                             GameVariables.Enemies[i].MoraleAttack();
-                            GameVariables.Enemies[i].Shot = null;
                             GameVariables.Enemies[i] = null;
                             GameVariables.Towers[t].shot = null;
                         }
                     }
                 }
             }
+            #endregion
+
+            #region Game Start Tower Check
             if (GameVariables.Towers.Count > 0)
             {
                 if (frameCount == 179)
@@ -400,7 +371,7 @@ namespace _4D13TowerDefenseGame
                 }
                 frameCount++;
             }
-
+            #endregion
 
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
@@ -426,65 +397,42 @@ namespace _4D13TowerDefenseGame
 
             spriteBatch.Draw(mapEdit_SideBar_Txtr, sideBarBG, Color.White);                 // Sidebar background
             spriteBatch.Draw(mainMenu_Exit_Txtr, mapEdit_ExitRec, Color.White);             // Exit Map Button
-            spriteBatch.Draw(mapEdit_Menu_Txtr, mapEdit_MenuRec, Color.White);
-            spriteBatch.Draw(game_GameBorder_Txtr, game_GameBorderRec, Color.White);
-
-            // Game Speed Controls
-            spriteBatch.Draw(game_Play_Txtr, game_PlayRec, Color.White);
-            spriteBatch.Draw(game_Pause_Txtr, game_PauseRec, Color.White);
-            spriteBatch.Draw(game_FF_Txtr, game_FFRec, Color.White);
-            spriteBatch.Draw(game_FFF_Txtr, game_FFFRec, Color.White);
+            spriteBatch.Draw(mapEdit_Menu_Txtr, mapEdit_MenuRec, Color.White);              // Menu Button
+            spriteBatch.Draw(game_GameBorder_Txtr, game_GameBorderRec, Color.White);        // Game Border
 
             // Spells
-            spriteBatch.Draw(spell_Fireball_Txtr, spell_FireballRec, Color.White);
-            spriteBatch.Draw(spell_Heal_Txtr, spell_HealRec, Color.White);
-            spriteBatch.Draw(spell_Rage_Txtr, spell_RageRec, Color.White);
-            spriteBatch.Draw(spell_Slow_Txtr, spell_SlowRec, Color.White);
+            spriteBatch.Draw(spell_Fireball_Txtr, spell_FireballRec, Color.White);          // FireBall icon
+            spriteBatch.Draw(spell_Heal_Txtr, spell_HealRec, Color.White);                  // Heal Icon
+            spriteBatch.Draw(spell_Rage_Txtr, spell_RageRec, Color.White);                  // Rage Icon
+            spriteBatch.Draw(spell_Slow_Txtr, spell_SlowRec, Color.White);                  // Slow Icon
 
             // Towers
-            spriteBatch.Draw(twr_Catapult_Txtr, twr_CatapultRec, Color.White);
-            spriteBatch.Draw(twr_Trebuchet_Txtr, twr_TrebuchetRec, Color.White);
+            spriteBatch.Draw(twr_Catapult_Txtr, twr_CatapultRec, Color.White);              // Catapault Icon
+            spriteBatch.Draw(twr_Trebuchet_Txtr, twr_TrebuchetRec, Color.White);            // Trebuchet Icon
 
             // Health / Mana Bars
-            spriteBatch.Draw(game_HealthBar_Txtr, game_HealthBarRec, Color.White);
-            spriteBatch.Draw(game_HealthBar_Txtr, game_ManaBarRec, Color.White);
+            spriteBatch.Draw(game_HealthBar_Txtr, game_HealthBarRec, Color.White);          // Health Bar underlay
+            spriteBatch.Draw(game_HealthBar_Txtr, game_ManaBarRec, Color.White);            // Mana Bar Underlay.
 
-            // Menu Button Hover and Click
-            if (mousePos.Intersects(mapEdit_MenuRec))
-            {
-                spriteBatch.Draw(mapEdit_MenuHover_Txtr, mapEdit_MenuRec, Color.White);
-                if (mState.LeftButton == ButtonState.Pressed)
-                {
-                    spriteBatch.Draw(mapEdit_MenuClick_Txtr, mapEdit_MenuRec, Color.White);
-                }
-            }
+            
 
+            #endregion
 
-            // Exit Button Hover and Click
-            if (mousePos.Intersects(mapEdit_ExitRec))
-            {
-                spriteBatch.Draw(mainMenu_ExitHover_Txtr, mapEdit_ExitRec, Color.White);
-                if (mState.LeftButton == ButtonState.Pressed)
-                {
-                    spriteBatch.Draw(mainMenu_ExitClick_Txtr, mapEdit_ExitRec, Color.White);
-                }
-            }
-
+            #region Heal Check
             if (mousePos.Intersects(spell_HealRec))
             {
                 if (mState.LeftButton == ButtonState.Pressed)
                 {
-                    if (GameVariables.Currency >= 50)
+                    if (GameVariables.Morale < 100)
                     {
-                    GameVariables.Currency = GameVariables.Currency - 10;
-                    GameVariables.Morale = GameVariables.Morale + 1;                    
+                        if (GameVariables.Currency >= 50)
+                        {
+                            GameVariables.Currency = GameVariables.Currency - 10;
+                            GameVariables.Morale = GameVariables.Morale + 1;
+                        }
                     }
                 }
             }
-
-
-
-
             #endregion
 
             #region Draw Textures on Rectangles
@@ -539,37 +487,7 @@ namespace _4D13TowerDefenseGame
                     }
                 }
             }
-            #endregion
-
-            // Vector for health test
-            Vector2 health = new Vector2();
-            health.X = game_HealthBarRec.X;
-            health.Y = game_HealthBarRec.Y;
-
-            // rectangle for health?
-            Rectangle health_bar = new Rectangle();
-            health_bar.X = game_HealthBarRec.Height;
-            health_bar.Y = game_HealthBarRec.Width;
-            // add sprite batch and draw.
-            spriteBatch.Draw(game_Health_Txtr, health_bar, Color.White);
-
-            // rectangle for currency?
-            Rectangle currency_bar = new Rectangle();
-            currency_bar.X = game_ManaBarRec.Height;
-            currency_bar.Y = game_ManaBarRec.Width;
-            // add sprite batch and draw.
-            spriteBatch.Draw(game_Currency_Txtr, currency_bar, Color.White);
-
-            // Vector for currency test
-            Vector2 currency = new Vector2();
-            currency.X = game_ManaBarRec.X;
-            currency.Y = game_ManaBarRec.Y;
-
-            // "Draw" Health
-            spriteBatch.DrawString(font, ("Health: " + GameVariables.Morale), health, Color.CornflowerBlue);
-
-            // "Draw" Currency
-            spriteBatch.DrawString(font, ("Currency: " + GameVariables.Currency), currency, Color.CornflowerBlue);
+            #endregion // tower drawing           
 
             #region Rectangle Texture Assignment Detection
             // Draw rectangle matrix
@@ -592,7 +510,7 @@ namespace _4D13TowerDefenseGame
                                 {
                                     //create tower
                                     textures[x, y] = 11;
-                                    GameVariables.Towers.Add(new Tower(1, 100, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower1", "Projectiles/Projectile", 1, 5, "", 40));
+                                    GameVariables.Towers.Add(new Tower(1, 50, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower1", "Projectiles/Projectile", 5, 10, "", 10));
                                     GameVariables.Currency = GameVariables.Currency - 100;
                                 }
                             }
@@ -601,13 +519,13 @@ namespace _4D13TowerDefenseGame
                         {
                             if (textures[x, y] == 0)
                             {
-                                if (GameVariables.Currency >= 100)
+                                if (GameVariables.Currency >= 200)
                                 {
                                     //create tower
                                     textures[x, y] = 12;
 
-                                    GameVariables.Towers.Add(new Tower(1, 50, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower2", "Projectiles/Projectile", 5, 10, "", 10));
-                                    GameVariables.Currency = GameVariables.Currency - 100;
+                                    GameVariables.Towers.Add(new Tower(1, 100, GameState.tiles[x, y].X, GameState.tiles[x, y].Y, 45, 45, "Tiles/Tiles - Tower Art/Tower2", "Projectiles/Projectile", 1, 5, "", 40));
+                                    GameVariables.Currency = GameVariables.Currency - 200;
                                 }
                             }
                         }
@@ -712,6 +630,9 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME ANIMATION CODE HERE
             /// ...
             /// </summary>
+
+            #region Enemy and tower animation
+            // animates the bullets
             foreach (Tower t in GameVariables.Towers)
             {
                 if (t != null)
@@ -727,6 +648,7 @@ namespace _4D13TowerDefenseGame
                     }
                 }
             }
+            // draw the enemies
             foreach (Enemy e in GameVariables.Enemies)
             {
                 if (e != null && e.IsVisible == true)
@@ -738,6 +660,7 @@ namespace _4D13TowerDefenseGame
                     }
                 }
             }
+            #endregion
         }
     }
 }
