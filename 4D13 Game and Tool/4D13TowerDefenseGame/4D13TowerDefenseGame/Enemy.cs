@@ -28,6 +28,7 @@ namespace _4D13TowerDefenseGame
         int slowCount; // controls the use of the slow spell
         Projectile shot; // projectiles fired at towers
         Rectangle hitBox;
+        int lastDirection;
 
         // RNG
         Random rng = new Random();
@@ -72,6 +73,10 @@ namespace _4D13TowerDefenseGame
             get { return shot; }
             set { shot = value; }
         }
+        public int LastDirection
+        {
+            get { return lastDirection; }
+        }
 
 
         // parameterized constructor
@@ -87,7 +92,7 @@ namespace _4D13TowerDefenseGame
             droppedCurrency = rng.Next(0,49);
 
             direction = 3;
-
+            lastDirection = 0;
 
             isVisible = false;
             slowed = false;
@@ -168,21 +173,25 @@ namespace _4D13TowerDefenseGame
                         case 1:
                             {
                                 this.pieceShape.Y -= moveSpeed;
+                                lastDirection = 1;
                                 break;
                             }
                         case 2:
                             {
                                 this.pieceShape.X += moveSpeed;
+                                lastDirection = 2;
                                 break;
                             }
                         case 3:
                             {
                                 this.pieceShape.Y += moveSpeed;
+                                lastDirection = 3;
                                 break;
                             }
                         case 4:
                             {
                                 this.pieceShape.X -= moveSpeed;
+                                lastDirection = 4;
                                 break;
                             }
                         case 5:
@@ -200,7 +209,26 @@ namespace _4D13TowerDefenseGame
                     {
                         if (this.pieceShape.Intersects(pm.Marker))
                         {
-                            direction = pm.Control;
+                            if (pm.Control == 3 && lastDirection == 1)
+                            {
+                                direction = 2;
+                            }
+                            else if (pm.Control == 1 && lastDirection == 1)
+                            {
+                                direction = 4;
+                            }
+                            else if (pm.Control == 4 && lastDirection == 2)
+                            {
+                                direction = 1;
+                            }
+                            else if (pm.Control == 2 && lastDirection == 4)
+                            {
+                                direction = 1;
+                            }
+                            else
+                            {
+                                direction = pm.Control;
+                            }
                         }
                     }
                     
@@ -214,21 +242,25 @@ namespace _4D13TowerDefenseGame
                             case 1:
                                 {
                                     this.pieceShape.Y -= moveSpeed;
+                                    lastDirection = 1;
                                     break;
                                 }
                             case 2:
                                 {
                                     this.pieceShape.X += moveSpeed;
+                                    lastDirection = 2;
                                     break;
                                 }
                             case 3:
                                 {
                                     this.pieceShape.Y += moveSpeed;
+                                    lastDirection = 3;
                                     break;
                                 }
                             case 4:
                                 {
                                     this.pieceShape.X -= moveSpeed;
+                                    lastDirection = 4;
                                     break;
                                 }
                             case 5:
@@ -258,7 +290,26 @@ namespace _4D13TowerDefenseGame
                     {
                         if (this.pieceShape.Intersects(pm.Marker))
                         {
-                            direction = pm.Control;
+                            if (pm.Control == 3 && lastDirection == 1)
+                            {
+                                direction = 2;
+                            }
+                            else if (pm.Control == 1 && lastDirection == 1)
+                            {
+                                direction = 4;
+                            }
+                            else if (pm.Control == 4 && lastDirection == 2)
+                            {
+                                direction = 1;
+                            }
+                            else if (pm.Control == 2 && lastDirection == 4)
+                            {
+                                direction = 1;
+                            }
+                            else
+                            {
+                                direction = pm.Control;
+                            }
                         }
                     }
                     
@@ -268,7 +319,7 @@ namespace _4D13TowerDefenseGame
             if (this.health <= 0)
             {
                 this.alive = false;
-                GameVariables.Currency = GameVariables.Currency + droppedCurrency;
+                //GameVariables.Currency = GameVariables.Currency + droppedCurrency;
             }
         }
     }

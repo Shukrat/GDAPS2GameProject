@@ -26,7 +26,7 @@ namespace _4D13TowerDefenseGame
                 case 1:
                     {
                         marker = new Rectangle(xPos + 45, yPos + 45, 1, 1);
-                        control = 3;
+                        control = 1;
                         break;
                     }
                 case 2:

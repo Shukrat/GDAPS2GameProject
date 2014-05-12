@@ -272,6 +272,25 @@ namespace _4D13TowerDefenseGame
             /// ...
             /// </summary>           
 
+            // Vector for health test
+            health = new Vector2();
+            health.X = game_HealthBarRec.X;
+            health.Y = game_HealthBarRec.Y;
+
+            // rectangle for health?
+            health_bar = new Rectangle();
+            health_bar.X = game_HealthBarRec.Height;
+            health_bar.Y = game_HealthBarRec.Width;
+
+            // Vector for currency test
+            currency = new Vector2();
+            currency.X = game_ManaBarRec.X;
+            currency.Y = game_ManaBarRec.Y;
+
+            // rectangle for currency?
+            currency_bar = new Rectangle();
+            currency_bar.X = game_ManaBarRec.Height;
+            currency_bar.Y = game_ManaBarRec.Width;
 
             if (GameVariables.Currency <= 0)
             {
@@ -302,15 +321,7 @@ namespace _4D13TowerDefenseGame
                                     }
                                 default:
                                     {
-
-                                        if (GameVariables.Towers[t].shot != null)
-                                        {
-                                            GameVariables.Towers[t].shot.MoveSpeed = 10;
-
-                                        }
-
                                         GameVariables.Towers[t].Berserked = false;
-
                                         break;
                                     }
                             }
@@ -323,14 +334,9 @@ namespace _4D13TowerDefenseGame
                         {
                             GameVariables.Towers[t].AttackEnemy(GameVariables.Enemies[i]);
                         }
-                        if (GameVariables.Enemies[i].HitBox.Intersects(GameVariables.Towers[t].PieceShape) && GameVariables.Enemies[i].IsVisible == true && GameVariables.Enemies[i].CanAttack == true)
-                        {
-                            GameVariables.Enemies[i].AttackTower(GameVariables.Towers[t]);
-                        }
                         if (GameVariables.Enemies[i].Alive == false)
                         {
-                            GameVariables.Enemies[i].Shot = null;
-                            GameVariables.Enemies[i] = null;
+                            GameVariables.Enemies.RemoveAt(i);
                             GameVariables.Towers[t].shot = null;
                         }
                     }
@@ -366,16 +372,11 @@ namespace _4D13TowerDefenseGame
                             }
                         }
 
-                        GameVariables.Enemies[i].Move();
-
-
-
-
                         if (GameVariables.Enemies[i].PieceShape.X > 800)
                         {
                             GameVariables.Enemies[i].MoraleAttack();
                             GameVariables.Enemies[i].Shot = null;
-                            GameVariables.Enemies[i] = null;
+                            GameVariables.Enemies.RemoveAt(i);
                             GameVariables.Towers[t].shot = null;
                         }
                     }
@@ -400,7 +401,23 @@ namespace _4D13TowerDefenseGame
                 }
                 frameCount++;
             }
-
+            
+            if (mousePos.Intersects(spell_HealRec))
+            {
+                if (mState.LeftButton == ButtonState.Pressed)
+                {
+                    if (GameVariables.Currency >= 50)
+                    {
+                        GameVariables.Currency = GameVariables.Currency - 10;
+                        GameVariables.Morale = GameVariables.Morale + 1;
+                    }
+                }
+            }
+            
+            foreach(Enemy e in GameVariables.Enemies)
+            {
+                e.Move();
+            }
 
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
@@ -470,17 +487,7 @@ namespace _4D13TowerDefenseGame
                 }
             }
 
-            if (mousePos.Intersects(spell_HealRec))
-            {
-                if (mState.LeftButton == ButtonState.Pressed)
-                {
-                    if (GameVariables.Currency >= 50)
-                    {
-                    GameVariables.Currency = GameVariables.Currency - 10;
-                    GameVariables.Morale = GameVariables.Morale + 1;                    
-                    }
-                }
-            }
+            
 
 
 
@@ -541,29 +548,12 @@ namespace _4D13TowerDefenseGame
             }
             #endregion
 
-            // Vector for health test
-            Vector2 health = new Vector2();
-            health.X = game_HealthBarRec.X;
-            health.Y = game_HealthBarRec.Y;
-
-            // rectangle for health?
-            Rectangle health_bar = new Rectangle();
-            health_bar.X = game_HealthBarRec.Height;
-            health_bar.Y = game_HealthBarRec.Width;
+            
             // add sprite batch and draw.
             spriteBatch.Draw(game_Health_Txtr, health_bar, Color.White);
-
-            // rectangle for currency?
-            Rectangle currency_bar = new Rectangle();
-            currency_bar.X = game_ManaBarRec.Height;
-            currency_bar.Y = game_ManaBarRec.Width;
+            
             // add sprite batch and draw.
             spriteBatch.Draw(game_Currency_Txtr, currency_bar, Color.White);
-
-            // Vector for currency test
-            Vector2 currency = new Vector2();
-            currency.X = game_ManaBarRec.X;
-            currency.Y = game_ManaBarRec.Y;
 
             // "Draw" Health
             spriteBatch.DrawString(font, ("Health: " + GameVariables.Morale), health, Color.CornflowerBlue);
@@ -712,6 +702,7 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME ANIMATION CODE HERE
             /// ...
             /// </summary>
+   
             foreach (Tower t in GameVariables.Towers)
             {
                 if (t != null)

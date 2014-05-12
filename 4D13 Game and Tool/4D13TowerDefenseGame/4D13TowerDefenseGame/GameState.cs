@@ -213,6 +213,8 @@ namespace _4D13TowerDefenseGame
         public Rectangle game_PauseRec;
         public Rectangle game_FFRec;
         public Rectangle game_FFFRec;
+        public Rectangle currency_bar;
+        public Rectangle health_bar;
 
         // Map Editor
         public Rectangle mapEdit_TilesRec;
@@ -226,6 +228,8 @@ namespace _4D13TowerDefenseGame
         #endregion
 
         public static int saveLoadBackground;
+        public Vector2 currency;
+        public Vector2 health;
 
         // Properties:
         #region Property - Get Rectangle 2D Array
