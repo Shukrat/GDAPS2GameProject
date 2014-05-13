@@ -86,7 +86,7 @@ namespace _4D13TowerDefenseGame
             enemySpawner = 0;
             frameCount = -10;
             // Reset/set gold
-            GameVariables.Currency = 1000;
+            GameVariables.Currency = 500;
             GameVariables.Morale = 100;
             GameVariables.Magic = new List<Spell>();
         }
@@ -240,8 +240,8 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME CODE HERE
             /// ...
             /// </summary>           
-<<<<<<< HEAD
 
+            #region Vector healh/mana
             // Vector for health test
             health = new Vector2();
             health.X = game_HealthBarRec.X;
@@ -261,10 +261,9 @@ namespace _4D13TowerDefenseGame
             currency_bar = new Rectangle();
             currency_bar.X = game_ManaBarRec.Height;
             currency_bar.Y = game_ManaBarRec.Width;
-=======
-            #region Value Checks
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
+            #endregion
 
+            #region Value Checks
             if (GameVariables.Currency <= 0)
             {
                 GameVariables.Currency = 0;
@@ -298,14 +297,6 @@ namespace _4D13TowerDefenseGame
 
                                 default:
                                     {
-<<<<<<< HEAD
-=======
-                                        if (GameVariables.Towers[t].shot != null)
-                                        {
-                                            GameVariables.Towers[t].shot.MoveSpeed = 10;
-
-                                        }
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
                                         GameVariables.Towers[t].Berserked = false;
                                         break;
                                     }
@@ -323,11 +314,7 @@ namespace _4D13TowerDefenseGame
                         }
                         if (GameVariables.Enemies[i].Alive == false)
                         {
-<<<<<<< HEAD
-                            GameVariables.Enemies.RemoveAt(i);
-=======
                             GameVariables.Enemies[i] = null;
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
                             GameVariables.Towers[t].shot = null;
                         }
                     }
@@ -352,7 +339,7 @@ namespace _4D13TowerDefenseGame
                                         case "fire":
                                             {
 
-                                                GameVariables.Enemies[i].Health -= 5;
+                                                GameVariables.Enemies[i].Health -= 250;
                                                 break;
                                             }
                                         default:
@@ -365,25 +352,15 @@ namespace _4D13TowerDefenseGame
                             }
                         }
 
-<<<<<<< HEAD
+
                         if (GameVariables.Enemies[i].PieceShape.X > 800)
                         {
                             GameVariables.Enemies[i].MoraleAttack();
                             GameVariables.Enemies[i].Shot = null;
                             GameVariables.Enemies.RemoveAt(i);
-=======
-                        GameVariables.Enemies[i].Move();
-
-
-
-                        // if enemies go out of bounds attack
-                        if (GameVariables.Enemies[i].PieceShape.X > 800)
-                        {
-                            GameVariables.Enemies[i].MoraleAttack();
-                            GameVariables.Enemies[i] = null;
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
-                            GameVariables.Towers[t].shot = null;
+                            
                         }
+                        
                     }
                 }
             }
@@ -392,7 +369,7 @@ namespace _4D13TowerDefenseGame
             #region Game Start Tower Check
             if (GameVariables.Towers.Count > 0)
             {
-                if (frameCount == 179)
+                if (frameCount == 119)
                 {
 
                     for (int k = 0; k <= enemySpawner; k++)
@@ -409,7 +386,7 @@ namespace _4D13TowerDefenseGame
                 }
                 frameCount++;
             }
-<<<<<<< HEAD
+
             
             if (mousePos.Intersects(spell_HealRec))
             {
@@ -425,11 +402,14 @@ namespace _4D13TowerDefenseGame
             
             foreach(Enemy e in GameVariables.Enemies)
             {
-                e.Move();
+                if (e != null && e.IsVisible == true)
+                {
+                    e.Move();
+                }
             }
-=======
+
             #endregion
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
+
 
             return GameProcesses.GameStateEnum.main_LoadMap;
         }
@@ -470,25 +450,16 @@ namespace _4D13TowerDefenseGame
 
             // Health / Mana Bars
             spriteBatch.Draw(game_HealthBar_Txtr, game_HealthBarRec, Color.White);          // Health Bar underlay
-            spriteBatch.Draw(game_HealthBar_Txtr, game_ManaBarRec, Color.White);            // Mana Bar Underlay.
+            spriteBatch.Draw(game_HealthBar_Txtr, game_ManaBarRec, Color.White);            // Mana Bar Underlay.          
 
-            
+            #endregion          
 
-            #endregion
-
-<<<<<<< HEAD
-            
-
-
-
-
-=======
             #region Heal Check
             if (mousePos.Intersects(spell_HealRec))
             {
                 if (mState.LeftButton == ButtonState.Pressed)
                 {
-                    if (GameVariables.Morale < 100)
+                    if (GameVariables.Morale < 101)
                     {
                         if (GameVariables.Currency >= 50)
                         {
@@ -498,7 +469,7 @@ namespace _4D13TowerDefenseGame
                     }
                 }
             }
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
+
             #endregion
 
             #region Draw Textures on Rectangles
@@ -553,10 +524,10 @@ namespace _4D13TowerDefenseGame
                     }
                 }
             }
-<<<<<<< HEAD
+
             #endregion
 
-            
+            #region Draw Stuff
             // add sprite batch and draw.
             spriteBatch.Draw(game_Health_Txtr, health_bar, Color.White);
             
@@ -568,9 +539,9 @@ namespace _4D13TowerDefenseGame
 
             // "Draw" Currency
             spriteBatch.DrawString(font, ("Currency: " + GameVariables.Currency), currency, Color.CornflowerBlue);
-=======
+
             #endregion // tower drawing           
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
+
 
             #region Rectangle Texture Assignment Detection
             // Draw rectangle matrix
@@ -673,6 +644,8 @@ namespace _4D13TowerDefenseGame
             #region Draw Textures on Rectangles
             // Draw textures on matrix if ints in textures array are specific numbers
             // THIS PERMANENTLY SHOWS TEXTURE'S ASSIGNED ON SCREEN
+
+   
             for (int x = 0; x < 20; x++)
             {
                 for (int y = 0; y < 20; y++)
@@ -713,18 +686,14 @@ namespace _4D13TowerDefenseGame
             /// INSERT GAME ANIMATION CODE HERE
             /// ...
             /// </summary>
-<<<<<<< HEAD
-   
-=======
 
             #region Enemy and tower animation
             // animates the bullets
->>>>>>> 219d5c2546722364b5809a30ba73ea85f0835a95
+
             foreach (Tower t in GameVariables.Towers)
             {
                 if (t != null)
                 {
-                    spriteBatch.Draw(twr_Catapult_Txtr, t.PieceShape, Color.White);
                     if (t.Fired != t.CoolDown)
                     {
                         t.Fired++;
@@ -748,6 +717,7 @@ namespace _4D13TowerDefenseGame
                 }
             }
             #endregion
+            
         }
     }
 }

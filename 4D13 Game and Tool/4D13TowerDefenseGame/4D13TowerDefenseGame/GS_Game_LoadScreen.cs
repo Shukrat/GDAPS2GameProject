@@ -59,14 +59,14 @@ namespace _4D13TowerDefenseGame
             {
                 #region Initalization
                 // Sets the Health and mana
-                GameVariables.Currency = 1000;
+                GameVariables.Currency = 500;
                 GameVariables.Morale = 100;        
 
                 // Sets everything up the lists for use
-                GameVariables.Towers = null;
-                GameVariables.Enemies = null;
+                //GameVariables.Towers = null;
+                //GameVariables.Enemies = null;
                 GameVariables.Magic = new List<Spell>();
-                GameVariables.Markers = null;
+                //GameVariables.Markers = null;
 
                 // set the list of enemies to exist
                 GameVariables.Enemies = new List<Enemy>();

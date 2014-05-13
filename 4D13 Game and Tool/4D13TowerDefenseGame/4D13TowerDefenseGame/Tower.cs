@@ -66,7 +66,7 @@ namespace _4D13TowerDefenseGame
             fired = coolDown;
             berserkSpeed = coolDown / 2;
             berserked = false;
-            hitbox = new Rectangle((pieceShape.X - pieceShape.Width), (pieceShape.Y - pieceShape.Height), (pieceShape.Width * 4), (pieceShape.Height * 4));
+            hitbox = new Rectangle((pieceShape.X - 65), (pieceShape.Y - 65), (pieceShape.Width * 4), (pieceShape.Height * 4));
         }  
 
         // method for attacking enemies

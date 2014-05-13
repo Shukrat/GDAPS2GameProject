@@ -23,10 +23,7 @@ namespace _4D13TowerDefenseGame
     // Tower attack - rage spell and fix range   
 
     // Things the NEED to be done
-    // fix pathing ((can't go up along paths and starts are forced down))
-    // fix spell timer ((very quick but works))
     // lose ((boots to main menu))
-    // enemy speed
 
 
 

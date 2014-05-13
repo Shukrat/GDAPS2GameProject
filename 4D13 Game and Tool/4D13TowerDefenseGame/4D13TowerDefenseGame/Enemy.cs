@@ -168,6 +168,46 @@ namespace _4D13TowerDefenseGame
             {
                 if (slowed == false)
                 {
+                    foreach (PathMarker pm in GameVariables.Markers)
+                    {
+                        if (this.pieceShape.Intersects(pm.Marker))
+                        {
+                            if (pm.Control == 3 && lastDirection == 1)
+                            {
+                                direction = 2;
+                                lastDirection = 1;
+                            }
+                            else if (pm.Control == 4 && lastDirection == 2)
+                            {
+                                direction = 1;
+                                lastDirection = 2;
+                            }
+                            else if (pm.Control == 2 && lastDirection == 4)
+                            {
+                                direction = 1;
+                                lastDirection = 4;
+                            }
+                            else if (pm.Control == 6 && lastDirection == 1)
+                            {
+                                direction = 4;
+                                lastDirection = 1;
+                            }
+                            else if (pm.Control == 2 && lastDirection == 1)
+                            {
+                                direction = 1;
+                                lastDirection = 1;
+                            }
+                            else if (pm.Control == 4 && lastDirection == 1)
+                            {
+                                direction = 1;
+                                lastDirection = 1;
+                            }
+                            else
+                            {
+                                direction = pm.Control;
+                            }
+                        }
+                    }
                     switch (direction)
                     {
                         case 1:
@@ -194,6 +234,12 @@ namespace _4D13TowerDefenseGame
                                 lastDirection = 4;
                                 break;
                             }
+                        case 6:
+                            {
+                                this.pieceShape.Y += moveSpeed;
+                                lastDirection = 6;
+                                break;
+                            }
                         case 5:
                             {
                                 this.MoraleAttack();
@@ -205,38 +251,53 @@ namespace _4D13TowerDefenseGame
                                 break;
                             }
                     }
-                    foreach (PathMarker pm in GameVariables.Markers)
-                    {
-                        if (this.pieceShape.Intersects(pm.Marker))
-                        {
-                            if (pm.Control == 3 && lastDirection == 1)
-                            {
-                                direction = 2;
-                            }
-                            else if (pm.Control == 1 && lastDirection == 1)
-                            {
-                                direction = 4;
-                            }
-                            else if (pm.Control == 4 && lastDirection == 2)
-                            {
-                                direction = 1;
-                            }
-                            else if (pm.Control == 2 && lastDirection == 4)
-                            {
-                                direction = 1;
-                            }
-                            else
-                            {
-                                direction = pm.Control;
-                            }
-                        }
-                    }
+                    
                     
                 }
                 else if (slowed == true)
                 {
                     if (slowControl == false)
                     {
+                        foreach (PathMarker pm in GameVariables.Markers)
+                        {
+                            if (this.pieceShape.Intersects(pm.Marker))
+                            {
+                                if (pm.Control == 3 && lastDirection == 1)
+                                {
+                                    direction = 2;
+                                    lastDirection = 1;
+                                }
+                                else if (pm.Control == 4 && lastDirection == 2)
+                                {
+                                    direction = 1;
+                                    lastDirection = 2;
+                                }
+                                else if (pm.Control == 2 && lastDirection == 4)
+                                {
+                                    direction = 1;
+                                    lastDirection = 4;
+                                }
+                                else if (pm.Control == 6 && lastDirection == 1)
+                                {
+                                    direction = 4;
+                                    lastDirection = 1;
+                                }
+                                else if (pm.Control == 2 && lastDirection == 1)
+                                {
+                                    direction = 1;
+                                    lastDirection = 1;
+                                }
+                                else if (pm.Control == 4 && lastDirection == 1)
+                                {
+                                    direction = 1;
+                                    lastDirection = 1;
+                                }
+                                else
+                                {
+                                    direction = pm.Control;
+                                }
+                            }
+                        }
                         switch (direction)
                         {
                             case 1:
@@ -263,6 +324,12 @@ namespace _4D13TowerDefenseGame
                                     lastDirection = 4;
                                     break;
                                 }
+                            case 6:
+                                {
+                                    this.pieceShape.Y += moveSpeed;
+                                    lastDirection = 6;
+                                    break;
+                                }
                             case 5:
                                 {
                                     this.MoraleAttack();
@@ -286,32 +353,6 @@ namespace _4D13TowerDefenseGame
                         slowCount++;
                     }
                     
-                    foreach (PathMarker pm in GameVariables.Markers)
-                    {
-                        if (this.pieceShape.Intersects(pm.Marker))
-                        {
-                            if (pm.Control == 3 && lastDirection == 1)
-                            {
-                                direction = 2;
-                            }
-                            else if (pm.Control == 1 && lastDirection == 1)
-                            {
-                                direction = 4;
-                            }
-                            else if (pm.Control == 4 && lastDirection == 2)
-                            {
-                                direction = 1;
-                            }
-                            else if (pm.Control == 2 && lastDirection == 4)
-                            {
-                                direction = 1;
-                            }
-                            else
-                            {
-                                direction = pm.Control;
-                            }
-                        }
-                    }
                     
                 }
                 
