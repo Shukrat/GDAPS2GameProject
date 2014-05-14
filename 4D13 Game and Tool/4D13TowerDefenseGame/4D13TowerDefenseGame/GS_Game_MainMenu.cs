@@ -64,12 +64,12 @@ namespace _4D13TowerDefenseGame
             mainMenu_LoadRec.X = 475;
             mainMenu_LoadRec.Y = 554;
 
-            // Create New Map Button
-            mainMenu_NewRec = new Rectangle();
-            mainMenu_NewRec.Width = 200;
-            mainMenu_NewRec.Height = 88;
-            mainMenu_NewRec.X = 475;
-            mainMenu_NewRec.Y = 446;
+            //// Create New Map Button
+            //mainMenu_NewRec = new Rectangle();
+            //mainMenu_NewRec.Width = 200;
+            //mainMenu_NewRec.Height = 88;
+            //mainMenu_NewRec.X = 475;
+            //mainMenu_NewRec.Y = 446;
 
             // Map editor button
             mainMenu_MapEditorRec = new Rectangle();
@@ -78,12 +78,12 @@ namespace _4D13TowerDefenseGame
             mainMenu_MapEditorRec.X = 475;
             mainMenu_MapEditorRec.Y = 652;
 
-            // Settings Button
-            mainMenu_SettingsRec = new Rectangle();
-            mainMenu_SettingsRec.Width = 150;
-            mainMenu_SettingsRec.Height = 66;
-            mainMenu_SettingsRec.X = 980;
-            mainMenu_SettingsRec.Y = 834;
+            //// Settings Button
+            //mainMenu_SettingsRec = new Rectangle();
+            //mainMenu_SettingsRec.Width = 150;
+            //mainMenu_SettingsRec.Height = 66;
+            //mainMenu_SettingsRec.X = 980;
+            //mainMenu_SettingsRec.Y = 834;
 
             #endregion
 

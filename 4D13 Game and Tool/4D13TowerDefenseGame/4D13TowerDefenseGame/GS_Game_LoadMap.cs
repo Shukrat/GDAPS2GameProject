@@ -590,7 +590,7 @@ namespace _4D13TowerDefenseGame
                                 if (GameVariables.Currency >= 100)
                                 {
                                     //create magic
-                                    textures[x, y] = 13;
+                                    //textures[x, y] = 13;
 
                                     GameVariables.Magic.Add(new Spell("fire", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
@@ -609,7 +609,7 @@ namespace _4D13TowerDefenseGame
                                 if (GameVariables.Currency >= 100)
                                 {
                                     //create magic
-                                    textures[x, y] = 15;
+                                    //textures[x, y] = 15;
                                     GameVariables.Magic.Add(new Spell("speed", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
                                     if (GameVariables.Currency <= 0)
@@ -626,7 +626,7 @@ namespace _4D13TowerDefenseGame
                                 if (GameVariables.Currency >= 100)
                                 {
                                     //create magic
-                                    textures[x, y] = 16;
+                                    //textures[x, y] = 16;
                                     GameVariables.Magic.Add(new Spell("slow", GameState.tiles[x, y].X - 45, GameState.tiles[x, y].Y - 45));
                                     GameVariables.Currency = GameVariables.Currency - 50;
                                     if (GameVariables.Currency <= 0)
